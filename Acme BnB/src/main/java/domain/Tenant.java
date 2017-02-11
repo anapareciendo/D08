@@ -15,8 +15,9 @@ import javax.validation.constraints.NotNull;
 public class Tenant extends Actor {
 
 	//---------------------------Relationships--------------------------
-	private Collection<Finder>	finders;
+	private Collection<Finder> finders;
 	private Collection<Request> requests;
+	private Collection<Invoice> invoices;
 	
 	@Valid
 	@NotNull
@@ -36,5 +37,15 @@ public class Tenant extends Actor {
 	}
 	public void setRequests(Collection<Request> requests) {
 		this.requests = requests;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "tenant")
+	public Collection<Invoice> getInvoices() {
+		return invoices;
+	}
+	public void setInvoices(Collection<Invoice> invoices) {
+		this.invoices = invoices;
 	}
 }

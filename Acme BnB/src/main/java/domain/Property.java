@@ -75,6 +75,7 @@ public class Property extends DomainEntity {
 	private Lessor lessor;
 	private Collection<Attribute> attributes;
 	private Collection<State> states;
+	private Collection<Audit> audits;
 
 	@Valid
 	@NotNull
@@ -104,5 +105,15 @@ public class Property extends DomainEntity {
 	}
 	public void setStates(Collection<State> states) {
 		this.states = states;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "property")
+	public Collection<Audit> getAudits() {
+		return audits;
+	}
+	public void setAudits(Collection<Audit> audits) {
+		this.audits = audits;
 	}
 }
