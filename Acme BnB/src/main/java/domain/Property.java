@@ -1,9 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -65,4 +70,39 @@ public class Property extends DomainEntity {
 		this.description = description;
 	}
 
+
+	//------------------------------Relationships------------------------------
+	private Lessor lessor;
+	private Collection<Attribute> attributes;
+	private Collection<State> states;
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Lessor getLessor() {
+		return lessor;
+	}
+	public void setLessor(Lessor lessor) {
+		this.lessor = lessor;
+	}
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "property")
+	public Collection<Attribute> getAttributes() {
+		return attributes;
+	}
+	public void setAttributes(Collection<Attribute> attributes) {
+		this.attributes = attributes;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "property")
+	public Collection<State> getStates() {
+		return states;
+	}
+	public void setStates(Collection<State> states) {
+		this.states = states;
+	}
 }
