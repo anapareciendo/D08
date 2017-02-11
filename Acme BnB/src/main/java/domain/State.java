@@ -35,12 +35,18 @@ public class State extends DomainEntity{
 	public Property getProperty() {
 		return property;
 	}
+	public void setProperty(Property property){
+		this.property=property;
+	}
 	
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
 	public Request getRequest() {
 		return request;
+	}
+	public void setRequest(Request request){
+		this.request=request;
 	}
 	
 }
