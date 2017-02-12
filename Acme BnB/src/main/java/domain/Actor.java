@@ -71,8 +71,11 @@ public abstract class Actor extends DomainEntity {
 
 
 	//----------------Relationships------------------------------------------
-	private UserAccount	userAccount;
-	private Collection<SocialIdentity> socialIdentities;
+	private UserAccount					userAccount;
+	private Collection<SocialIdentity>	socialIdentities;
+	private Collection<Comment>			postComments;
+	private Collection<Comment>			reciveComments;
+
 
 	@Valid
 	@NotNull
@@ -83,7 +86,7 @@ public abstract class Actor extends DomainEntity {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
-	
+
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "actor")
@@ -92,6 +95,26 @@ public abstract class Actor extends DomainEntity {
 	}
 	public void setSocialIdentities(Collection<SocialIdentity> socialIdentities) {
 		this.socialIdentities = socialIdentities;
+	}
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "sender")
+	public Collection<Comment> getPostComments() {
+		return postComments;
+	}
+	public void setPostComments(Collection<Comment> postComments) {
+		this.postComments = postComments;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "recipient")
+	public Collection<Comment> getReciveComments() {
+		return reciveComments;
+	}
+	public void setReciveComments(Collection<Comment> reciveComments) {
+		this.reciveComments = reciveComments;
 	}
 
 }
