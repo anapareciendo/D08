@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.AdministratorRepository;
+import repositories.LessorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Administrator;
 import domain.Comment;
+import domain.Lessor;
+import domain.Property;
 import domain.SocialIdentity;
 
 @Service
@@ -23,7 +24,7 @@ public class LessorService {
 
 	//Managed repository
 	@Autowired
-	private AdministratorRepository administratorRepository;
+	private LessorRepository lessorRepository;
 
 
 	//Supporting services
@@ -34,54 +35,56 @@ public class LessorService {
 	}
 
 	//Simple CRUD methods
-	public Administrator create() {
-		Administrator res;
-		res = new Administrator();
+	public Lessor create() {
+		Lessor res;
+		res = new Lessor();
 		res.setPostComments(new ArrayList<Comment>());
 		res.setReciveComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
+		res.setProperties(new ArrayList<Property>());
+		
+		return res;
+	}
+
+	public Collection<Lessor> findAll() {
+		Collection<Lessor> res = lessorRepository.findAll();
+		return res;
+	}
+
+	public Lessor findOne(int lessorId) {
+		Lessor res = lessorRepository.findOne(lessorId);
+		return res;
+	}
+
+	public Lessor save(Lessor lessor) {
+		Assert.notNull(lessor, "The lessor to save cannot be null.");
+		Lessor res = lessorRepository.save(lessor);
 
 		return res;
 	}
 
-	public Collection<Administrator> findAll() {
-		Collection<Administrator> res = administratorRepository.findAll();
-		return res;
-	}
-
-	public Administrator findOne(int adminId) {
-		Administrator res = administratorRepository.findOne(adminId);
-		return res;
-	}
-
-	public Administrator save(Administrator admin) {
-		Assert.notNull(admin, "The tenant to save cannot be null.");
-		Administrator res = administratorRepository.save(admin);
-
-		return res;
-	}
-
-	public void delete(Administrator admin) {
+	public void delete(Lessor lessor) {
 		UserAccount ua = LoginService.getPrincipal();
 		Assert.notNull(ua);
 		Authority a = new Authority();
 		a.setAuthority(Authority.ADMIN);
 		Assert.isTrue(ua.getAuthorities().contains(a), "You must to be a admin to delete an actor.");
 
-		Assert.notNull(admin, "The adminstrator to delete cannot be null.");
-		Assert.isTrue(administratorRepository.exists(admin.getId()));
+		Assert.notNull(lessor, "The lessor to delete cannot be null.");
+		Assert.isTrue(lessorRepository.exists(lessor.getId()));
 
-		Assert.isNull(admin.getPostComments().isEmpty(), "The administrator cannot be delete with post comments");
-		Assert.isTrue(admin.getReciveComments().isEmpty(), "The administrator cannot be delete with recive comments");
-		Assert.isTrue(admin.getSocialIdentities().isEmpty(), "The administrator cannot be delete with social identities");
+		Assert.isNull(lessor.getPostComments().isEmpty(), "The lessor cannot be delete with post comments");
+		Assert.isTrue(lessor.getReciveComments().isEmpty(), "The lessor cannot be delete with recive comments");
+		Assert.isTrue(lessor.getSocialIdentities().isEmpty(), "The lessor cannot be delete with social identities");
+		Assert.isTrue(lessor.getProperties().isEmpty(), "The lessor cannot be delete with properties");
 
-		administratorRepository.delete(admin);
+		lessorRepository.delete(lessor);
 	}
 
 	//Utilites methods
-	public Administrator findByUserAccountId(int id){
+	public Lessor findByUserAccountId(int id){
 		Assert.notNull(id);
-		return administratorRepository.findByUserAccountId(id);
+		return lessorRepository.findByUserAccountId(id);
 	}
 
 }
