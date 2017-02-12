@@ -54,7 +54,7 @@ public class FinderService {
 	public Finder save(Finder finder) {
 		Assert.notNull(finder, "The finder to save cannot be null.");
 		Finder res = finderRepository.save(finder);
-		res.getTenant().getFinders().add(res);
+		res.getTenant().setFinder(res);
 		return res;
 	}
 

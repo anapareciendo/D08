@@ -6,7 +6,9 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -15,18 +17,18 @@ import javax.validation.constraints.NotNull;
 public class Tenant extends Actor {
 
 	//---------------------------Relationships--------------------------
-	private Collection<Finder> finders;
+	private Finder finder;
 	private Collection<Request> requests;
 	private Collection<Invoice> invoices;
 	
 	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "tenant")
-	public Collection<Finder> getFinders() {
-		return finders;
+	@OneToOne(mappedBy="tenant",optional=true)
+	@JoinColumn(name="finder_id", referencedColumnName="finder_id")
+	public Finder getFinder() {
+		return finder;
 	}
-	public void setFinders(Collection<Finder> finders) {
-		this.finders = finders;
+	public void setFinder(Finder finder) {
+		this.finder = finder;
 	}
 	
 	@Valid

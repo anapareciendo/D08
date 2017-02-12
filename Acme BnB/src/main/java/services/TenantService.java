@@ -13,7 +13,6 @@ import repositories.TenantRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Finder;
 import domain.Invoice;
 import domain.Request;
 import domain.Tenant;
@@ -24,7 +23,7 @@ public class TenantService {
 
 	//Managed repository
 	@Autowired
-	private TenantRepository	tenantRepository;
+	private TenantRepository tenantRepository;
 
 
 	//Supporting services
@@ -38,7 +37,6 @@ public class TenantService {
 	public Tenant create() {
 		Tenant res;
 		res = new Tenant();
-		res.setFinders(new ArrayList<Finder>());
 		res.setRequests(new ArrayList<Request>());
 		res.setInvoices(new ArrayList<Invoice>());
 
@@ -72,7 +70,7 @@ public class TenantService {
 		Assert.notNull(tenant, "The tenant to delete cannot be null.");
 		Assert.isTrue(tenantRepository.exists(tenant.getId()));
 
-		Assert.isTrue(tenant.getFinders().isEmpty(), "The tenant cannot be delete with finders");
+		Assert.isNull(tenant.getFinder(), "The tenant cannot be delete with finder");
 		Assert.isTrue(tenant.getRequests().isEmpty(), "The tenant cannot be delete with requests");
 		Assert.isTrue(tenant.getInvoices().isEmpty(), "The tenant cannot be delete with campaigns");
 
@@ -80,5 +78,9 @@ public class TenantService {
 	}
 
 	//Utilites methods
+	public Tenant findByUserAccountId(int id){
+		Assert.notNull(id);
+		return tenantRepository.findByUserAccountId(id);
+	}
 
 }
