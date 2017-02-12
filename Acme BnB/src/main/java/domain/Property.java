@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -89,12 +90,16 @@ public class Property extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "property")
+	@ManyToMany(
+			cascade={javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE},
+			mappedBy="properties",
+			targetEntity=Attribute.class
+			)
 	public Collection<Attribute> getAttributes() {
 		return attributes;
 	}
-	public void setAttributes(Collection<Attribute> attributes) {
-		this.attributes = attributes;
+	public void setAttributes(Collection<Attribute> attributes){
+		this.attributes=attributes;
 	}
 	
 	@Valid
