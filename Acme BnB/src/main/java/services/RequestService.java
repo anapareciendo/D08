@@ -65,7 +65,7 @@ public class RequestService {
 		
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(request.getTenant().getUserAccount().equals(ua) || ua.getAuthorities().contains(b), "You are not the owner of this request");
-		Assert.notNull(request, "The campaign to delete cannot be null.");
+		Assert.notNull(request, "The request to delete cannot be null.");
 		Assert.isTrue(requestRepository.exists(request.getId()));
 	
 		Assert.isTrue(request.getStates().isEmpty(), "The request cannot be delete with states");
