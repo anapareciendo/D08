@@ -37,7 +37,7 @@ public class Auditor extends Actor {
 	public Collection<Audit> getAudits() {
 		return audits;
 	}
-	public void seAudits(Collection<Audit> audits) {
+	public void setAudits(Collection<Audit> audits) {
 		this.audits = audits;
 	}
 	
