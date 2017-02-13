@@ -74,6 +74,13 @@ public class RequestService {
 	}
 	
 	//Utilites methods
+	public Collection<Request> findMyRequest(){
+		Authority b = new Authority();
+		b.setAuthority(Authority.TENANT);
+		UserAccount ua=LoginService.getPrincipal();
+		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a tenant for this action");
+		return requestRepository.findMyRequest(ua.getId());
+	}
 	
 	
 }
