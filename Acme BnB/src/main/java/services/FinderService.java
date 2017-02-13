@@ -71,13 +71,13 @@ public class FinderService {
 	}
 
 	//Utilites methods
-	public Collection<Finder> findMyFinders(){
+	public Finder findMyFinder(){
 		Authority b = new Authority();
 		b.setAuthority(Authority.TENANT);
 		UserAccount ua=LoginService.getPrincipal();
 		
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a tenant for this action");
-		return finderRepository.findMyFinders(ua.getId());
+		return finderRepository.findMyFinder(ua.getId());
 	}
 
 }
