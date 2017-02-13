@@ -15,11 +15,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-private String	name;
-private Double	ratePerDay;
-private Double	totalRate;
-private String	address;
-private String	description;
 
 <display:table name="property" id="property"
   requestURI="${requestURI }" pagesize="5"
