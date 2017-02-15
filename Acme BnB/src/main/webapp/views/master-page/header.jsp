@@ -45,8 +45,9 @@
 			<li><a class="fNiv"><spring:message code="master.page.signin" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="security/signinLessor.do"><spring:message code="security.lessor" /></a></li>
-					<li><a href="security/signinTenant.do"><spring:message code="security.tenant" /></a></li>
+					<li><a href="security/signinLessor.do"><spring:message code="master.page.security.lessor" /></a></li>
+					<li><a href="security/signinTenant.do"><spring:message code="master.page.security.tenant" /></a></li>
+					<li><a href="property/list.do"><spring:message code="master.page.property.list" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
