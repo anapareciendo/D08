@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.AdministratorRepository;
+import repositories.AuditorRepository;
 import repositories.LessorRepository;
 import repositories.TenantRepository;
 import domain.Actor;
