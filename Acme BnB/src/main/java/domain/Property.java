@@ -75,8 +75,18 @@ public class Property extends DomainEntity {
 	//------------------------------Relationships------------------------------
 	private Lessor lessor;
 	private Collection<Attribute> attributes;
-	private Collection<State> states;
 	private Collection<Audit> audits;
+	private Collection<Request> requests;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy="property")
+	public Collection<Request> getRequests() {
+		return requests;
+	}
+	public void setRequests(Collection<Request> requests) {
+		this.requests = requests;
+	}
 
 	@Valid
 	@NotNull
@@ -100,16 +110,6 @@ public class Property extends DomainEntity {
 	}
 	public void setAttributes(Collection<Attribute> attributes){
 		this.attributes=attributes;
-	}
-	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "property")
-	public Collection<State> getStates() {
-		return states;
-	}
-	public void setStates(Collection<State> states) {
-		this.states = states;
 	}
 	
 	@Valid

@@ -206,7 +206,7 @@
 		</property>
 	</bean>
 	
-		
+	<!-- Tenant -->
  	<bean id="tenant1" class="domain.Tenant">
 		<property name="name" value="Manuel" />
 		<property name="surname" value="Pallero" />
@@ -217,9 +217,6 @@
 		<property name="requests">
 			<list></list>
 		</property>	
-		<property name="invoices">
-			<list></list>
-		</property>
 		<property name="postComments">
 			<list></list>
 		</property>
@@ -241,9 +238,6 @@
 		<property name="requests">
 			<list></list>
 		</property>	
-		<property name="invoices">
-			<list></list>
-		</property>
 		<property name="postComments">
 			<list></list>
 		</property>
@@ -265,9 +259,6 @@
 		<property name="requests">
 			<list></list>
 		</property>	
-		<property name="invoices">
-			<list></list>
-		</property>
 		<property name="postComments">
 			<list></list>
 		</property>
@@ -355,7 +346,7 @@
 		<property name="attributes">
 			<list></list>
 		</property>
-		<property name="states">
+		<property name="requests">
 			<list></list>
 		</property> 
 		<property name="audits">
@@ -374,7 +365,7 @@
 		<property name="attributes">
 			<list></list>
 		</property>
-		<property name="states">
+		<property name="requests">
 			<list></list>
 		</property> 
 		<property name="audits">
@@ -396,7 +387,8 @@
 		<property name="smoke" value="TRUE" />
 		<property name="creditCard" ref="creditCard1" />
 		<property name="tenant" ref="tenant1" />
-		<property name="states" ref="state1" />		
+		<property name="tenant" ref="property1" />
+		<property name="status" value="ACCEPTED" />	
 	</bean>
 	
 	<bean id="request2" class="domain.Request">
@@ -405,29 +397,10 @@
 		<property name="smoke" value="TRUE" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="tenant" ref="tenant1" />
-		<property name="states" ref="state1" />		
+		<property name="tenant" ref="property2" />
+		<property name="status" value="ACCEPTED" />	
 	</bean>
 	
-	
-	<!-- State -->
-	<bean id="state1" class="domain.State">
-		<property name="status" value="ACCEPTED" />
-		<property name="property" ref="property1" />		
-		<property name="request" ref="request1" />		
-	</bean>
-
-
-	<bean id="state2" class="domain.State">
-		<property name="status" value="ACCEPTED" />
-		<property name="property" ref="property1" />		
-		<property name="request" ref="request1" />		
-	</bean>
-	
-	<bean id="state3" class="domain.State">
-		<property name="status" value="ACCEPTED" />
-		<property name="property" ref="property2" />		
-		<property name="request" ref="request1" />		
-	</bean>
 	
 	<!-- Finder -->
 	<bean id="finder1" class="domain.Finder">

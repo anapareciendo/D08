@@ -15,7 +15,18 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Tenant extends Actor {
-
+	
+	//----------------------------Attributes----------------------------
+	private CreditCard creditCard;
+	
+	@Valid
+	@NotNull
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
 	//---------------------------Relationships--------------------------
 	private Finder finder;
 	private Collection<Request> requests;

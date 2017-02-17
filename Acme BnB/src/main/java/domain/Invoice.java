@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -74,7 +75,18 @@ public class Invoice extends DomainEntity {
 	
 	//------------------------------Relationships------------------------------
 	private Tenant tenant;
+	private Request request;
 		
+	@Valid
+	@NotNull
+	@OneToOne(optional=false)
+	public Request getRequest() {
+		return request;
+	}
+	public void setRequest(Request request) {
+		this.request = request;
+	}
+
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)

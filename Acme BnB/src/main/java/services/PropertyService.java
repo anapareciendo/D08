@@ -16,7 +16,7 @@ import domain.Attribute;
 import domain.Audit;
 import domain.Lessor;
 import domain.Property;
-import domain.State;
+import domain.Request;
 
 @Service
 @Transactional
@@ -41,7 +41,7 @@ public class PropertyService {
 		res.setLessor(lessor);
 		res.setAttributes(new ArrayList<Attribute>());
 		res.setAudits(new ArrayList<Audit>());
-		res.setStates(new ArrayList<State>());
+		res.setRequests(new ArrayList<Request>());
 
 		return res;
 	}
@@ -74,7 +74,7 @@ public class PropertyService {
 		Assert.isTrue(property.getLessor().getUserAccount().equals(ua) || ua.getAuthorities().contains(b), "You are not the owner of the property");
 		Assert.isTrue(property.getAttributes().isEmpty(), "The property cannot be delete with attributes");
 		Assert.isTrue(property.getAudits().isEmpty(), "The property cannot be delete with audits");
-		Assert.isTrue(property.getStates().isEmpty(), "The property cannot be delete with states");
+		Assert.isTrue(property.getRequests().isEmpty(), "The property cannot be delete with request");
 		
 		propertyRepository.delete(property);
 	}
