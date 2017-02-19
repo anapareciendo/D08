@@ -49,5 +49,5 @@ public class Attribute extends DomainEntity {
 	public void setProperties(Collection<Property> properties) {
 		this.properties = properties;
 	}
-
+	
 }

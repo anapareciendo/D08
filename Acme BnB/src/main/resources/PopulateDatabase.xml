@@ -125,7 +125,9 @@
 			</list>
 		</property>
 	</bean>
-		<!-- CreditCard -->
+	
+	
+	<!-- CreditCard -->
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holder" value="Ana Rosa" />
 		<property name="brand" value="Visa" />
@@ -134,6 +136,7 @@
 		<property name="expirationYear" value="18" />
 		<property name="cvv" value="200" />
 	</bean>
+	
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holder" value="Roberto Pardo" />
 		<property name="brand" value="Mastercard" />
@@ -214,6 +217,7 @@
 		<property name="phone" value="+034 122335298" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount4" />
+		<property name="creditCard" ref="creditCard1" />
 		<property name="requests">
 			<list></list>
 		</property>	
@@ -235,6 +239,7 @@
 		<property name="phone" value="+034 122335298" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount5" />
+		<property name="creditCard" ref="creditCard2" />
 		<property name="requests">
 			<list></list>
 		</property>	
@@ -256,6 +261,7 @@
 		<property name="phone" value="+034 122335298" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount6" />
+		<property name="creditCard" ref="creditCard3" />
 		<property name="requests">
 			<list></list>
 		</property>	
@@ -291,6 +297,7 @@
 			<list></list>
 		</property>	
 	</bean>
+	
 	
 	<bean id="lessor2" class="domain.Lessor">
 		<property name="name" value="Rodrigo" />
@@ -333,8 +340,7 @@
 			<list></list>
 		</property>	
 	</bean> 
-		
-		<!-- Property -->
+	<!-- Property -->
 	<!-- Sin atributo añadido -->
 	<bean id="property1" class="domain.Property">
 		<property name="name" value="Villa Ángel 2.0" />
@@ -353,8 +359,7 @@
 			<list></list>
 		</property>	
 	</bean>
-		
-		
+	
 	<bean id="property2" class="domain.Property">
 		<property name="name" value="Villa Ángel" />
 		<property name="ratePerDay" value="1.0" />
@@ -376,7 +381,7 @@
 	<!-- Attribute -->
  	
 	<bean id="attribute1" class="domain.Attribute">
-		<property name="attribute" value="Nuevo atributo" />
+		<property name="value" value="Nuevo atributo" />
 		<property name="properties" ref="property1" />		
 	</bean> 
 	
@@ -385,20 +390,20 @@
 		<property name="checkIn" value="2016/12/31" />
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
-		<property name="creditCard" ref="creditCard1" />
-		<property name="tenant" ref="tenant1" />
-		<property name="tenant" ref="property1" />
 		<property name="status" value="ACCEPTED" />	
+		<property name="tenant" ref="tenant1" />
+		<property name="property" ref="property1" />
 	</bean>
+	
 	
 	<bean id="request2" class="domain.Request">
 		<property name="checkIn" value="2016/12/31" />
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
-		<property name="creditCard" ref="creditCard2" />
-		<property name="tenant" ref="tenant1" />
-		<property name="tenant" ref="property2" />
 		<property name="status" value="ACCEPTED" />	
+		<property name="tenant" ref="tenant1" />
+		<property name="property" ref="property2" />
+		
 	</bean>
 	
 	
@@ -412,8 +417,5 @@
 		<property name="description" value="Descrpiocion" />
 		<property name="tenant" ref="tenant1" />		
 	</bean>
-	
-	
-	
 	
 </beans>
