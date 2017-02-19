@@ -1,14 +1,14 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -24,7 +24,16 @@ public class Request extends DomainEntity {
 	private Date checkIn;
 	private Date checkOut;
 	private Boolean smoke;
-	private CreditCard creditCard;
+	private Status status;
+	
+	@NotNull
+	@Valid
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -57,18 +66,29 @@ public class Request extends DomainEntity {
 		this.smoke = smoke;
 	}
 
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
-
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
-	
 	//------------------------------Relationships------------------------------
 	private Tenant tenant;
-	private Collection<State> states;
-		
+	private Property property;
+	private Invoice invoice;
+	
+	@Valid
+	@OneToOne(mappedBy="request", optional=true)
+	@JoinColumn(name="invoice_id", referencedColumnName="invoice_id")
+	public Invoice getInvoice() {
+		return invoice;
+	}
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public Property getProperty() {
+		return property;
+	}
+	public void setProperty(Property property) {
+		this.property = property;
+	}
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
@@ -79,14 +99,4 @@ public class Request extends DomainEntity {
 		this.tenant = tenant;
 	}
 	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "request")
-	public Collection<State> getStates() {
-		return states;
-	}
-	public void setStates(Collection<State> states) {
-		this.states = states;
-	}
-
 }

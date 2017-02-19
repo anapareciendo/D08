@@ -15,5 +15,10 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	
 	//@Query("select avg(p.states.size) from Property p join p.states s where s.status!=domain.Status.PENDING group  by p.lessor")
 	//select count(s) from State s where s.status=domain.Status.ACCEPTED group by s.property.lessor;
+	
 	//select (select count(*) from State s where s.status=domain.Status.ACCEPTED) / count(*)*1.0 from Lessor l;
+	//select (select count(*) from State s where s.status=domain.Status.DENIED) / count(*)*1.0 from Lessor l;
+
+	//select p.lessor from Property p where (p.states.size = (select count(s) from State s where s.status=domain.Status.ACCEPTED));
+
 }
