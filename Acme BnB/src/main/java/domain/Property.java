@@ -80,16 +80,6 @@ public class Property extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy="property")
-	public Collection<Request> getRequests() {
-		return requests;
-	}
-	public void setRequests(Collection<Request> requests) {
-		this.requests = requests;
-	}
-
-	@Valid
-	@NotNull
 	@ManyToOne(optional = false)
 	public Lessor getLessor() {
 		return lessor;
@@ -120,5 +110,15 @@ public class Property extends DomainEntity {
 	}
 	public void setAudits(Collection<Audit> audits) {
 		this.audits = audits;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy="property")
+	public Collection<Request> getRequests() {
+		return requests;
+	}
+	public void setRequests(Collection<Request> requests) {
+		this.requests = requests;
 	}
 }

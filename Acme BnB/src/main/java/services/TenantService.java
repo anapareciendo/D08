@@ -13,7 +13,6 @@ import repositories.TenantRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Invoice;
 import domain.Request;
 import domain.SocialIdentity;
 import domain.Tenant;
@@ -39,7 +38,6 @@ public class TenantService {
 		Tenant res;
 		res = new Tenant();
 		res.setRequests(new ArrayList<Request>());
-		res.setInvoices(new ArrayList<Invoice>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 
 		return res;
@@ -74,7 +72,6 @@ public class TenantService {
 
 		Assert.isNull(tenant.getFinder(), "The tenant cannot be delete with finder");
 		Assert.isTrue(tenant.getRequests().isEmpty(), "The tenant cannot be delete with requests");
-		Assert.isTrue(tenant.getInvoices().isEmpty(), "The tenant cannot be delete with campaigns");
 		Assert.isTrue(tenant.getSocialIdentities().isEmpty(), "The tenant cannot be delete with social identites");
 
 		tenantRepository.delete(tenant);

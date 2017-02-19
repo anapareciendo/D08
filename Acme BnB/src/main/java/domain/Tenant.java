@@ -30,7 +30,6 @@ public class Tenant extends Actor {
 	//---------------------------Relationships--------------------------
 	private Finder finder;
 	private Collection<Request> requests;
-	private Collection<Invoice> invoices;
 	
 	@Valid
 	@OneToOne(mappedBy="tenant",optional=true)
@@ -52,13 +51,5 @@ public class Tenant extends Actor {
 		this.requests = requests;
 	}
 	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "tenant")
-	public Collection<Invoice> getInvoices() {
-		return invoices;
-	}
-	public void setInvoices(Collection<Invoice> invoices) {
-		this.invoices = invoices;
-	}
+	
 }

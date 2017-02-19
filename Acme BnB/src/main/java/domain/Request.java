@@ -67,9 +67,9 @@ public class Request extends DomainEntity {
 	}
 
 	//------------------------------Relationships------------------------------
-	private Tenant tenant;
-	private Property property;
 	private Invoice invoice;
+	private Property property;
+	private Tenant tenant;
 	
 	@Valid
 	@OneToOne(mappedBy="request", optional=true)
