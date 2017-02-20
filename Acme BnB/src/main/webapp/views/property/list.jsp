@@ -35,4 +35,11 @@
   <spring:message code="property.description" var="descriptionHeader"/>
   <display:column property="description" title="${descriptionHeader}" sortable="false" />
   
+  <display:column>
+	  <a href="lessor/display.do?lessorId=${property.lessor.id}">
+	  	<spring:message code="property.lessor" var="lessorHeader" />
+	  	<jstl:out value="${lessorHeader}" />
+	  </a>
+  </display:column>
+  
 </display:table>

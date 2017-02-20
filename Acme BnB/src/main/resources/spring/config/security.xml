@@ -44,7 +44,7 @@
 
 		
 		<security:intercept-url pattern="/property/list.do" access="permitAll" /> 
-	
+		<security:intercept-url pattern="/lessor/display.do" access="permitAll" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

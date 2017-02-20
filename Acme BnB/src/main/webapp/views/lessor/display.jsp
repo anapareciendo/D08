@@ -24,6 +24,10 @@
 		<p>
 			<spring:message code="lessor.name"/>: <jstl:out value="${lessor.name}"/><br>
 			<spring:message code="lessor.surname"/>: <jstl:out value="${lessor.surname}" /><br>
-			<spring:message code="lessor.email"/>: <jstl:out value="${lessor.email}" /><br>			
+			<spring:message code="lessor.email"/>: <jstl:out value="${lessor.email}" /><br>
+			<spring:message code="lessor.phone"/>: <jstl:out value="${lessor.phone}" /><br>
+			<jstl:if test="${lessor.picture != null}">
+				<img src="${lessor.picture}" alt="">
+			</jstl:if>		
 		</p>
 	</div>
