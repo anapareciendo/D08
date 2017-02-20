@@ -21,4 +21,23 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	//select p.lessor from Property p where (p.states.size = (select count(s) from State s where s.status=domain.Status.ACCEPTED));
 
+	@Query("select (select count(*) from Request r where r.status=domain.Status.ACCEPTED) / count(*)*1.0 from Lessor l")
+	Double requestAcceptedByLessor();
+	
+	@Query("select (select count(*) from Request r where r.status=domain.Status.DENIED) / count(*)*1.0 from Lessor l")
+	Double requestDeniedByLessor();
+	
+	@Query("select (select count(*) from Request r where r.status=domain.Status.ACCEPTED) / count(*)*1.0 from Tenant t")
+	Double requestAcceptedByTenant();
+	
+	@Query("select (select count(*) from Request r where r.status=domain.Status.DENIED) / count(*)*1.0 from Tenant t")
+	Double requestDeniedByTenant();
+	
+	//select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.ACCEPTED);
+	//Lo mismo con denied
+	//lo mismo con pending
+	
+	//El mas repetido de lo que devuelva
+	//select r.tenant from Request r where r.status = domain.Status.ACCEPTED;
+	
 }

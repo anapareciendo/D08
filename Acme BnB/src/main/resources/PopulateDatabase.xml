@@ -126,6 +126,41 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="auditor1" />
+		<property name="password" value="175d2e7a63f386554a4dd66e865c3e14" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+		<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="auditor2" />
+		<property name="password" value="04dd94ba3212ac52ad3a1f4cbfb52d4f" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+		<bean id="userAccount12" class="security.UserAccount">
+		<property name="username" value="auditor3" />
+		<property name="password" value="fc2073dbe4f65dfd71e46602f8e6a5f3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- CreditCard -->
 	<bean id="creditCard1" class="domain.CreditCard">
@@ -340,6 +375,74 @@
 			<list></list>
 		</property>	
 	</bean> 
+	
+	<!-- Auditor  -->
+	<bean id="auditor1" class="domain.Auditor">
+		<property name="name" value="Jose" />
+		<property name="surname" value="Rodriguez" />
+		<property name="email" value="jorodri@gmail.com" />
+		<property name="phone" value="(051)122332687" />
+		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="userAccount" ref="userAccount10" />	
+		<property name="socialIdentities">
+			<list></list>
+		</property>
+		<property name="postComments">
+			<list></list>
+		</property>
+		<property name="reciveComments">
+			<list></list>
+		</property>
+		<property name="company" value="Tecnocasa" />
+		<property name="audits">
+			<list></list>
+		</property>	
+	</bean> 
+	
+	<bean id="auditor2" class="domain.Auditor">
+		<property name="name" value="Rosa" />
+		<property name="surname" value="Castellano" />
+		<property name="email" value="rocame@gmail.com" />
+		<property name="phone" value="(051)122332687" />
+		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="userAccount" ref="userAccount11" />	
+		<property name="socialIdentities">
+			<list></list>
+		</property>
+		<property name="postComments">
+			<list></list>
+		</property>
+		<property name="reciveComments">
+			<list></list>
+		</property>
+		<property name="company" value="Tecnocasa" />
+		<property name="audits">
+			<list></list>
+		</property>	
+	</bean> 
+	
+	<bean id="auditor3" class="domain.Auditor">
+		<property name="name" value="Luis" />
+		<property name="surname" value="Gamero" />
+		<property name="email" value="lugari@gmail.com" />
+		<property name="phone" value="(051)122332687" />
+		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="userAccount" ref="userAccount12" />	
+		<property name="socialIdentities">
+			<list></list>
+		</property>
+		<property name="postComments">
+			<list></list>
+		</property>
+		<property name="reciveComments">
+			<list></list>
+		</property>
+		<property name="company" value="Tecnocasa" />
+		<property name="audits">
+			<list></list>
+		</property>	
+	</bean> 
+	
 	<!-- Property -->
 	<!-- Sin atributo añadido -->
 	<bean id="property1" class="domain.Property">
@@ -377,6 +480,24 @@
 			<list></list>
 		</property>	
 	</bean>
+	
+	<bean id="property3" class="domain.Property">
+		<property name="name" value="Campo Silvestre" />
+		<property name="ratePerDay" value="1.0" />
+		<property name="totalRate" value="3.0" />
+		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
+		<property name="address" value="Sevilla" />
+		<property name="lessor" ref="lessor2" />
+		<property name="attributes">
+			<list></list>
+		</property>
+		<property name="requests">
+			<list></list>
+		</property> 
+		<property name="audits">
+			<list></list>
+		</property>	
+	</bean>
 
 	<!-- Attribute -->
  	
@@ -391,7 +512,7 @@
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
 		<property name="status" value="ACCEPTED" />	
-		<property name="tenant" ref="tenant1" />
+		<property name="tenant" ref="tenant2" />
 		<property name="property" ref="property1" />
 	</bean>
 	
@@ -401,8 +522,18 @@
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
 		<property name="status" value="ACCEPTED" />	
-		<property name="tenant" ref="tenant1" />
+		<property name="tenant" ref="tenant2" />
 		<property name="property" ref="property2" />
+		
+	</bean>
+	
+	<bean id="request3" class="domain.Request">
+		<property name="checkIn" value="2016/12/31" />
+		<property name="checkOut" value="2017/01/02" />
+		<property name="smoke" value="TRUE" />
+		<property name="status" value="ACCEPTED" />	
+		<property name="tenant" ref="tenant1" />
+		<property name="property" ref="property3" />
 		
 	</bean>
 	
@@ -418,4 +549,54 @@
 		<property name="tenant" ref="tenant1" />		
 	</bean>
 	
+	<!-- Audit -->
+	<bean id="audit1" class="domain.Audit">
+		<property name="moment" value="2016/12/31" />
+		<property name="text" value="Text 1" />
+		<property name="attachments">
+			<list></list>
+		</property>	
+		<property name="auditor" ref="auditor1" />	
+		<property name="property" ref="property1" />			
+	</bean>
+	
+	<bean id="audit2" class="domain.Audit">
+		<property name="moment" value="2016/03/01" />
+		<property name="text" value="Text 2" />
+		<property name="attachments">
+			<list></list>
+		</property>	
+		<property name="auditor" ref="auditor1" />	
+		<property name="property" ref="property2" />			
+	</bean>
+	
+	<bean id="audit3" class="domain.Audit">
+		<property name="moment" value="2016/03/01" />
+		<property name="text" value="Text 3" />
+		<property name="attachments">
+			<list></list>
+		</property>	
+		<property name="auditor" ref="auditor2" />	
+		<property name="property" ref="property1" />			
+	</bean>
+	
+	<!-- Invoice -->
+		
+	<bean id="invoice1" class="domain.Invoice">
+		<property name="moment" value="2016/03/01" />
+		<property name="vatNumber" value="123456" />
+		<property name="detail" value="Invoice number 1" />
+		<property name="totalAmount" value="123.2" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="request" ref="request1" />			
+	</bean>
+	
+	<bean id="invoice2" class="domain.Invoice">
+		<property name="moment" value="2016/05/02" />
+		<property name="vatNumber" value="123456" />
+		<property name="detail" value="Invoice number 2" />
+		<property name="totalAmount" value="123.2" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="request" ref="request2" />			
+	</bean>
 </beans>
