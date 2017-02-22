@@ -25,6 +25,16 @@ public class Request extends DomainEntity {
 	private Date checkOut;
 	private Boolean smoke;
 	private Status status;
+	private CreditCard creditCard;
+	
+	@Valid
+	@NotNull
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
 	
 	@NotNull
 	@Valid
