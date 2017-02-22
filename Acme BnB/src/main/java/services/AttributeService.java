@@ -13,7 +13,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Attribute;
-import domain.Property;
+import domain.Value;
 
 @Service
 @Transactional
@@ -34,7 +34,7 @@ public class AttributeService {
 	public Attribute create() {
 		Attribute res;
 		res = new Attribute();
-		res.setProperties(new ArrayList<Property>());
+		res.setValues(new ArrayList<Value>());
 
 		return res;
 	}
@@ -64,6 +64,8 @@ public class AttributeService {
 
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be an admin for this action");
+		
+		Assert.isTrue(attribute.getValues().isEmpty(),"The Attribute cannot be delete with values");
 		
 		attributeRepository.delete(attribute);
 	}

@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -74,9 +73,19 @@ public class Property extends DomainEntity {
 
 	//------------------------------Relationships------------------------------
 	private Lessor lessor;
-	private Collection<Attribute> attributes;
 	private Collection<Audit> audits;
 	private Collection<Request> requests;
+	private Collection<Value> values;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy="property")
+	public Collection<Value> getValues() {
+		return values;
+	}
+	public void setValues(Collection<Value> values) {
+		this.values = values;
+	}
 
 	@Valid
 	@NotNull
@@ -86,20 +95,6 @@ public class Property extends DomainEntity {
 	}
 	public void setLessor(Lessor lessor) {
 		this.lessor = lessor;
-	}
-
-	@Valid
-	@NotNull
-	@ManyToMany(
-			cascade={javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE},
-			mappedBy="properties",
-			targetEntity=Attribute.class
-			)
-	public Collection<Attribute> getAttributes() {
-		return attributes;
-	}
-	public void setAttributes(Collection<Attribute> attributes){
-		this.attributes=attributes;
 	}
 	
 	@Valid

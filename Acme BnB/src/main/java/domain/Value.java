@@ -1,12 +1,10 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -14,7 +12,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Attribute extends DomainEntity {
+public class Value extends DomainEntity {
 
 	//-------------------------------Attributes------------------
 	private String name;
@@ -23,23 +21,35 @@ public class Attribute extends DomainEntity {
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
 	//------------------------------Relationships-------------------------
-	private Collection<Value> values;
+	private Property property;
+	private Attribute attribute;
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy="attribute")
-	public Collection<Value> getValues() {
-		return values;
+	@ManyToOne(optional=false)
+	public Property getProperty() {
+		return property;
 	}
-	public void setValues(Collection<Value> values) {
-		this.values = values;
+	public void setProperty(Property property) {
+		this.property = property;
 	}
-	
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public Attribute getAttribute() {
+		return attribute;
+	}
+	public void setAttribute(Attribute attribute) {
+		this.attribute = attribute;
+	}
 	
 	
 	
