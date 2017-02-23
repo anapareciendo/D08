@@ -266,7 +266,6 @@
 			<list></list>
 		</property>
 	</bean> 
-	
 	<bean id="tenant2" class="domain.Tenant">
 		<property name="name" value="Olga" />
 		<property name="surname" value="Rodriguez" />
@@ -375,7 +374,6 @@
 			<list></list>
 		</property>	
 	</bean> 
-	
 	<!-- Auditor  -->
 	<bean id="auditor1" class="domain.Auditor">
 		<property name="name" value="Jose" />
@@ -442,7 +440,6 @@
 			<list></list>
 		</property>	
 	</bean> 
-	
 	<!-- Property -->
 	<!-- Sin atributo añadido -->
 	<bean id="property1" class="domain.Property">
@@ -462,7 +459,6 @@
 			<list></list>
 		</property>	
 	</bean>
-	
 	<bean id="property2" class="domain.Property">
 		<property name="name" value="Villa Ángel" />
 		<property name="ratePerDay" value="1.0" />
@@ -498,7 +494,8 @@
 			<list></list>
 		</property>	
 	</bean>
-
+	
+	
 	<!-- Attribute -->
  	
 	<bean id="attribute1" class="domain.Attribute">
@@ -599,4 +596,27 @@
 		<property name="creditCard" ref="creditCard2" />
 		<property name="request" ref="request2" />			
 	</bean>
+	
+	<!-- Social identity -->
+	<bean id="socialIdentity1" class="domain.SocialIdentity">
+		<property name="nick" value="Mi primera cuenta" />
+		<property name="nameSocial" value="Primera" />
+		<property name="urlSocial" value="http://facebook.com" />
+		<property name="actor" ref="admin1" />			
+	</bean>
+	
+	<bean id="socialIdentity2" class="domain.SocialIdentity">
+		<property name="nick" value="Ivan" />
+		<property name="nameSocial" value="Ivromal" />
+		<property name="urlSocial" value="http://facebook.com" />
+		<property name="actor" ref="admin2" />			
+	</bean>
+	
+	<bean id="socialIdentity3" class="domain.SocialIdentity">
+		<property name="nick" value="Ratón" />
+		<property name="nameSocial" value="ratona" />
+		<property name="urlSocial" value="http://facebook.com" />
+		<property name="actor" ref="lessor1" />			
+	</bean>
+	
 </beans>

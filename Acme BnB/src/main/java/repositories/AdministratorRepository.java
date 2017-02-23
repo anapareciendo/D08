@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
+import domain.Lessor;
+import domain.Tenant;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
@@ -33,11 +35,38 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select (select count(*) from Request r where r.status=domain.Status.DENIED) / count(*)*1.0 from Tenant t")
 	Double requestDeniedByTenant();
 	
-	//select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.ACCEPTED);
-	//Lo mismo con denied
-	//lo mismo con pending
+	//Hay que coger el primero de los que devuelve
+	@Query("select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.ACCEPTED)")
+	Lessor lessorMoreAccepted();
+	@Query("select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.DENIED)")
+	Lessor lessorMoreDenied();
+	@Query("select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.PENDING)")
+	Lessor lessorMorePending();
+
 	
 	//El mas repetido de lo que devuelva
-	//select r.tenant from Request r where r.status = domain.Status.ACCEPTED;
+	@Query("select r.tenant from Request r where r.status = domain.Status.ACCEPTED")
+	Tenant tennatMoreAccepted();
+	@Query("select r.tenant from Request r where r.status = domain.Status.DENIED")
+	Tenant tennatMoreDenied();
+	@Query("select r.tenant from Request r where r.status = domain.Status.PENDING")
+	Tenant tennatMorePending();
+	
+	//Level A
+	
+	@Query("select min(a.socialIdentities.size) from Actor a")
+	Integer minSocialIdentityPerActor();
+	@Query("select max(a.socialIdentities.size) from Actor a")
+	Integer maxSocialIdentityPerActor();
+	@Query("select avg(a.socialIdentities.size) from Actor a")
+	Integer avgSocialIdentityPerActor();
+	
+	@Query("select sum(i.totalAmount) from Invoice i")
+	Double totalAmountMoney();
+	
+	//Hay que unir estas dos querys pero no se si con un dividir
+	//select avg(p) from Property p where p.audits.size>0;
+	//select avg(p) from Property p where p.audits.size=0;
+	
 	
 }
