@@ -440,6 +440,7 @@
 			<list></list>
 		</property>	
 	</bean> 
+	
 	<!-- Property -->
 	<!-- Sin atributo añadido -->
 	<bean id="property1" class="domain.Property">
@@ -449,7 +450,7 @@
 		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
 		<property name="address" value="Madrid" />
 		<property name="lessor" ref="lessor2" />
-		<property name="attributes">
+		<property name="values">
 			<list></list>
 		</property>
 		<property name="requests">
@@ -459,6 +460,7 @@
 			<list></list>
 		</property>	
 	</bean>
+	
 	<bean id="property2" class="domain.Property">
 		<property name="name" value="Villa Ángel" />
 		<property name="ratePerDay" value="1.0" />
@@ -466,7 +468,7 @@
 		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
 		<property name="address" value="Madrid" />
 		<property name="lessor" ref="lessor1" />
-		<property name="attributes">
+		<property name="values">
 			<list></list>
 		</property>
 		<property name="requests">
@@ -484,7 +486,7 @@
 		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
 		<property name="address" value="Sevilla" />
 		<property name="lessor" ref="lessor2" />
-		<property name="attributes">
+		<property name="values">
 			<list></list>
 		</property>
 		<property name="requests">
@@ -499,15 +501,62 @@
 	<!-- Attribute -->
  	
 	<bean id="attribute1" class="domain.Attribute">
-		<property name="value" value="Nuevo atributo" />
-		<property name="properties" ref="property1" />		
+		<property name="name" value="Country" />
+		<property name="values">
+			<list></list>
+		</property>			
 	</bean> 
 	
-		<!-- Request -->
+	<bean id="attribute2" class="domain.Attribute">
+		<property name="name" value="Province" />
+		<property name="values">
+			<list></list>
+		</property>			
+	</bean> 
+		<bean id="attribute3" class="domain.Attribute">
+		<property name="name" value="State" />
+		<property name="values">
+			<list></list>
+		</property>			
+	</bean> 
+	
+		<bean id="attribute4" class="domain.Attribute">
+		<property name="name" value="City" />
+		<property name="values">
+			<list></list>
+		</property>			
+	</bean> 
+		<bean id="attribute5" class="domain.Attribute">
+		<property name="name" value="Capacity" />
+		<property name="values">
+			<list></list>
+		</property>			
+	</bean> 
+	<!-- Value -->
+	<bean id="value1" class="domain.Value">
+		<property name="name" value="España" />
+		<property name="attribute" ref="attribute1" />	
+		<property name="property" ref="property1" />	
+	</bean> 
+	
+	<bean id="value2" class="domain.Value">
+		<property name="name" value="Madrid" />
+		<property name="attribute" ref="attribute1" />	
+		<property name="property" ref="property2" />	
+	</bean> 
+	
+	<bean id="value3" class="domain.Value">
+		<property name="name" value="Sevilla" />
+		<property name="attribute" ref="attribute1" />	
+		<property name="property" ref="property1" />	
+	</bean> 
+
+	<!-- Request -->
 	<bean id="request1" class="domain.Request">
 		<property name="checkIn" value="2016/12/31" />
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
+		<property name="creditCard" ref="creditCard3" />
 		<property name="status" value="ACCEPTED" />	
 		<property name="tenant" ref="tenant2" />
 		<property name="property" ref="property1" />
@@ -518,6 +567,7 @@
 		<property name="checkIn" value="2016/12/31" />
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
+		<property name="creditCard" ref="creditCard1" />
 		<property name="status" value="ACCEPTED" />	
 		<property name="tenant" ref="tenant2" />
 		<property name="property" ref="property2" />
@@ -529,6 +579,7 @@
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
 		<property name="status" value="ACCEPTED" />	
+		<property name="creditCard" ref="creditCard2" />
 		<property name="tenant" ref="tenant1" />
 		<property name="property" ref="property3" />
 		
@@ -584,7 +635,6 @@
 		<property name="vatNumber" value="123456" />
 		<property name="detail" value="Invoice number 1" />
 		<property name="totalAmount" value="123.2" />
-		<property name="creditCard" ref="creditCard1" />
 		<property name="request" ref="request1" />			
 	</bean>
 	
@@ -593,30 +643,26 @@
 		<property name="vatNumber" value="123456" />
 		<property name="detail" value="Invoice number 2" />
 		<property name="totalAmount" value="123.2" />
-		<property name="creditCard" ref="creditCard2" />
 		<property name="request" ref="request2" />			
 	</bean>
 	
-	<!-- Social identity -->
+	<!-- Social Identity -->
 	<bean id="socialIdentity1" class="domain.SocialIdentity">
-		<property name="nick" value="Mi primera cuenta" />
-		<property name="nameSocial" value="Primera" />
+		<property name="nick" value="Ivaco" />
+		<property name="nameSocial" value="Ivanaco" />
 		<property name="urlSocial" value="http://facebook.com" />
 		<property name="actor" ref="admin1" />			
 	</bean>
-	
 	<bean id="socialIdentity2" class="domain.SocialIdentity">
-		<property name="nick" value="Ivan" />
-		<property name="nameSocial" value="Ivromal" />
+		<property name="nick" value="Patricio" />
+		<property name="nameSocial" value="Patrinick" />
 		<property name="urlSocial" value="http://facebook.com" />
-		<property name="actor" ref="admin2" />			
+		<property name="actor" ref="admin1" />			
 	</bean>
-	
 	<bean id="socialIdentity3" class="domain.SocialIdentity">
-		<property name="nick" value="Ratón" />
-		<property name="nameSocial" value="ratona" />
+		<property name="nick" value="Vani" />
+		<property name="nameSocial" value="Vanicoli" />
 		<property name="urlSocial" value="http://facebook.com" />
 		<property name="actor" ref="lessor1" />			
 	</bean>
-	
 </beans>
