@@ -20,11 +20,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Invoice extends DomainEntity {
 
 	//-------------------------------Attributes------------------
-	private Date		moment;
-	private Integer		vatNumber;
-	private String		detail;
-	private Double		totalAmount;
-	private CreditCard	creditCard;
+	private Date	moment;
+	private Integer	vatNumber;
+	private String	detail;
+	private Double	totalAmount;
 
 
 	@NotNull
@@ -63,14 +62,6 @@ public class Invoice extends DomainEntity {
 
 	public void setTotalAmount(Double totalAmount) {
 		this.totalAmount = totalAmount;
-	}
-
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
-
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
 	}
 
 

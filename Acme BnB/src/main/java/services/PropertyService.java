@@ -12,11 +12,11 @@ import repositories.PropertyRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Attribute;
 import domain.Audit;
 import domain.Lessor;
 import domain.Property;
 import domain.Request;
+import domain.Value;
 
 @Service
 @Transactional
@@ -39,7 +39,7 @@ public class PropertyService {
 		Property res;
 		res = new Property();
 		res.setLessor(lessor);
-		res.setAttributes(new ArrayList<Attribute>());
+		res.setValues(new ArrayList<Value>());
 		res.setAudits(new ArrayList<Audit>());
 		res.setRequests(new ArrayList<Request>());
 
@@ -72,7 +72,7 @@ public class PropertyService {
 
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(property.getLessor().getUserAccount().equals(ua) || ua.getAuthorities().contains(b), "You are not the owner of the property");
-		Assert.isTrue(property.getAttributes().isEmpty(), "The property cannot be delete with attributes");
+		Assert.isTrue(property.getValues().isEmpty(), "The property cannot be delete with attributes");
 		Assert.isTrue(property.getAudits().isEmpty(), "The property cannot be delete with audits");
 		Assert.isTrue(property.getRequests().isEmpty(), "The property cannot be delete with request");
 		
