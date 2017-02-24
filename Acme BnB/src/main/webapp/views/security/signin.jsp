@@ -22,6 +22,9 @@
 	<acme:textbox code="security.picture" path="picture"/>
 	
 	<br/>
+	<input type="checkbox" name="condition" value="acepto"/><spring:message code="security.condition" />
+	
+	<br/><br/>
 	<%-- <acme:checkbox code="security.condition" path="condition" value="Yes"/> --%>
 	
 	<input type="submit" name="${authority}" value="<spring:message code="security.submit" />" />

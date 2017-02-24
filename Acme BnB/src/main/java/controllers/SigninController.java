@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.LessorService;
@@ -49,16 +50,21 @@ public class SigninController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.POST, params = "lessor2")
-	public ModelAndView user(ActorForm actor, BindingResult binding) {
+	public ModelAndView user(ActorForm actor, BindingResult binding, @RequestParam String[] condition) {
+		//Sale panic si no se marca el tick del checkbox
 		ModelAndView result;
 		Lessor lessor;
 		lessor = lessorService.reconstruct(actor, binding);
 
-		if (binding.hasErrors()) {
+		if (binding.hasErrors() || lessor.getName().equals("Not")) {
 			result = new ModelAndView("security/signin");
 			result.addObject("lessor2", actor);
 			result.addObject("authority", "lessor2");
-			result.addObject("errors", binding.getAllErrors());
+			if(lessor.getName().equals("Not")){
+				result.addObject("message", "security.password.failed");
+			}else{
+				result.addObject("errors", binding.getAllErrors());
+			}
 		} else {
 			try{
 				lessorService.save(lessor);

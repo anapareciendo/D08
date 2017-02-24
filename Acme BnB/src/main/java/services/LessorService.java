@@ -122,11 +122,11 @@ public class LessorService {
 			result.setEmail(actor.getEmail());
 			result.setPhone(actor.getPhone());
 			result.setPicture(actor.getPicture());
-			
+			validator.validate(result, binding);
 		}else{
 			result=new Lessor();
+			result.setName("Not");
 		}
-		validator.validate(result, binding);
 		return result;
 	}
 
