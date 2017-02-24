@@ -10,34 +10,19 @@
 
 <form:form action="security/signin.do" modelAttribute="${authority}">
 	
-	<form:hidden path="userAccount.id" />
-	<form:hidden path="userAccount.authorities"/>
-	
-	<acme:textbox code="security.username" path="userAccount.username"/>
-	<acme:textbox code="security.password" path="userAccount.password"/>
+	<acme:textbox code="security.username" path="username"/>
+	<acme:password code="security.password" path="password1"/>
+	<acme:password code="security.password2" path="password2"/>
 	<br/>
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<!-- Actor -->
-	<form:hidden path="socialIdentities" />
-	<form:hidden path="postComments" />
-	<form:hidden path="reciveComments" />
-	<form:hidden path="userAccount" />
-	
-	<jstl:choose>
-  		<jstl:when test="${authority == 'lessor2'}">
-			<!-- SuperUser -->
-			<form:hidden path="properties"/>
-		</jstl:when>
-		
-	</jstl:choose>
-	
 	<acme:textbox code="security.name" path="name"/>
 	<acme:textbox code="security.surname" path="surname"/>
 	<acme:textbox code="security.email" path="email"/>
 	<acme:textbox code="security.phone" path="phone"/>
 	<acme:textbox code="security.picture" path="picture"/>
+	
+	<br/>
+	<%-- <acme:checkbox code="security.condition" path="condition" value="Yes"/> --%>
 	
 	<input type="submit" name="${authority}" value="<spring:message code="security.submit" />" />
 	<input type="button" name="cancel" value="<spring:message code="security.cancel" />" onclick="window.location='welcome/index.do'" /> <br />

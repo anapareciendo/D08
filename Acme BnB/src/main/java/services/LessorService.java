@@ -5,18 +5,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.LessorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
 import domain.Comment;
 import domain.Lessor;
 import domain.Property;
 import domain.SocialIdentity;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -28,6 +33,12 @@ public class LessorService {
 
 
 	//Supporting services
+	@Autowired
+	private UserAccountService userAccountService;
+	
+	//Validator
+	@Autowired
+	private Validator validator;
 
 	//Constructors
 	public LessorService() {
@@ -35,13 +46,14 @@ public class LessorService {
 	}
 
 	//Simple CRUD methods
-	public Lessor create() {
+	public Lessor create(UserAccount ua) {
 		Lessor res;
 		res = new Lessor();
 		res.setPostComments(new ArrayList<Comment>());
 		res.setReciveComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 		res.setProperties(new ArrayList<Property>());
+		res.setUserAccount(ua);
 		
 		return res;
 	}
@@ -85,6 +97,37 @@ public class LessorService {
 	public Lessor findByUserAccountId(int id){
 		Assert.notNull(id);
 		return lessorRepository.findByUserAccountId(id);
+	}
+	
+	public Lessor reconstruct(ActorForm actor, BindingResult binding){
+		Lessor result;
+		
+		if(!actor.getPassword1().isEmpty() && !actor.getPassword2().isEmpty() && actor.getPassword1().equals(actor.getPassword2())){
+			UserAccount ua = userAccountService.create();
+			
+			Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			String hash = encoder.encodePassword(actor.getPassword1(), null);
+			
+			ua.setUsername(actor.getUsername());
+			ua.setPassword(hash);
+			
+			Authority a = new Authority();
+			a.setAuthority(Authority.LESSOR);
+			ua.getAuthorities().add(a);
+			
+			result=this.create(ua);
+			
+			result.setName(actor.getName());
+			result.setSurname(actor.getSurname());
+			result.setEmail(actor.getEmail());
+			result.setPhone(actor.getPhone());
+			result.setPicture(actor.getPicture());
+			
+		}else{
+			result=new Lessor();
+		}
+		validator.validate(result, binding);
+		return result;
 	}
 
 }

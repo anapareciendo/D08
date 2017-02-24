@@ -12,15 +12,14 @@ package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
-import security.UserAccount;
-import security.UserAccountService;
 import services.LessorService;
 import domain.Lessor;
+import forms.ActorForm;
 
 @Controller
 @RequestMapping("/security")
@@ -29,9 +28,6 @@ public class SigninController extends AbstractController {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private LessorService lessorService;
-	@Autowired
-	private UserAccountService userAccountService;
-	
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -43,18 +39,38 @@ public class SigninController extends AbstractController {
 	@RequestMapping(value="/signinLessor", method = RequestMethod.GET)
 	public ModelAndView signinUser(){
 		ModelAndView result;
-		Lessor actor = lessorService.create();
-		
-		UserAccount account = userAccountService.create();
-		Authority a = new Authority();
-		a.setAuthority(Authority.LESSOR);
-		account.getAuthorities().add(a);
-		actor.setUserAccount(account);
+		ActorForm actor = new ActorForm();
 		
 		result = new ModelAndView("security/signin");
 		result.addObject("authority", "lessor2");
 		result.addObject("lessor2", actor);
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.POST, params = "lessor2")
+	public ModelAndView user(ActorForm actor, BindingResult binding) {
+		ModelAndView result;
+		Lessor lessor;
+		lessor = lessorService.reconstruct(actor, binding);
+
+		if (binding.hasErrors()) {
+			result = new ModelAndView("security/signin");
+			result.addObject("lessor2", actor);
+			result.addObject("authority", "lessor2");
+			result.addObject("errors", binding.getAllErrors());
+		} else {
+			try{
+				lessorService.save(lessor);
+				result = new ModelAndView("redirect:login.do");
+			}catch (Throwable oops) {
+				result = new ModelAndView("security/signin");
+				result.addObject("authority", "lessor2");
+				result.addObject("lessor2", actor);
+				result.addObject("message", "security.signin.failed");
+			}
+		}
+
 		return result;
 	}
 	
