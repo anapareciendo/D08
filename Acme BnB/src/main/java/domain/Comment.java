@@ -68,8 +68,7 @@ public class Comment extends DomainEntity {
 	
 	//---------------------Relationships--------------------------
 	private Actor sender;
-	private Actor recipient;
-	
+
 	@Valid
 	@NotNull
 	@ManyToOne(optional=false)
@@ -80,14 +79,4 @@ public class Comment extends DomainEntity {
 		this.sender=sender;
 	}
 	
-	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
-	public Actor getRecipient() {
-		return recipient;
-	}
-	public void setRecipient(Actor recipient){
-		this.recipient=recipient;
-	}
-
 }

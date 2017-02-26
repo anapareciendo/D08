@@ -26,5 +26,12 @@ public class Lessor extends Actor {
 	public void setProperties(Collection<Property> properties) {
 		this.properties = properties;
 	}
+	
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
+	}
 
 }

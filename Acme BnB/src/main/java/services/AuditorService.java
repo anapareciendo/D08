@@ -38,7 +38,6 @@ public class AuditorService {
 		Auditor res;
 		res = new Auditor();
 		res.setPostComments(new ArrayList<Comment>());
-		res.setReciveComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 
 		return res;
@@ -72,7 +71,6 @@ public class AuditorService {
 		Assert.isTrue(auditorRepository.exists(auditor.getId()));
 
 		Assert.isNull(auditor.getPostComments().isEmpty(), "The administrator cannot be delete with post comments");
-		Assert.isTrue(auditor.getReciveComments().isEmpty(), "The administrator cannot be delete with recive comments");
 		Assert.isTrue(auditor.getSocialIdentities().isEmpty(), "The administrator cannot be delete with social identities");
 
 		auditorRepository.delete(auditor);

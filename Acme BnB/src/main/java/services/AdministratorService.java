@@ -38,7 +38,6 @@ public class AdministratorService {
 		Administrator res;
 		res = new Administrator();
 		res.setPostComments(new ArrayList<Comment>());
-		res.setReciveComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 
 		return res;
@@ -72,7 +71,6 @@ public class AdministratorService {
 		Assert.isTrue(administratorRepository.exists(admin.getId()));
 
 		Assert.isNull(admin.getPostComments().isEmpty(), "The administrator cannot be delete with post comments");
-		Assert.isTrue(admin.getReciveComments().isEmpty(), "The administrator cannot be delete with recive comments");
 		Assert.isTrue(admin.getSocialIdentities().isEmpty(), "The administrator cannot be delete with social identities");
 
 		administratorRepository.delete(admin);

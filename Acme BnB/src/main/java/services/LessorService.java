@@ -50,9 +50,9 @@ public class LessorService {
 		Lessor res;
 		res = new Lessor();
 		res.setPostComments(new ArrayList<Comment>());
-		res.setReciveComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 		res.setProperties(new ArrayList<Property>());
+		res.setComments(new ArrayList<Comment>());
 		res.setUserAccount(ua);
 		
 		return res;
@@ -86,7 +86,7 @@ public class LessorService {
 		Assert.isTrue(lessorRepository.exists(lessor.getId()));
 
 		Assert.isNull(lessor.getPostComments().isEmpty(), "The lessor cannot be delete with post comments");
-		Assert.isTrue(lessor.getReciveComments().isEmpty(), "The lessor cannot be delete with recive comments");
+		Assert.isTrue(lessor.getComments().isEmpty(), "The lessor cannot be delete with recive comments");
 		Assert.isTrue(lessor.getSocialIdentities().isEmpty(), "The lessor cannot be delete with social identities");
 		Assert.isTrue(lessor.getProperties().isEmpty(), "The lessor cannot be delete with properties");
 

@@ -19,7 +19,7 @@ import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class Actor extends DomainEntity {
+public abstract class Actor extends Commentable {
 
 	//	-------------------Attributes----------------------------------------
 	private String	name;
@@ -74,7 +74,6 @@ public abstract class Actor extends DomainEntity {
 	private UserAccount					userAccount;
 	private Collection<SocialIdentity>	socialIdentities;
 	private Collection<Comment>			postComments;
-	private Collection<Comment>			reciveComments;
 
 
 	@Valid
@@ -107,14 +106,4 @@ public abstract class Actor extends DomainEntity {
 		this.postComments = postComments;
 	}
 	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "recipient")
-	public Collection<Comment> getReciveComments() {
-		return reciveComments;
-	}
-	public void setReciveComments(Collection<Comment> reciveComments) {
-		this.reciveComments = reciveComments;
-	}
-
 }

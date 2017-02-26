@@ -24,7 +24,16 @@ public class Invoice extends DomainEntity {
 	private Integer	vatNumber;
 	private String	detail;
 	private Double	totalAmount;
+	private CreditCard	creditCard;
 
+	@Valid
+	@NotNull
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
 
 	@NotNull
 	@Temporal(TemporalType.DATE)

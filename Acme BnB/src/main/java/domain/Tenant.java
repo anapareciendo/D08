@@ -51,5 +51,11 @@ public class Tenant extends Actor {
 		this.requests = requests;
 	}
 	
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
+	}
 	
 }

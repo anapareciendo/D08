@@ -13,6 +13,7 @@ import repositories.TenantRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Comment;
 import domain.Request;
 import domain.SocialIdentity;
 import domain.Tenant;
@@ -34,11 +35,14 @@ public class TenantService {
 	}
 
 	//Simple CRUD methods
-	public Tenant create() {
+	public Tenant create(UserAccount ua) {
 		Tenant res;
 		res = new Tenant();
 		res.setRequests(new ArrayList<Request>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
+		res.setComments(new ArrayList<Comment>());
+		res.setPostComments(new ArrayList<Comment>());
+		res.setUserAccount(ua);
 
 		return res;
 	}
@@ -72,8 +76,11 @@ public class TenantService {
 
 		Assert.isNull(tenant.getFinder(), "The tenant cannot be delete with finder");
 		Assert.isTrue(tenant.getRequests().isEmpty(), "The tenant cannot be delete with requests");
+		Assert.isTrue(tenant.getComments().isEmpty(), "The tenant cannot be delete with comments");
+		Assert.isTrue(tenant.getPostComments().isEmpty(), "The tenant cannot be delete with post comments");
 		Assert.isTrue(tenant.getSocialIdentities().isEmpty(), "The tenant cannot be delete with social identites");
-
+		
+		
 		tenantRepository.delete(tenant);
 	}
 
