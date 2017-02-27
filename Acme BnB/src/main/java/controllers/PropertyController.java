@@ -36,4 +36,18 @@ public class PropertyController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/listMyProperties", method = RequestMethod.GET)
+	public ModelAndView listMyProperties() {
+		ModelAndView result;
+		Collection<Property> property;
+
+		property = propertyService.findMyProperties();
+		result = new ModelAndView("property/list");
+		result.addObject("requestURI", "property/list.do");
+		result.addObject("property", property);
+		result.addObject("owner", true);
+
+		return result;
+	}
 }

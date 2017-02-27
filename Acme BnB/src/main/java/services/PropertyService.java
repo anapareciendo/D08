@@ -81,7 +81,7 @@ public class PropertyService {
 	
 	
 	//Utilites methods
-	Collection<Property> findMyProperties(){
+	public Collection<Property> findMyProperties(){
 		Authority b = new Authority();
 		b.setAuthority(Authority.LESSOR);
 		UserAccount ua=LoginService.getPrincipal();

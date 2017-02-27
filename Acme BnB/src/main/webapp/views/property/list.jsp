@@ -42,4 +42,13 @@
 	  </a>
   </display:column>
   
+  <jstl:if test="${owner == true}">
+  		<display:column>
+	  		<a href="value/list.do?propertyId=${row.id}">
+	  			<spring:message code="property.attributes" var="attributesHeader" />
+	  			<jstl:out value="${attributesHeader}" />
+	  		</a>
+  		</display:column>
+  	</jstl:if>   	
+  
 </display:table>
