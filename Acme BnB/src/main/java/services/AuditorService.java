@@ -39,7 +39,8 @@ public class AuditorService {
 		res = new Auditor();
 		res.setPostComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
-
+		res.setComments(new ArrayList<Comment>());
+		
 		return res;
 	}
 
