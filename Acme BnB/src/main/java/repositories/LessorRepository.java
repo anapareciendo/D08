@@ -12,5 +12,11 @@ public interface LessorRepository extends JpaRepository<Lessor, Integer> {
 
 	@Query("select l from Lessor l where l.userAccount.id = ?1")
 	Lessor findByUserAccountId(int id);
+	
+	//Dashboard
+	//select p from Property p order by p.audits
+	//select p from Property p order by p.requests
+	//select p from Property p order by p.requests where
+	
 
 }

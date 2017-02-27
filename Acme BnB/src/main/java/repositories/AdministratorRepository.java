@@ -52,6 +52,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select r.tenant from Request r where r.status = domain.Status.PENDING")
 	Tenant tennatMorePending();
 	
+	
 	//Level A
 	
 	@Query("select min(a.socialIdentities.size) from Actor a")
@@ -60,6 +61,15 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Integer maxSocialIdentityPerActor();
 	@Query("select avg(a.socialIdentities.size) from Actor a")
 	Integer avgSocialIdentityPerActor();
+	
+/*	The minimum, the average, and the maximum number of invoices issued to
+	the tenants.
+	@Query("")
+	Integer minInvoicePerTenant();
+	@Query("")
+	Integer maxInvoicePerTenant();
+	@Query("")
+	Integer avgInvoicePerTenant(); */
 	
 	@Query("select sum(i.totalAmount) from Invoice i")
 	Double totalAmountMoney();

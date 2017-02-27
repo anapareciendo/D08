@@ -15,7 +15,9 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Comment;
+import domain.Lessor;
 import domain.SocialIdentity;
+import domain.Tenant;
 
 @Service
 @Transactional
@@ -83,4 +85,102 @@ public class AdministratorService {
 		return administratorRepository.findByUserAccountId(id);
 	}
 
+	
+	private void isAdministrator(){
+		UserAccount ua = LoginService.getPrincipal();
+		Assert.notNull(ua);
+		Authority a = new Authority();
+		a.setAuthority(Authority.ADMIN);
+		Assert.isTrue(ua.getAuthorities().contains(a), "You must to be a administrator for this action.");
+	}
+	
+	public Double requestAcceptedByLessor(){
+		this.isAdministrator();
+		return administratorRepository.requestAcceptedByLessor();
+	}
+	
+	public Double requestDeniedByLessor(){
+		this.isAdministrator();
+		return administratorRepository.requestDeniedByLessor();
+	}
+	
+	public Double requestAcceptedByTenant(){
+		this.isAdministrator();
+		return administratorRepository.requestAcceptedByTenant();
+	}
+	
+	public Double requestDeniedByTenant(){
+		this.isAdministrator();
+		return administratorRepository.requestDeniedByTenant();
+	}
+	
+	public Lessor lessorMoreAccepted(){
+		this.isAdministrator();
+		return administratorRepository.lessorMoreAccepted();
+	}
+	
+	public Lessor lessorMoreDenied(){
+		this.isAdministrator();
+		return administratorRepository.lessorMoreDenied();
+	}
+	
+	public Lessor lessorMorePending(){
+		this.isAdministrator();
+		return administratorRepository.lessorMorePending();
+	}
+	
+	public Tenant tennatMoreAccepted(){
+		this.isAdministrator();
+		return administratorRepository.tennatMoreAccepted();
+	}
+	
+	public Tenant tennatMoreDenied(){
+		this.isAdministrator();
+		return administratorRepository.tennatMoreDenied();
+	}
+	
+	public Tenant tennatMorePending(){
+		this.isAdministrator();
+		return administratorRepository.tennatMorePending();
+	}
+	
+	public Integer minSocialIdentityPerActor(){
+		this.isAdministrator();
+		return administratorRepository.minSocialIdentityPerActor();
+	}
+	
+	public Integer maxSocialIdentityPerActor(){
+		this.isAdministrator();
+		return administratorRepository.maxSocialIdentityPerActor();
+	}
+	
+	public Integer avgSocialIdentityPerActor(){
+		this.isAdministrator();
+		return administratorRepository.avgSocialIdentityPerActor();
+	}
+	
+	/*
+	public Integer minInvoicePerActor(){
+		this.isAdministrator();
+		return administratorRepository.minInvoicePerActor();
+	}
+	
+	public Integer maxInvoicePerActor(){
+		this.isAdministrator();
+		return administratorRepository.maxInvoicePerActor();
+	}
+	
+	public Integer avgInvoicePerActor(){
+		this.isAdministrator();
+		return administratorRepository.avgInvoicePerActor();
+	}
+	 */
+	
+	public Double totalAmountMoney(){
+		this.isAdministrator();
+		return administratorRepository.totalAmountMoney();
+	}
+	
+	
+	
 }
