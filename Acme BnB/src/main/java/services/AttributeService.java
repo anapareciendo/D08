@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Attribute;
-import domain.Value;
 
 @Service
 @Transactional
@@ -34,7 +32,6 @@ public class AttributeService {
 	public Attribute create() {
 		Attribute res;
 		res = new Attribute();
-		res.setValues(new ArrayList<Value>());
 
 		return res;
 	}
@@ -65,7 +62,7 @@ public class AttributeService {
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be an admin for this action");
 		
-		Assert.isTrue(attribute.getValues().isEmpty(),"The Attribute cannot be delete with values");
+	
 		
 		attributeRepository.delete(attribute);
 	}
