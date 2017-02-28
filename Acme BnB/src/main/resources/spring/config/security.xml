@@ -66,6 +66,7 @@
 		<security:intercept-url pattern="/finder/tenant/find.do" access="hasRole('TENANT')" />
 		
 		<security:intercept-url pattern="/audit/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialIdentity/list.do" access="isAuthenticated()" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
