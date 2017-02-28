@@ -203,7 +203,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 	</bean>
@@ -221,7 +221,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 	</bean>
@@ -239,7 +239,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 	</bean>
@@ -259,7 +259,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 		<property name="socialIdentities">
@@ -280,7 +280,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 		<property name="socialIdentities">
@@ -302,7 +302,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 		<property name="socialIdentities">
@@ -327,7 +327,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>	
 	</bean>
@@ -349,7 +349,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>	
 	</bean>
@@ -370,7 +370,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>	
 	</bean> 
@@ -388,7 +388,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 		<property name="company" value="Tecnocasa" />
@@ -410,7 +410,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 		<property name="company" value="Tecnocasa" />
@@ -432,7 +432,7 @@
 		<property name="postComments">
 			<list></list>
 		</property>
-		<property name="reciveComments">
+		<property name="comments">
 			<list></list>
 		</property>
 		<property name="company" value="Tecnocasa" />
@@ -635,6 +635,7 @@
 		<property name="vatNumber" value="123456" />
 		<property name="detail" value="Invoice number 1" />
 		<property name="totalAmount" value="123.2" />
+		<property name="creditCard" ref="creditCard3" />
 		<property name="request" ref="request1" />			
 	</bean>
 	
@@ -643,6 +644,7 @@
 		<property name="vatNumber" value="123456" />
 		<property name="detail" value="Invoice number 2" />
 		<property name="totalAmount" value="123.2" />
+		<property name="creditCard" ref="creditCard3" />
 		<property name="request" ref="request2" />			
 	</bean>
 	

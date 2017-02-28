@@ -1,7 +1,6 @@
 
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -41,15 +40,6 @@ public class Auditor extends Actor {
 	public void setAudits(Collection<Audit> audits) {
 		this.audits = audits;
 	}
-	
-	public Collection<Comment> getComments() {
-		return new ArrayList<Comment>();
-	}
-
-	public void setComments(Collection<Comment> comments) {
-		this.comments = new ArrayList<Comment>();
-	}
-	
 	
 
 }

@@ -15,14 +15,17 @@ import javax.validation.constraints.NotNull;
 public abstract class Commentable extends DomainEntity {
 
 	//	-------------------Attributes----------------------------------------
-	public Collection<Comment> comments;
+	private Collection<Comment> comments;
 	
 	@Valid
 	@NotNull
-	@OneToMany
-	public abstract Collection<Comment> getComments();
-
-	public abstract void setComments(Collection<Comment> comments);
+	@OneToMany(mappedBy = "commentable")
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
+	}
 
 
 }

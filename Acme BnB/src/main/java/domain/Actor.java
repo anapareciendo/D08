@@ -75,7 +75,6 @@ public abstract class Actor extends Commentable {
 	private Collection<SocialIdentity>	socialIdentities;
 	private Collection<Comment>			postComments;
 
-
 	@Valid
 	@NotNull
 	@OneToOne(cascade = javax.persistence.CascadeType.ALL)
@@ -105,5 +104,6 @@ public abstract class Actor extends Commentable {
 	public void setPostComments(Collection<Comment> postComments) {
 		this.postComments = postComments;
 	}
+	
 	
 }

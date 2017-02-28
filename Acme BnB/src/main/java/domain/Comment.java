@@ -68,6 +68,7 @@ public class Comment extends DomainEntity {
 	
 	//---------------------Relationships--------------------------
 	private Actor sender;
+	private Commentable commentable;
 
 	@Valid
 	@NotNull
@@ -78,5 +79,16 @@ public class Comment extends DomainEntity {
 	public void setSender(Actor sender){
 		this.sender=sender;
 	}
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public Commentable getCommentable() {
+		return this.commentable;
+	}
+	public void setCommentable(Commentable commentable){
+		this.commentable=commentable;
+	}
+	
 	
 }

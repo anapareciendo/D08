@@ -41,7 +41,6 @@ public class AdministratorService {
 		res = new Administrator();
 		res.setPostComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
-		res.setComments(new ArrayList<Comment>());
 
 		return res;
 	}

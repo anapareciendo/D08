@@ -44,11 +44,25 @@
   
   <jstl:if test="${owner == true}">
   		<display:column>
-	  		<a href="value/list.do?propertyId=${row.id}">
+	  		<a href="value/list.do?propertyId=${property.id}">
 	  			<spring:message code="property.attributes" var="attributesHeader" />
 	  			<jstl:out value="${attributesHeader}" />
 	  		</a>
   		</display:column>
-  	</jstl:if>   	
-  
+  	</jstl:if>
+  	
+  	<%-- <jstl:if test="${owner == true}">
+  		<display:column>
+	  		<a href="property/edit.do?propertyId=${row.id}">
+	  			<spring:message code="property.edit" var="editHeader" />
+	  			<jstl:out value="${editHeader}" />
+	  		</a>
+  		</display:column>
+  	</jstl:if>      --%>
+  	
+  	<jstl:if test="${owner == true}">
+  	<div>
+		<a href="property/create.do"> <spring:message code="property.create" /></a>
+	</div>	
+  	</jstl:if>
 </display:table>

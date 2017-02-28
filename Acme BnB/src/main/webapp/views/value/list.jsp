@@ -24,7 +24,7 @@
   <display:column property="name" title="${nameHeader}" sortable="true" />
   
   <spring:message code="value.attribute" var="attributeHeader"/>
-  <display:column property="attribute" title="${attributeHeader}" sortable="true" />
+  <display:column property="attribute.name" title="${attributeHeader}" sortable="true" />
   
 
 </display:table>
