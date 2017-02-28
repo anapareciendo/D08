@@ -21,32 +21,13 @@ import controllers.AbstractController;
 import domain.Finder;
 
 @Controller
-@RequestMapping("/tenant/finder")
-public class FinderController extends AbstractController {
+@RequestMapping("/finder/tenant")
+public class FinderTenantController extends AbstractController {
 	
 	@Autowired
 	private FinderService finderService;
 
 
-	
-	// Action-1 ---------------------------------------------------------------		
-
-	@RequestMapping(value="/display", method = RequestMethod.GET)
-	public ModelAndView displayFinder() {
-		ModelAndView result;
-		Finder finder = finderService.findMyFinder();
-
-		if(finder!=null){
-			result = new ModelAndView("finder/display");
-			result.addObject("finder", finder);
-			result.addObject("contain", true);
-		}else{
-			result = new ModelAndView("curricula/display");
-			result.addObject("contain", false);
-		}
-		
-		return result;
-	}
 	
 
 	
