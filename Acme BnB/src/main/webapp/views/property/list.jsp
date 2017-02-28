@@ -60,9 +60,9 @@
   		</display:column>
   	</jstl:if>      --%>
   	
-  	<jstl:if test="${owner == true}">
+</display:table>
+<jstl:if test="${owner == true}">
   	<div>
 		<a href="property/create.do"> <spring:message code="property.create" /></a>
 	</div>	
-  	</jstl:if>
-</display:table>
+</jstl:if>
