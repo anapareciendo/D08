@@ -103,6 +103,18 @@ public class AttributeAdminController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int attributeId) {
+		ModelAndView result;
+		Attribute attribute= attributeService.findOne(attributeId);
+
+		result = new ModelAndView("attribute/edit");
+		result.addObject("attribute", attribute);
+		
+		
+		return result;
+	}
+	
 	
 	protected ModelAndView createEditModelAndView(Attribute attribute) {
 		ModelAndView result;

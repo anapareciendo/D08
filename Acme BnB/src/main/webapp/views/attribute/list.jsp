@@ -35,7 +35,13 @@
 	<spring:message code="attribute.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader }" sortable="true" />
 	
-
+			
+	<display:column>
+	  	<a href="attribute/admin/edit.do?attributeId=${attribute.id}">
+	 			<spring:message code="attribute.edit" var="editHeader" />
+		  		<jstl:out value="${editHeader}" />
+		 </a>
+	</display:column>
 	
 	
 </display:table>
