@@ -43,7 +43,6 @@ public class Property extends DomainEntity {
 		this.ratePerDay = ratePerDay;
 	}
 
-	@NotNull
 	public Double getTotalRate() {
 		return totalRate;
 	}

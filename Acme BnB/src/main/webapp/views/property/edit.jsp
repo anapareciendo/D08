@@ -11,10 +11,10 @@
 <form:form action="property/lessor/edit.do" modelAttribute="property">
 
 	<form:hidden path="id" />
+	<form:hidden path="totalRate"/>
 
 	<acme:textbox code="property.name" path="name"/>
-	<acme:textbox code="property.rate" path="rate"/>
-	<acme:textbox code="property.totalRate" path="totalRate"/>
+	<acme:textbox code="property.ratePerDay" path="ratePerDay"/>
 	<acme:textbox code="property.description" path="description"/>
 	<acme:textbox code="property.address" path="address"/>
 	

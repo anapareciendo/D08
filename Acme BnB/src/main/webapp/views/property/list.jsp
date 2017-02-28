@@ -26,9 +26,6 @@
   <spring:message code="property.ratePerDay" var="ratePerDayHeader"/>
   <display:column property="ratePerDay" title="${ratePerDayHeader}" sortable="true" />
   
-  <spring:message code="property.totalRate" var="totalRateHeader"/>
-  <display:column property="totalRate" title="${totalRateHeader}" sortable="true" />
-  
   <spring:message code="property.address" var="addressHeader"/>
   <display:column property="address" title="${addressHeader}" sortable="false" />
   
@@ -63,6 +60,6 @@
 </display:table>
 <jstl:if test="${owner == true}">
   	<div>
-		<a href="/property/lessor/create.do"> <spring:message code="property.create" /></a>
+		<a href="property/lessor/create.do"> <spring:message code="property.create" /></a>
 	</div>	
 </jstl:if>

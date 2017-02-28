@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,6 +66,26 @@ public class PropertyLessorController extends AbstractController {
 		Property property = propertyService.findOne(propertyId);
 				
 		result = createEditModelAndView(property);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(Property property, BindingResult binding) {
+		ModelAndView result;
+		property = propertyService.reconstruct(property, binding);
+		
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(property);
+			result.addObject("errors", binding.getAllErrors());
+		} else {
+			try {
+				propertyService.save(property);				
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(property, "property.commit.error");
+			}
+		}
 
 		return result;
 	}

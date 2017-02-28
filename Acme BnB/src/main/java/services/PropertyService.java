@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.PropertyRepository;
 import security.Authority;
@@ -27,6 +29,11 @@ public class PropertyService {
 	private PropertyRepository propertyRepository;
 	
 	//Supporting services
+	@Autowired
+	private LessorService lessorService;
+	
+	@Autowired
+	private Validator validator;
 	
 	//Constructors
 	public PropertyService() {
@@ -87,6 +94,22 @@ public class PropertyService {
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a lessor for this action");
 		return propertyRepository.findMyProperties(ua.getId());
+	}
+
+	public Property reconstruct(Property property, BindingResult binding) {
+		Property res;
+		if(property.getId()==0){
+			Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+			res=this.create(lessor);
+		}else{
+			res=propertyRepository.findOne(property.getId());
+		}
+		res.setName(property.getName());
+		res.setDescription(property.getDescription());
+		res.setRatePerDay(property.getRatePerDay());
+		res.setAddress(property.getAddress());
+		validator.validate(res, binding);
+		return res;
 	}
 	
 }
