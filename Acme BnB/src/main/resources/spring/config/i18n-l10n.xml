@@ -31,6 +31,7 @@
 		<value>/views/lessor/messages</value>
 		<value>/views/value/messages</value>
 		<value>/views/attribute/messages</value>
+		<value>/views/audit/messages</value>
 	</util:list>
 
 </beans>

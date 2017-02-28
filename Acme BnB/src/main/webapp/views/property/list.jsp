@@ -38,7 +38,17 @@
 	  	<jstl:out value="${lessorHeader}" />
 	  </a>
   </display:column>
-  
+
+	<security:authorize access="isAuthenticated()">
+	  <display:column>
+	  		<a href="audit/list.do?propertyId=${property.id}">
+	  			<spring:message code="property.audit" var="auditHeader" />
+	  			<jstl:out value="${auditHeader}" />
+	  		</a>
+  		</display:column>
+	
+	</security:authorize>
+ 
   <jstl:if test="${owner == true}">
   		<display:column>
 	  		<a href="value/list.do?propertyId=${property.id}">
