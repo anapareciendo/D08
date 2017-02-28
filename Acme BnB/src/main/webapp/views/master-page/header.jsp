@@ -43,15 +43,6 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('LESSOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.lessor" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="property/lessor/list.do"><spring:message code="master.page.lessor.list" /></a></li>					
-				</ul>
-			</li>
-		</security:authorize>
-		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv"><spring:message code="master.page.signin" /></a>
@@ -61,7 +52,12 @@
 					<li><a href="security/signinTenant.do"><spring:message code="master.page.security.tenant" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="property/list.do"><spring:message code="master.page.property.list" /></a></li>
+			<li><a class="fNiv"><spring:message code="master.page.property" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="property/list.do"><spring:message code="master.page.property.list" /></a>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -76,6 +72,15 @@
 					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
 					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message code="master.page.property" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="property/list.do"><spring:message code="master.page.property.list" /></a>
+					<security:authorize access="hasRole('LESSOR')">
+						<li><a href="property/lessor/list.do"><spring:message code="master.page.lessor.list" /></a></li>					
+					</security:authorize>
 				</ul>
 			</li>
 		</security:authorize>
