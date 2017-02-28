@@ -54,11 +54,11 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	//Level A
 	
 	@Query("select min(a.socialIdentities.size) from Actor a")
-	Integer minSocialIdentityPerActor();
+	Double minSocialIdentityPerActor();
 	@Query("select max(a.socialIdentities.size) from Actor a")
-	Integer maxSocialIdentityPerActor();
-	@Query("select avg(a.socialIdentities.size) from Actor a")
-	Integer avgSocialIdentityPerActor();
+	Double maxSocialIdentityPerActor();
+	@Query("select (select count(*) from SocialIdentity s) / count(*)*1.0 from Actor a")
+	Double avgSocialIdentityPerActor();
 	
 /*	The minimum, the average, and the maximum number of invoices issued to
 	the tenants.

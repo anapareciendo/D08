@@ -141,18 +141,18 @@ public class AdministratorService {
 		return administratorRepository.tennatMorePending();
 	}
 	*/
-	public Integer minSocialIdentityPerActor(){
+	public Double minSocialIdentityPerActor(){
 		this.isAdministrator();
 		return administratorRepository.minSocialIdentityPerActor();
 	}
 	
 	
-	public Integer maxSocialIdentityPerActor(){
+	public Double maxSocialIdentityPerActor(){
 		this.isAdministrator();
 		return administratorRepository.maxSocialIdentityPerActor();
 	}
 	
-	public Integer avgSocialIdentityPerActor(){
+	public Double avgSocialIdentityPerActor(){
 		this.isAdministrator();
 		return administratorRepository.avgSocialIdentityPerActor();
 	}

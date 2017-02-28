@@ -55,9 +55,9 @@ public class DashboardAdminController extends AbstractController {
 		Tenant tennatMorePending = adminService.tennatMorePending();
 		*/
 		
-		Integer minSocialIdentityPerActor = adminService.minSocialIdentityPerActor();
-		Integer maxSocialIdentityPerActor = adminService.maxSocialIdentityPerActor();
-		Integer avgSocialIdentityPerActor = adminService.avgSocialIdentityPerActor();
+		Double minSocialIdentityPerActor = adminService.minSocialIdentityPerActor();
+		Double maxSocialIdentityPerActor = adminService.maxSocialIdentityPerActor();
+		Double avgSocialIdentityPerActor = adminService.avgSocialIdentityPerActor();
 		
 		/*Integer minInvoicePerActor = adminService.minInvoicePerActor();
 		Integer maxInvoicePerActor = adminService.maxInvoicePerActor();

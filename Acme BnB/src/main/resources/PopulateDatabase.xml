@@ -161,6 +161,18 @@
 			</list>
 		</property>
 	</bean>
+		
+	<bean id="userAccount13" class="security.UserAccount">
+		<property name="username" value="tenant4" />
+		<property name="password" value="00d74d456730a8abed4d2027bc05435c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TENANT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- CreditCard -->
 	<bean id="creditCard1" class="domain.CreditCard">
@@ -310,6 +322,27 @@
 		</property>
 	</bean> 
 	
+	<bean id="tenant4" class="domain.Tenant">
+		<property name="name" value="Aitor" />
+		<property name="surname" value="Tilla" />
+		<property name="email" value="perez@gmail.com" />
+		<property name="phone" value="+034 122335298" />
+		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="userAccount" ref="userAccount13" />
+		<property name="creditCard" ref="creditCard3" />
+		<property name="requests">
+			<list></list>
+		</property>	
+		<property name="postComments">
+			<list></list>
+		</property>
+		<property name="comments">
+			<list></list>
+		</property>
+		<property name="socialIdentities">
+			<list></list>
+		</property>
+	</bean> 
 	<!-- Lessor -->
 	<bean id="lessor1" class="domain.Lessor">
 		<property name="name" value="Jose" />
@@ -442,7 +475,7 @@
 	</bean> 
 	
 	<!-- Property -->
-	<!-- Sin atributo añadido -->
+	
 	<bean id="property1" class="domain.Property">
 		<property name="name" value="Villa Ángel 2.0" />
 		<property name="ratePerDay" value="1.0" />
@@ -585,7 +618,45 @@
 		
 	</bean>
 	
+	<bean id="request4" class="domain.Request">
+		<property name="checkIn" value="2016/03/28" />
+		<property name="checkOut" value="2017/07/03" />
+		<property name="smoke" value="TRUE" />
+		<property name="status" value="ACCEPTED" />	
+		<property name="creditCard" ref="creditCard1" />
+		<property name="tenant" ref="tenant1" />
+		<property name="property" ref="property3" />
+	</bean>
 	
+	<bean id="request5" class="domain.Request">
+		<property name="checkIn" value="2016/07/22" />
+		<property name="checkOut" value="2017/07/25" />
+		<property name="smoke" value="TRUE" />
+		<property name="status" value="ACCEPTED" />	
+		<property name="creditCard" ref="creditCard1" />
+		<property name="tenant" ref="tenant1" />
+		<property name="property" ref="property3" />
+	</bean>
+	
+	<bean id="request6" class="domain.Request">
+		<property name="checkIn" value="2016/05/22" />
+		<property name="checkOut" value="2017/05/25" />
+		<property name="smoke" value="TRUE" />
+		<property name="status" value="DENIED" />	
+		<property name="creditCard" ref="creditCard1" />
+		<property name="tenant" ref="tenant3" />
+		<property name="property" ref="property2" />
+	</bean>
+	
+	<bean id="request7" class="domain.Request">
+		<property name="checkIn" value="2016/08/12" />
+		<property name="checkOut" value="2017/08/25" />
+		<property name="smoke" value="TRUE" />
+		<property name="status" value="DENIED" />	
+		<property name="creditCard" ref="creditCard1" />
+		<property name="tenant" ref="tenant3" />
+		<property name="property" ref="property2" />
+	</bean>
 	<!-- Finder -->
 	<bean id="finder1" class="domain.Finder">
 		<property name="destinationCity" value="Madrid" />
