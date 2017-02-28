@@ -1,7 +1,9 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AttributeService;
+import services.PropertyService;
 import services.ValueService;
+import domain.Attribute;
+import domain.Property;
 import domain.Value;
 
 @Controller
@@ -20,6 +26,11 @@ public class ValueController extends AbstractController {
 
 	@Autowired
 	private ValueService valueService;
+	
+	@Autowired
+	private PropertyService propertyService;
+	@Autowired
+	private AttributeService attributeService;
 
 	public ValueController() {
 		super();
@@ -45,16 +56,33 @@ public class ValueController extends AbstractController {
 		Value value = valueService.findOne(valueId);
 		
 		result = createEditModelAndView(value);
-		result.addObject("create",false);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int propertyId) {
+		ModelAndView result;
+		Value value;
+		
+		Property property = propertyService.findOne(propertyId);
+		
+		List<Attribute> attributes = new ArrayList<Attribute>();
+		attributes.addAll(attributeService.findAll());
+		
+		value = valueService.create(property, attributes.get(0));
+		
+		result = createEditModelAndView(value);
+		
 
 		return result;
 	}
 	
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(Value value, BindingResult binding) {
+	public ModelAndView save(Value value, BindingResult binding, @RequestParam int propertyId) {
 		ModelAndView result;
-		value = valueService.reconstruct(value, binding);
+		value = valueService.reconstruct(value, binding, propertyId);
 		
 		if (binding.hasErrors()) {
 			
@@ -62,7 +90,7 @@ public class ValueController extends AbstractController {
 			result.addObject("errors", binding.getAllErrors());
 			
 		} else {
-			try {
+//			try {
 				valueService.save(value);
 				
 				Collection<Value> values;
@@ -71,9 +99,9 @@ public class ValueController extends AbstractController {
 				result.addObject("requestURI", "value/list.do");
 				result.addObject("value", values);
 				
-			} catch (Throwable oops) {
-				result = createEditModelAndView(value, "value.commit.error");
-			}
+//			} catch (Throwable oops) {
+//				result = createEditModelAndView(value, "value.commit.error");
+//			}
 		}
 
 		return result;
@@ -90,8 +118,12 @@ public class ValueController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Value value, String message) {
 		ModelAndView result;
 		
+		List<Attribute> attributes = new ArrayList<Attribute>();
+		attributes.addAll(attributeService.findAll());
+		
 		result = new ModelAndView("value/edit");
 		result.addObject("value", value);
+		result.addObject("attributes", attributes);
 		result.addObject("message", message);
 
 		return result;

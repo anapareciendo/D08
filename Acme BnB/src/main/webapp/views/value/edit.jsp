@@ -8,15 +8,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="value/edit.do" modelAttribute="value">
+<form:form action="value/edit.do?propertyId=${value.property.id}" modelAttribute="value">
 
 	<form:hidden path="id" />
 
 	<acme:textbox code="value.name" path="name"/>
 	
-	<jstl:if test="${create == true}">
-		<acme:select items="" itemLabel="" code="value.attribute" path="attribute"/>
-	</jstl:if>
+	<acme:select items="${attributes }" itemLabel="name" code="value.attribute" path="attribute"/>
+
 	
 	<input type="submit" name="save" value="<spring:message code="value.save" />" />
 	<input type="button" name="cancel" value="<spring:message code="value.cancel" />" onclick="window.location='welcome/index.do'" /> <br />
