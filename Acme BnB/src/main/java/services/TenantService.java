@@ -2,21 +2,28 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.TenantRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
 import domain.Comment;
 import domain.Request;
 import domain.SocialIdentity;
 import domain.Tenant;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -28,6 +35,11 @@ public class TenantService {
 
 
 	//Supporting services
+	@Autowired
+	private UserAccountService userAccountService;
+	
+	@Autowired
+	private Validator validator;
 
 	//Constructors
 	public TenantService() {
@@ -88,6 +100,40 @@ public class TenantService {
 	public Tenant findByUserAccountId(int id){
 		Assert.notNull(id);
 		return tenantRepository.findByUserAccountId(id);
+	}
+
+	public Tenant reconstruct(ActorForm actor, BindingResult binding) {
+		Tenant result;
+		List<String> cond = Arrays.asList(actor.getConditions());
+		if(!actor.getPassword1().isEmpty() && !actor.getPassword2().isEmpty() && actor.getPassword1().equals(actor.getPassword2()) && cond.contains("acepto")){
+			UserAccount ua = userAccountService.create();
+			
+			Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			String hash = encoder.encodePassword(actor.getPassword1(), null);
+			
+			ua.setUsername(actor.getUsername());
+			ua.setPassword(hash);
+			
+			Authority a = new Authority();
+			a.setAuthority(Authority.TENANT);
+			ua.getAuthorities().add(a);
+			
+			result=this.create(ua);
+			
+			result.setName(actor.getName());
+			result.setSurname(actor.getSurname());
+			result.setEmail(actor.getEmail());
+			result.setPhone(actor.getPhone());
+			result.setPicture(actor.getPicture());
+			validator.validate(result, binding);
+		}else{
+			result=new Tenant();
+			result.setName("Pass");
+			if(!cond.contains("acepto")){
+				result.setName("Cond");
+			}
+		}
+		return result;
 	}
 
 }

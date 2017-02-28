@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.LessorService;
+import services.TenantService;
 import domain.Lessor;
+import domain.Tenant;
 import forms.ActorForm;
 
 @Controller
@@ -28,6 +30,8 @@ public class SigninController extends AbstractController {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private LessorService lessorService;
+	@Autowired
+	private TenantService tenantService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -48,9 +52,20 @@ public class SigninController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value="/signinTenant", method = RequestMethod.GET)
+	public ModelAndView signinTenant(){
+		ModelAndView result;
+		ActorForm actor = new ActorForm();
+		
+		result = new ModelAndView("security/signin");
+		result.addObject("authority", "tenant2");
+		result.addObject("tenant2", actor);
+		
+		return result;
+	}
+	
 	@RequestMapping(value = "/signin", method = RequestMethod.POST, params = "lessor2")
 	public ModelAndView user(ActorForm actor, BindingResult binding) {
-		//Sale panic si no se marca el tick del checkbox
 		ModelAndView result;
 		Lessor lessor;
 		lessor = lessorService.reconstruct(actor, binding);
@@ -75,6 +90,39 @@ public class SigninController extends AbstractController {
 				result = new ModelAndView("security/signin");
 				result.addObject("authority", "lessor2");
 				result.addObject("lessor2", actor);
+				result.addObject("message", "security.signin.failed");
+			}
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.POST, params = "tenant2")
+	public ModelAndView tenant(ActorForm actor, BindingResult binding) {
+		ModelAndView result;
+		Tenant tenant;
+		tenant = tenantService.reconstruct(actor, binding);
+
+		if (binding.hasErrors() || tenant.getName().equals("Pass") || tenant.getName().equals("Cond")) {
+			result = new ModelAndView("security/signin");
+			result.addObject("lessor2", actor);
+			result.addObject("authority", "lessor2");
+			if(tenant.getName().equals("Pass")){
+				result.addObject("message", "security.password.failed");
+			}else if(tenant.getName().equals("Cond")){
+				result.addObject("message", "security.condition.failed");
+			}
+			else{
+				result.addObject("errors", binding.getAllErrors());
+			}
+		} else {
+			try{
+				tenantService.save(tenant);
+				result = new ModelAndView("redirect:login.do");
+			}catch (Throwable oops) {
+				result = new ModelAndView("security/signin");
+				result.addObject("authority", "tenant2");
+				result.addObject("tenant2", actor);
 				result.addObject("message", "security.signin.failed");
 			}
 		}
