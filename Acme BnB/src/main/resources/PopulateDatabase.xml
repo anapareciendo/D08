@@ -652,6 +652,7 @@
 		<property name="address" value="Calle" />
 		<property name="description" value="Descrpiocion" />
 		<property name="tenant" ref="tenant1" />		
+		<property name="moment" value="12/11/2016 12:15"/>
 	</bean>
 	
 	<!-- Audit -->
