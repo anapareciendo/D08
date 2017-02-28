@@ -72,6 +72,7 @@
 					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
 					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+					<li><a href="socialIdentity/list.do"><spring:message code="master.page.socialIdentity.list" /> </a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message code="master.page.property" /></a>
