@@ -57,6 +57,7 @@
 		<security:intercept-url pattern="/dashboard/admin/display.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/attribute/admin/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/attribute/admin/delete.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/attribute/admin/create.do" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
