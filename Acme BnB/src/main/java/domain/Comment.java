@@ -38,7 +38,7 @@ public class Comment extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return moment;
 	}

@@ -32,6 +32,12 @@
 	  	<jstl:out value="${editHeader}" />
 	  </a>
   </display:column>
+  <display:column>
+	  <a href="value/delete.do?valueId=${value.id}">
+	  	<spring:message code="value.edit" var="editHeader" />
+	  	<jstl:out value="${editHeader}" />
+	  </a>
+  </display:column>
 
 </display:table>
 <div>

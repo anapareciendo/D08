@@ -90,18 +90,27 @@ public class ValueController extends AbstractController {
 			result.addObject("errors", binding.getAllErrors());
 			
 		} else {
-//			try {
+			try {
 				valueService.save(value);
+				result = new ModelAndView("redirect:list.do?propertyId="+value.getProperty().getId());
 				
-				Collection<Value> values;
-				values = valueService.findValues(value.getProperty().getId());
-				result = new ModelAndView("value/list");
-				result.addObject("requestURI", "value/list.do");
-				result.addObject("value", values);
-				
-//			} catch (Throwable oops) {
-//				result = createEditModelAndView(value, "value.commit.error");
-//			}
+			} catch (Throwable oops) {
+				result = createEditModelAndView(value, "value.commit.error");
+			}
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/delete")
+	public ModelAndView delete(@RequestParam int valueId) {
+		ModelAndView result;
+		Value value = valueService.findOne(valueId);
+		try {			
+			valueService.delete(value);
+			result = new ModelAndView("redirect:list.do?propertyId="+value.getProperty().getId());	
+		} catch (Throwable oops) {
+			result = createEditModelAndView(value, "value.commit.error");
 		}
 
 		return result;
