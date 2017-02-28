@@ -44,7 +44,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.lessor" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="/property/lessor/list.do"><spring:message code="master.page.lessor.list" /></a></li>					
+					<li><a href="property/lessor/list.do"><spring:message code="master.page.lessor.list" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>
