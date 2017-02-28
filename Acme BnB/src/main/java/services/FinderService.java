@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.FinderRepository;
 import security.Authority;
@@ -26,6 +28,11 @@ public class FinderService {
 
 
 	//Supporting services
+	@Autowired
+	private TenantService tenantService;
+	
+	@Autowired
+	private Validator validator;
 
 	//Constructors
 	public FinderService() {
@@ -80,6 +87,23 @@ public class FinderService {
 		
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a tenant for this action");
 		return finderRepository.findMyFinder(ua.getId());
+	}
+
+	public Finder reconstruct(Finder finder, BindingResult binding) {
+		Finder res;
+		if(finder.getId()==0){
+			res=this.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()));
+		}else{
+			res=finderRepository.findOne(finder.getId());
+		}
+		res.setDestinationCity(finder.getDestinationCity());
+		res.setMaxPrice(finder.getMaxPrice());
+		res.setMinPrice(finder.getMinPrice());
+		res.setKeyword(finder.getKeyword());
+		res.setAddress(finder.getAddress());
+		res.setDescription(finder.getDescription());
+		validator.validate(res, binding);
+		return res;
 	}
 
 }

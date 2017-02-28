@@ -12,6 +12,7 @@ package controllers.tenant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,6 +40,29 @@ public class FinderTenantController extends AbstractController {
 		result = new ModelAndView("finder/finder");
 		result.addObject("finder", finder);
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/find", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(Finder finder, BindingResult binding) {
+		ModelAndView result;
+		finder = finderService.reconstruct(finder, binding);
+		
+		if (binding.hasErrors()) {
+			result = new ModelAndView("finder/finder");
+			result.addObject("finder", finder);
+			result.addObject("errors", binding.getAllErrors());
+		} else {
+//			try {
+				finderService.save(finder);				
+				result = new ModelAndView("redirect:finder.do");
+//			} catch (Throwable oops) {
+//				result = new ModelAndView("finder/finder");
+//				result.addObject("finder", finder);
+//				result.addObject("message", "finder.commit.error");
+//			}
+		}
+
 		return result;
 	}
 
