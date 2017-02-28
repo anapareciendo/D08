@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class FinderService {
 		Finder res;
 		res = new Finder();
 		res.setTenant(tenant);
+		res.setMoment(Calendar.getInstance().getTime());
 
 		return res;
 	}
