@@ -17,7 +17,7 @@ import domain.Lessor;
 import domain.Property;
 
 @Controller
-@RequestMapping("/lessor/property")
+@RequestMapping("/property/lessor")
 public class PropertyLessorController extends AbstractController {
 
 	@Autowired

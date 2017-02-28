@@ -63,6 +63,6 @@
 </display:table>
 <jstl:if test="${owner == true}">
   	<div>
-		<a href="property/create.do"> <spring:message code="property.create" /></a>
+		<a href="/property/lessor/create.do"> <spring:message code="property.create" /></a>
 	</div>	
 </jstl:if>

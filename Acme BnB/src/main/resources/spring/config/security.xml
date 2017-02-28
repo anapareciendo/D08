@@ -47,10 +47,10 @@
 		<security:intercept-url pattern="/property/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/lessor/display.do" access="permitAll" />
 		
-		<security:intercept-url pattern="/lessor/property/list.do" access="hasRole('LESSOR')" />
-		<security:intercept-url pattern="/value/list.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/edit.do" access="hasRole('LESSOR')" />
-		<security:intercept-url pattern="/property/create.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/property/lessor/list.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/property/lessor/create.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/value/list.do" access="hasRole('LESSOR')" />
 	
 		<security:intercept-url pattern="/tenant/finder/display" access="hasRole('TENANT')" />
 		

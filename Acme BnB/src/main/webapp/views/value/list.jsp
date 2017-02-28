@@ -20,11 +20,11 @@
   requestURI="${requestURI }" pagesize="5"
   class="displaytag">
   
-  <spring:message code="value.name" var="nameHeader"/>
-  <display:column property="name" title="${nameHeader}" sortable="true" />
-  
   <spring:message code="value.attribute" var="attributeHeader"/>
   <display:column property="attribute.name" title="${attributeHeader}" sortable="true" />
   
+  <spring:message code="value.name" var="nameHeader"/>
+  <display:column property="name" title="${nameHeader}" sortable="true" />
+
 
 </display:table>
