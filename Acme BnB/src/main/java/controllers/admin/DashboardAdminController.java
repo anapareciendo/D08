@@ -18,8 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import controllers.AbstractController;
-import domain.Lessor;
-import domain.Tenant;
 
 @Controller
 @RequestMapping("/dashboard/admin")
@@ -48,13 +46,14 @@ public class DashboardAdminController extends AbstractController {
 		Double requestAcceptedByTenant= adminService.requestAcceptedByTenant();
 		Double requestDeniedByTenant = adminService.requestDeniedByTenant();
 		
-		Lessor lessorMoreAccepted = adminService.lessorMoreAccepted();
+	/*	Lessor lessorMoreAccepted = adminService.lessorMoreAccepted();
 		Lessor lessorMoreDenied = adminService.lessorMoreDenied();
 		Lessor lessorMorePending = adminService.lessorMorePending();
 		
 		Tenant tennatMoreAccepted = adminService.tennatMoreAccepted();
 		Tenant tennatMoreDenied = adminService.tennatMoreDenied();
 		Tenant tennatMorePending = adminService.tennatMorePending();
+		*/
 		
 		Integer minSocialIdentityPerActor = adminService.minSocialIdentityPerActor();
 		Integer maxSocialIdentityPerActor = adminService.maxSocialIdentityPerActor();
@@ -74,13 +73,14 @@ public class DashboardAdminController extends AbstractController {
 		result.addObject("requestAcceptedByTenant", requestAcceptedByTenant);
 		result.addObject("requestDeniedByTenant", requestDeniedByTenant);
 		
-		result.addObject("lessorMoreAccepted", lessorMoreAccepted);
+	/*	result.addObject("lessorMoreAccepted", lessorMoreAccepted);
 		result.addObject("lessorMoreDenied", lessorMoreDenied);
 		result.addObject("lessorMorePending", lessorMorePending);
 		
 		result.addObject("tennatMoreAccepted", tennatMoreAccepted);
 		result.addObject("tennatMoreDenied", tennatMoreDenied);
 		result.addObject("tennatMorePending", tennatMorePending);
+		*/
 		
 		result.addObject("minSocialIdentityPerActor", minSocialIdentityPerActor);
 		result.addObject("maxSocialIdentityPerActor", maxSocialIdentityPerActor);

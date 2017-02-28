@@ -23,18 +23,19 @@
 	<div>
 		<p>
 			<spring:message code="dashboard.requestAcceptedByLessor"/>: <jstl:out value="${requestAcceptedByLessor}"/><br>
-			<spring:message code="dashboard.requestDeniedByLessor"/>: <jstl:out value="${requestDeniedByLessor(}"/><br>
+			<spring:message code="dashboard.requestDeniedByLessor"/>: <jstl:out value="${requestDeniedByLessor}"/><br>
 			
 			<spring:message code="dashboard.requestAcceptedByTenant"/>: <jstl:out value="${requestAcceptedByTenant}"/><br>
 			<spring:message code="dashboard.requestDeniedByTenant"/>: <jstl:out value="${requestDeniedByTenant}"/><br>
 			
-			<spring:message code="dashboard.lessorMoreAccepted"/>: <jstl:out value="${lessorMoreAccepted}"/><br>
+	<%-- 		<spring:message code="dashboard.lessorMoreAccepted"/>: <jstl:out value="${lessorMoreAccepted}"/><br>
 			<spring:message code="dashboard.lessorMoreDenied"/>: <jstl:out value="${lessorMoreDenied}"/><br>
 			<spring:message code="dashboard.lessorMorePending"/>: <jstl:out value="${lessorMorePending}"/><br>
 			
 			<spring:message code="dashboard.tennatMoreAccepted"/>: <jstl:out value="${tennatMoreAccepted}"/><br>
 			<spring:message code="dashboard.tennatMoreDenied"/>: <jstl:out value="${tennatMoreDenied}"/><br>
 			<spring:message code="dashboard.tennatMorePending"/>: <jstl:out value="${tennatMorePending}"/><br>
+			--%>
 			
 			<spring:message code="dashboard.minSocialIdentityPerActor"/>: <jstl:out value="${minSocialIdentityPerActor}"/><br>
 			<spring:message code="dashboard.maxSocialIdentityPerActor"/>: <jstl:out value="${maxSocialIdentityPerActor}"/><br>

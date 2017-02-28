@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
-import domain.Lessor;
-import domain.Tenant;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
@@ -36,21 +34,21 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Double requestDeniedByTenant();
 	
 	//Hay que coger el primero de los que devuelve
-	@Query("select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.ACCEPTED)")
+	/*@Query("select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.ACCEPTED)")
 	Lessor lessorMoreAccepted();
 	@Query("select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.DENIED)")
 	Lessor lessorMoreDenied();
 	@Query("select p.lessor from Property p join p.requests r where r.status.size <=(select count(*) from Request r where r.status=domain.Status.PENDING)")
 	Lessor lessorMorePending();
-
+*/
 	
 	//El mas repetido de lo que devuelva
-	@Query("select r.tenant from Request r where r.status = domain.Status.ACCEPTED")
+	/*@Query("select r.tenant from Request r where r.status = domain.Status.ACCEPTED")
 	Tenant tennatMoreAccepted();
 	@Query("select r.tenant from Request r where r.status = domain.Status.DENIED")
 	Tenant tennatMoreDenied();
 	@Query("select r.tenant from Request r where r.status = domain.Status.PENDING")
-	Tenant tennatMorePending();
+	Tenant tennatMorePending(); */
 	
 	
 	//Level A

@@ -15,9 +15,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Comment;
-import domain.Lessor;
 import domain.SocialIdentity;
-import domain.Tenant;
 
 @Service
 @Transactional
@@ -113,7 +111,7 @@ public class AdministratorService {
 		return administratorRepository.requestDeniedByTenant();
 	}
 	
-	public Lessor lessorMoreAccepted(){
+	/*public Lessor lessorMoreAccepted(){
 		this.isAdministrator();
 		return administratorRepository.lessorMoreAccepted();
 	}
@@ -142,11 +140,12 @@ public class AdministratorService {
 		this.isAdministrator();
 		return administratorRepository.tennatMorePending();
 	}
-	
+	*/
 	public Integer minSocialIdentityPerActor(){
 		this.isAdministrator();
 		return administratorRepository.minSocialIdentityPerActor();
 	}
+	
 	
 	public Integer maxSocialIdentityPerActor(){
 		this.isAdministrator();
