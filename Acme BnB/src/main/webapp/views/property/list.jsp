@@ -51,14 +51,14 @@
   		</display:column>
   	</jstl:if>
   	
-  	<%-- <jstl:if test="${owner == true}">
+  	<jstl:if test="${owner == true}">
   		<display:column>
-	  		<a href="property/edit.do?propertyId=${row.id}">
+	  		<a href="property/lessor/edit.do?propertyId=${property.id}">
 	  			<spring:message code="property.edit" var="editHeader" />
 	  			<jstl:out value="${editHeader}" />
 	  		</a>
   		</display:column>
-  	</jstl:if>      --%>
+  	</jstl:if>
   	
 </display:table>
 <jstl:if test="${owner == true}">

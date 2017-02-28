@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
@@ -49,10 +50,20 @@ public class PropertyLessorController extends AbstractController {
 		ModelAndView result;
 		Property property;
 
-		int uaId = LoginService.getPrincipal().getId();
-		Lessor lessor = lessorService.findByUserAccountId(uaId);
+		Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
 		
 		property = propertyService.create(lessor);
+		result = createEditModelAndView(property);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int propertyId) {
+		ModelAndView result;
+		
+		Property property = propertyService.findOne(propertyId);
+				
 		result = createEditModelAndView(property);
 
 		return result;
