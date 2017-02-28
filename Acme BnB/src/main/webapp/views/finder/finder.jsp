@@ -8,7 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="property/lessor/edit.do" modelAttribute="property">
+<form:form action="finder/find.do" modelAttribute="finder">
 
 	<acme:textbox code="finder.destinationCity" path="destinationCity"/>
 	<acme:textbox code="finder.maxPrice" path="maxPrice"/>
