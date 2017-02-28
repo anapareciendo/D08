@@ -33,5 +33,4 @@
 		<spring:message code="${code}" />
 	</form:label>	
 	<form:checkbox path="${path}" value="${value}"/>	
-	<form:errors path="${path}" cssClass="error" />
 </div>	

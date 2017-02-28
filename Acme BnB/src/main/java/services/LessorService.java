@@ -2,7 +2,9 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -101,8 +103,8 @@ public class LessorService {
 	
 	public Lessor reconstruct(ActorForm actor, BindingResult binding){
 		Lessor result;
-		
-		if(!actor.getPassword1().isEmpty() && !actor.getPassword2().isEmpty() && actor.getPassword1().equals(actor.getPassword2())){
+		List<String> cond = Arrays.asList(actor.getConditions());
+		if(!actor.getPassword1().isEmpty() && !actor.getPassword2().isEmpty() && actor.getPassword1().equals(actor.getPassword2()) && cond.contains("acepto")){
 			UserAccount ua = userAccountService.create();
 			
 			Md5PasswordEncoder encoder = new Md5PasswordEncoder();
@@ -125,7 +127,10 @@ public class LessorService {
 			validator.validate(result, binding);
 		}else{
 			result=new Lessor();
-			result.setName("Not");
+			result.setName("Pass");
+			if(!cond.contains("acepto")){
+				result.setName("Cond");
+			}
 		}
 		return result;
 	}

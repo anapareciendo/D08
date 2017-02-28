@@ -16,7 +16,7 @@ public class ActorForm {
 	private String phone;
 	private String picture;
 	
-	private String[] conditions;
+	private String[] conditions={};
 
 	public ActorForm() {
 		super();
