@@ -27,7 +27,7 @@
 					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
 					<li><a href="dashboard/admin/display.do"><spring:message code="master.page.administrator.dashboard" /></a></li>					
-				
+					<li><a href="attribute/admin/list.do"><spring:message code="master.page.administrator.attribute" /></a></li>									
 				</ul>
 			</li>
 		</security:authorize>
