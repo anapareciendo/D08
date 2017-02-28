@@ -52,7 +52,7 @@
 		<security:intercept-url pattern="/property/lessor/create.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/value/list.do" access="hasRole('LESSOR')" />
 	
-		<security:intercept-url pattern="/tenant/finder/display" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/dashboard/admin/display" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
