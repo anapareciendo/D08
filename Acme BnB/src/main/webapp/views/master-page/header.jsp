@@ -81,6 +81,9 @@
 					<security:authorize access="hasRole('LESSOR')">
 						<li><a href="property/lessor/list.do"><spring:message code="master.page.lessor.list" /></a></li>					
 					</security:authorize>
+					<security:authorize access="hasRole('TENANT')">
+						<li><a href="finder/tenant/finder.do"><spring:message code="master.page.property.finder" /></a></li>					
+					</security:authorize>
 				</ul>
 			</li>
 		</security:authorize>

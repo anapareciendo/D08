@@ -62,8 +62,8 @@
 		<security:intercept-url pattern="/attribute/admin/create.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/attribute/admin/edit.do" access="hasRole('ADMIN')" />
 		
-		<security:intercept-url pattern="/finder/finder.do" access="hasRole('TENANT')" />
-		<security:intercept-url pattern="/finder/find.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/finder/tenant/finder.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/finder/tenant/find.do" access="hasRole('TENANT')" />
 		
 		<security:intercept-url pattern="/audit/list.do" access="isAuthenticated()" />
 		
