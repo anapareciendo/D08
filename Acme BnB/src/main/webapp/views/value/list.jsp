@@ -25,6 +25,12 @@
   
   <spring:message code="value.name" var="nameHeader"/>
   <display:column property="name" title="${nameHeader}" sortable="true" />
-
+  
+  <display:column>
+	  <a href="value/edit.do?valueId=${value.id}">
+	  	<spring:message code="value.edit" var="editHeader" />
+	  	<jstl:out value="${editHeader}" />
+	  </a>
+  </display:column>
 
 </display:table>

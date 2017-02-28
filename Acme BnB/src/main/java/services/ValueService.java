@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ValueRepository;
 import security.Authority;
@@ -24,6 +26,10 @@ public class ValueService {
 	private ValueRepository valueRepository;
 	
 	//Supporting services
+
+	
+	@Autowired
+	private Validator validator;
 	
 	//Constructors
 	public ValueService() {
@@ -79,6 +85,20 @@ public class ValueService {
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a lessor for this action");
 		return valueRepository.findValues(propertyId);
+	}
+	
+	public Value reconstruct(Value value, BindingResult binding) {
+		Value res;
+		
+		if(value.getId()==0){
+			res = value;
+		}else{
+			res = valueRepository.findOne(value.getId());
+			res.setName(value.getName());
+			validator.validate(res, binding);
+		}
+		
+		return res;
 	}
 	
 }
