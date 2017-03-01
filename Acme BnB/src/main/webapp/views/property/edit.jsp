@@ -11,6 +11,7 @@
 <form:form action="property/lessor/edit.do" modelAttribute="property">
 
 	<form:hidden path="id" />
+	<form:hidden path="version" />
 	<form:hidden path="totalRate"/>
 
 	<acme:textbox code="property.name" path="name"/>
