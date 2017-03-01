@@ -478,7 +478,7 @@
 	
 	<bean id="property1" class="domain.Property">
 		<property name="name" value="Villa Ángel 2.0" />
-		<property name="ratePerDay" value="1.0" />
+		<property name="ratePerDay" value="25.35" />
 		<property name="totalRate" value="4.0" />
 		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
 		<property name="address" value="Madrid" />
@@ -496,7 +496,7 @@
 	
 	<bean id="property2" class="domain.Property">
 		<property name="name" value="Villa Ángel" />
-		<property name="ratePerDay" value="1.0" />
+		<property name="ratePerDay" value="38.49" />
 		<property name="totalRate" value="3.0" />
 		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
 		<property name="address" value="Madrid" />
@@ -514,7 +514,7 @@
 	
 	<bean id="property3" class="domain.Property">
 		<property name="name" value="Campo Silvestre" />
-		<property name="ratePerDay" value="1.0" />
+		<property name="ratePerDay" value="130.25" />
 		<property name="totalRate" value="3.0" />
 		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
 		<property name="address" value="Sevilla" />

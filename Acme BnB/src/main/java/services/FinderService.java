@@ -3,6 +3,8 @@ package services;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Finder;
+import domain.Property;
 import domain.Tenant;
 
 @Service
@@ -103,6 +106,35 @@ public class FinderService {
 		res.setAddress(finder.getAddress());
 		res.setDescription(finder.getDescription());
 		validator.validate(res, binding);
+		return res;
+	}
+	
+	public Collection<Property> searchFincer(String address, Double minPrice, Double maxPrice, String city, String keyword){
+		Double mp = minPrice;
+		Double xp = maxPrice;
+		if(mp==null){
+			mp=0.0;
+		}
+		if(xp==null){
+			xp=Double.MAX_VALUE;
+		}
+		Set<Property> res=new HashSet<Property>(finderRepository.searchFinder(address, mp, xp));
+		res.addAll(finderRepository.searchFinder(city,keyword));
+ 		return res;
+	}
+
+	public boolean isActive() {
+		boolean res = true;
+		Finder finder = tenantService.findByUserAccountId(LoginService.getPrincipal().getId()).getFinder();
+		if(finder==null){
+			res=false;
+		}else{
+			long actual = Calendar.getInstance().getTime().getTime();
+			long old = finder.getMoment().getTime();
+			if(actual-old > 3600000){
+				res=false;
+			}
+		}
 		return res;
 	}
 
