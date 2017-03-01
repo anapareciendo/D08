@@ -66,9 +66,6 @@ public class SocialIdentityController extends AbstractController{
 		//Lessor
 		Authority l = new Authority();
 		l.setAuthority(Authority.LESSOR);
-		
-		//UserAccount ua=LoginService.getPrincipal();
-		//Assert.isTrue(folder.getActor().getUserAccount().equals(ua) || ua.getAuthorities().contains(b), "You are not the owner of this folder");
 
 		UserAccount ua= LoginService.getPrincipal();
 		if(ua.getAuthorities().contains(l)){
@@ -98,6 +95,7 @@ public class SocialIdentityController extends AbstractController{
 				socialIdentityService.save(socialIdentity);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
+				
 				result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");
 			}
 		}
