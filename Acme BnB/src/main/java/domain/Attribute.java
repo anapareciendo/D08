@@ -23,9 +23,6 @@ public class Attribute extends DomainEntity {
 	}
 
 	//------------------------------Relationships-------------------------
-
-	
-	
 	
 	
 }

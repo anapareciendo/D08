@@ -82,15 +82,16 @@ public class ValueController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Value value, BindingResult binding, @RequestParam int propertyId) {
 		ModelAndView result;
-		value = valueService.reconstruct(value, binding, propertyId);
-		
+
 		if (binding.hasErrors()) {
 			
 			result = createEditModelAndView(value);
 			result.addObject("errors", binding.getAllErrors());
 			
 		} else {
+			
 			try {
+				value = valueService.reconstruct(value, binding, propertyId);
 				valueService.save(value);
 				result = new ModelAndView("redirect:list.do?propertyId="+propertyId);
 				
@@ -102,11 +103,14 @@ public class ValueController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Value value, @RequestParam int propertyId) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int valueId) {
 		ModelAndView result;
-
-		try {			
+		
+		Value value = valueService.findOne(valueId);
+		
+		try {
+			int propertyId = value.getProperty().getId();
 			valueService.delete(value);
 			result = new ModelAndView("redirect:list.do?propertyId="+propertyId);	
 		} catch (Throwable oops) {

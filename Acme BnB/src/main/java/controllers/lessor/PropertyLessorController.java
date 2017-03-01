@@ -73,13 +73,14 @@ public class PropertyLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result;
-		property = propertyService.reconstruct(property, binding);
+		
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(property);
 			result.addObject("errors", binding.getAllErrors());
 		} else {
 			try {
+				property = propertyService.reconstruct(property, binding);
 				propertyService.save(property);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
