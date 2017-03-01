@@ -10,6 +10,8 @@
 
 package controllers.tenant;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import services.FinderService;
 import services.TenantService;
 import controllers.AbstractController;
 import domain.Finder;
+import domain.Property;
 
 @Controller
 @RequestMapping("/finder/tenant")
@@ -35,7 +38,11 @@ public class FinderTenantController extends AbstractController {
 	@RequestMapping(value="/finder", method = RequestMethod.GET)
 	public ModelAndView signinUser(){
 		ModelAndView result;
-		Finder finder = finderService.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()));
+		Finder finder= tenantService.findByUserAccountId(LoginService.getPrincipal().getId()).getFinder();
+		if(!finderService.isActive()){
+			finderService.delete(finder);
+			finder = finderService.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()));
+		}
 		
 		result = new ModelAndView("finder/finder");
 		result.addObject("finder", finder);
@@ -53,14 +60,17 @@ public class FinderTenantController extends AbstractController {
 			result.addObject("finder", finder);
 			result.addObject("errors", binding.getAllErrors());
 		} else {
-//			try {
-				finderService.save(finder);				
-				result = new ModelAndView("redirect:finder.do");
-//			} catch (Throwable oops) {
-//				result = new ModelAndView("finder/finder");
-//				result.addObject("finder", finder);
-//				result.addObject("message", "finder.commit.error");
-//			}
+			try {
+				Finder ff=finderService.save(finder);				
+				Collection<Property> search = finderService.searchFincer(ff.getAddress(), ff.getMinPrice(), ff.getMaxPrice(), ff.getDestinationCity(), ff.getKeyword());
+				result = new ModelAndView("property/list");
+				result.addObject("requestURI", "property/list.do");
+				result.addObject("property", search);
+			} catch (Throwable oops) {
+				result = new ModelAndView("finder/finder");
+				result.addObject("finder", finder);
+				result.addObject("message", "finder.commit.error");
+			}
 		}
 
 		return result;
