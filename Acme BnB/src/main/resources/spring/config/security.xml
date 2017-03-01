@@ -67,6 +67,8 @@
 		
 		<security:intercept-url pattern="/audit/list.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/socialIdentity/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialIdentity/edit.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialIdentity/create.do" access="isAuthenticated()" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

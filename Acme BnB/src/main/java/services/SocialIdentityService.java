@@ -6,8 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
+import repositories.LessorRepository;
 import repositories.SocialIdentityRepository;
+import security.LoginService;
+import domain.Actor;
+import domain.Lessor;
+import domain.Property;
 import domain.SocialIdentity;
 
 @Service
@@ -17,8 +24,13 @@ public class SocialIdentityService {
 	//Managed repository
 	@Autowired
 	private SocialIdentityRepository socialRepository;
+
 	
 	//Supporting services
+	@Autowired
+	private LessorService lessorService;
+	@Autowired
+	private Validator validator;
 	
 	//Constructors
 	public SocialIdentityService() {
@@ -26,9 +38,10 @@ public class SocialIdentityService {
 	}
 	
 	//Simple CRUD methods
-	public SocialIdentity create() {
+	public SocialIdentity create(Actor actor) {
 		SocialIdentity res;
 		res = new SocialIdentity();
+		res.setActor(actor);
 		return res;
 	}
 	
@@ -51,6 +64,24 @@ public class SocialIdentityService {
 	
 	
 	//Utilites methods
+	
+	public SocialIdentity reconstruct(SocialIdentity socialIdentity, BindingResult binding) {
+		SocialIdentity res;
+		
+		if(socialIdentity.getId()==0){
+			Lessor lessor= lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+			res = this.create(lessor);
+		}else{
+			res = socialRepository.findOne(socialIdentity.getId());
+			res.setNick(socialIdentity.getNick());
+			res.setNameSocial(socialIdentity.getNameSocial());
+			res.setUrlSocial(socialIdentity.getUrlSocial());
+			
+		}
+
+		validator.validate(res, binding);
+		return res;
+	}
 	
 }
 

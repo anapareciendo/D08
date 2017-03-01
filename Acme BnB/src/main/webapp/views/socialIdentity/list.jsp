@@ -41,13 +41,14 @@
 	<spring:message code="socialIdentity.urlSocial" var="urlSocialHeader" />
 	<display:column property="urlSocial" title="${urlSocialHeader }" sortable="true" />
 
+	<security:authorize access="hasRole('LESSOR')">
 	<display:column>
 	  	<a href="socialIdentity/edit.do?socialIdentityId=${socialIdentity.id}">
 	 			<spring:message code="socialIdentity.edit" var="editHeader" />
 		  		<jstl:out value="${editHeader}" />
 		 </a>
 	</display:column>
-	
+	</security:authorize>
 	
 </display:table>
 
