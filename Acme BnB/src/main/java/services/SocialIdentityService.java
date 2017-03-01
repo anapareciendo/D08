@@ -10,7 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.SocialIdentityRepository;
+import security.Authority;
 import security.LoginService;
+import security.UserAccount;
 import domain.Actor;
 import domain.Lessor;
 import domain.SocialIdentity;
@@ -81,5 +83,13 @@ public class SocialIdentityService {
 		return res;
 	}
 	
+	public Collection<SocialIdentity> findMySocialIdentities(){
+		UserAccount ua = LoginService.getPrincipal();
+		Assert.notNull(ua);
+		Authority a = new Authority();
+		a.setAuthority(Authority.TRIAL);
+		Assert.isTrue(!ua.getAuthorities().contains(a), "You must to be authenticate to find your folders.");
+		return socialRepository.findMySocialIdentities(ua.getId());
+	}
 }
 

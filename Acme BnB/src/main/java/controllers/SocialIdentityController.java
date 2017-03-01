@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
 import security.LoginService;
+import security.UserAccount;
 import services.LessorService;
 import services.SocialIdentityService;
+import services.TenantService;
 import domain.Lessor;
 import domain.SocialIdentity;
+import domain.Tenant;
 
 @Controller
 @RequestMapping("/socialIdentity")
@@ -24,13 +28,15 @@ public class SocialIdentityController extends AbstractController{
 	private SocialIdentityService socialIdentityService;
 	@Autowired
 	private LessorService lessorService;
+	@Autowired
+	private TenantService tenantService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<SocialIdentity> socialIdentities;
 
-		socialIdentities = socialIdentityService.findAll();
+		socialIdentities = socialIdentityService.findMySocialIdentities();
 		result = new ModelAndView("socialIdentity/list");
 		result.addObject("requestURI", "socialIdentity/list.do");
 		result.addObject("socialIdentity", socialIdentities);
@@ -53,13 +59,28 @@ public class SocialIdentityController extends AbstractController{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		SocialIdentity socialIdentity;
-
-		Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+		SocialIdentity socialIdentity=new SocialIdentity();
+		//Tenant
+		Authority t = new Authority();
+		t.setAuthority(Authority.TENANT);
+		//Lessor
+		Authority l = new Authority();
+		l.setAuthority(Authority.LESSOR);
 		
-		socialIdentity = socialIdentityService.create(lessor);
-		result = createEditModelAndView(socialIdentity);
+		//UserAccount ua=LoginService.getPrincipal();
+		//Assert.isTrue(folder.getActor().getUserAccount().equals(ua) || ua.getAuthorities().contains(b), "You are not the owner of this folder");
 
+		UserAccount ua= LoginService.getPrincipal();
+		if(ua.getAuthorities().contains(l)){
+			Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+			socialIdentity = socialIdentityService.create(lessor);
+			result = createEditModelAndView(socialIdentity);
+		}else if(ua.getAuthorities().contains(t)){
+			Tenant tenant= tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
+			socialIdentity = socialIdentityService.create(tenant);
+			result = createEditModelAndView(socialIdentity);
+		}
+		result = createEditModelAndView(socialIdentity);
 		return result;
 	}
 	
