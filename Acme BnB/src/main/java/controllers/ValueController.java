@@ -52,10 +52,11 @@ public class ValueController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int valueId) {
 		ModelAndView result;
-		
+		Collection<Attribute> attributes = attributeService.findAll();
 		Value value = valueService.findOne(valueId);
 		
 		result = createEditModelAndView(value);
+		result.addObject("attributes", attributes);
 
 		return result;
 	}
@@ -82,21 +83,21 @@ public class ValueController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Value value, BindingResult binding, @RequestParam int propertyId) {
 		ModelAndView result;
-
+		
 		if (binding.hasErrors()) {
 			
 			result = createEditModelAndView(value);
 			result.addObject("errors", binding.getAllErrors());
 			
 		} else {
-			
 			try {
 				value = valueService.reconstruct(value, binding, propertyId);
 				valueService.save(value);
 				result = new ModelAndView("redirect:list.do?propertyId="+propertyId);
-				
+				 
 			} catch (Throwable oops) {
-				result = createEditModelAndView(value, "value.commit.error");
+				result = new ModelAndView("redirect:edit.do?valueId="+value.getId());
+				
 			}
 		}
 
@@ -130,13 +131,9 @@ public class ValueController extends AbstractController {
 	
 	protected ModelAndView createEditModelAndView(Value value, String message) {
 		ModelAndView result;
-		
-		List<Attribute> attributes = new ArrayList<Attribute>();
-		attributes.addAll(attributeService.findAll());
-		
+				
 		result = new ModelAndView("value/edit");
 		result.addObject("value", value);
-		result.addObject("attributes", attributes);
 		result.addObject("message", message);
 
 		return result;

@@ -73,7 +73,7 @@ public class PropertyLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result;
-		
+		System.out.println("Errores"+binding.hasErrors());
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(property);

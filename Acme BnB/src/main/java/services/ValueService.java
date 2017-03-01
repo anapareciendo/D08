@@ -40,6 +40,8 @@ public class ValueService {
 	
 	//Simple CRUD methods
 	public Value create(Property property, Attribute attribute) {
+		Assert.notNull(property);
+		Assert.notNull(attribute);
 		Value res;
 		res = new Value();
 		res.setAttribute(attribute);
@@ -59,7 +61,7 @@ public class ValueService {
 	}
 	
 	public Value save(Value value) {
-		Assert.notNull(value, "The property to save cannot be null.");
+		Assert.notNull(value, "The value to save cannot be null.");
 		Value res = valueRepository.save(value);
 		res.getProperty().getValues().add(res);
 		return res;
@@ -96,9 +98,11 @@ public class ValueService {
 			res = this.create(property, value.getAttribute());
 		}else{
 			res = valueRepository.findOne(value.getId());
+			res.setName(value.getName());
 			res.setAttribute(value.getAttribute());
+			
 		}
-		res.setName(value.getName());
+		
 		validator.validate(res, binding);
 		return res;
 	}
