@@ -67,7 +67,11 @@ public class AttributeAdminController extends AbstractController {
 		result.addObject("requestURI", "attribute/admin/list.do");
 		result.addObject("attribute", attributes);
 		}catch(Throwable oops){
-			result= new ModelAndView("hacker/hackers");
+			Collection<Attribute> attributes= attributeService.findAll();
+			result = new ModelAndView("attribute/list");
+			result.addObject("requestURI", "attribute/admin/list.do");
+			result.addObject("attribute", attributes);
+			result.addObject("message", "attribute.delete.error");
 		}
 		return result;
 	}
