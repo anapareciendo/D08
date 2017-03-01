@@ -99,17 +99,18 @@ public class PropertyService {
 	public Property reconstruct(Property property, BindingResult binding) {
 		Property res;
 		if(property.getId()==0){
-			Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
-			res=this.create(lessor);
+			validator.validate(property, binding);
+			//Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+			//res=this.create(lessor);
 		}else{
 			res=propertyRepository.findOne(property.getId());
+			property.setName(res.getName());
+			property.setDescription(res.getDescription());
+			property.setRatePerDay(res.getRatePerDay());
+			property.setAddress(res.getAddress());
 		}
-		res.setName(property.getName());
-		res.setDescription(property.getDescription());
-		res.setRatePerDay(property.getRatePerDay());
-		res.setAddress(property.getAddress());
-		validator.validate(res, binding);
-		return res;
+		validator.validate(property, binding);
+		return property;
 	}
 	
 }
