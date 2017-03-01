@@ -18,6 +18,9 @@
 
 	
 	<input type="submit" name="save" value="<spring:message code="value.save" />" />
+	<input type="submit" name="delete"
+			value="<spring:message code="value.delete" />"
+			onclick="return confirm('<spring:message code="value.confirm.delete" />')" />&nbsp;
 	<input type="button" name="cancel" value="<spring:message code="value.cancel" />" onclick="window.location='welcome/index.do'" /> <br />
 	
 	<div>
