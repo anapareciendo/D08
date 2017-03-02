@@ -45,6 +45,9 @@
 		<bean class="converters.SocialIdentityToStringConverter" />
 		<bean class="converters.StringToSocialIdentityConverter" />
 		
+		<bean class="converters.ValueToStringConverter" />
+		<bean class="converters.StringToValueConverter" />
+		
 	</util:list>
 	
 </beans>

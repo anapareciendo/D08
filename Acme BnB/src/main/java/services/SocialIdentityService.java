@@ -9,12 +9,10 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.LessorRepository;
 import repositories.SocialIdentityRepository;
 import security.LoginService;
 import domain.Actor;
 import domain.Lessor;
-import domain.Property;
 import domain.SocialIdentity;
 
 @Service
