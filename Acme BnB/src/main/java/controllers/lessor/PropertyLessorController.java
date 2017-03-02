@@ -79,11 +79,11 @@ public class PropertyLessorController extends AbstractController {
 				propertyService.save(property);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(property);
-				result.addObject("errors", binding.getAllErrors());
+				result = createEditModelAndView(property, "property.commit.error");
 			}
 		}catch(Throwable oppss){
-			result = createEditModelAndView(property, "property.commit.error");
+			result = createEditModelAndView(property);
+//			result.addObject("errors", binding.getAllErrors());
 		}
 
 		return result;
