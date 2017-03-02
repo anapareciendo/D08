@@ -58,6 +58,7 @@ public class SocialIdentityService {
 	public SocialIdentity save(SocialIdentity social) {
 		Assert.notNull(social, "The social identity to save cannot be null.");
 		SocialIdentity res = socialRepository.save(social);
+		res.getActor().getSocialIdentities().add(res);
 		return res;
 	}
 	

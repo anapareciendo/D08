@@ -59,7 +59,7 @@ public class SocialIdentityController extends AbstractController{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		SocialIdentity socialIdentity=new SocialIdentity();
+		SocialIdentity socialIdentity= new SocialIdentity();
 		//Tenant
 		Authority t = new Authority();
 		t.setAuthority(Authority.TENANT);
@@ -80,6 +80,7 @@ public class SocialIdentityController extends AbstractController{
 		result = createEditModelAndView(socialIdentity);
 		return result;
 	}
+
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(SocialIdentity socialIdentity, BindingResult binding) {
@@ -95,8 +96,8 @@ public class SocialIdentityController extends AbstractController{
 				socialIdentityService.save(socialIdentity);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				
 				result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");
+				result.addObject("errors", binding.getAllErrors());
 			}
 		}
 
