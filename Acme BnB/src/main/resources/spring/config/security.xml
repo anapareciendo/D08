@@ -70,7 +70,7 @@
 		<security:intercept-url pattern="/socialIdentity/edit.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/socialIdentity/create.do" access="isAuthenticated()" />
 		
-		<security:intercept-url pattern="/comment/list.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/comment/list.do" access="hasRole('LESSOR') or hasRole('TENANT')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

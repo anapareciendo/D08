@@ -31,7 +31,17 @@
   
   <spring:message code="comment.star" var="starHeader"/>
   <display:column property="star" title="${starHeader}" sortable="false" />
- 
+  
+  <spring:message code="comment.sender" var="senderHeader" />
+	<display:column title="${senderHeader} " sortable="false">
+		<jstl:out value="${comment.sender.userAccount.username}" />
+	</display:column>
+  
+   <spring:message code="comment.commentable" var="commentableHeader" />
+	<display:column title="${commentableHeader} " sortable="false">
+		<jstl:out value="${comment.commentable.userAccount.username}" />
+	</display:column>
+	
 </display:table>
 <%-- <jstl:if test="${owner == true}">
   	<div>
