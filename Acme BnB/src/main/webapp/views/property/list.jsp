@@ -56,9 +56,6 @@
 	  			<jstl:out value="${attributesHeader}" />
 	  		</a>
   		</display:column>
-  	</jstl:if>
-  	
-  	<jstl:if test="${owner == true}">
   		<display:column>
 	  		<a href="property/lessor/edit.do?propertyId=${property.id}">
 	  			<spring:message code="property.edit" var="editHeader" />
