@@ -13,9 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import services.AdministratorService;
+import services.AuditorService;
 import services.LessorService;
 import services.SocialIdentityService;
 import services.TenantService;
+import domain.Administrator;
+import domain.Auditor;
 import domain.Lessor;
 import domain.SocialIdentity;
 import domain.Tenant;
@@ -30,6 +34,11 @@ public class SocialIdentityController extends AbstractController{
 	private LessorService lessorService;
 	@Autowired
 	private TenantService tenantService;
+	@Autowired
+	private AuditorService auditorService;
+	@Autowired
+	private AdministratorService adminService;
+	
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -66,6 +75,12 @@ public class SocialIdentityController extends AbstractController{
 		//Lessor
 		Authority l = new Authority();
 		l.setAuthority(Authority.LESSOR);
+		//Auditor
+		Authority a = new Authority();
+		a.setAuthority(Authority.AUDITOR);
+		//Admin
+		Authority admin = new Authority();
+		admin.setAuthority(Authority.ADMIN);
 
 		UserAccount ua= LoginService.getPrincipal();
 		if(ua.getAuthorities().contains(l)){
@@ -76,33 +91,55 @@ public class SocialIdentityController extends AbstractController{
 			Tenant tenant= tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
 			socialIdentity = socialIdentityService.create(tenant);
 			result = createEditModelAndView(socialIdentity);
+		}else if(ua.getAuthorities().contains(a)){
+			Auditor auditor= auditorService.findByUserAccountId(LoginService.getPrincipal().getId());
+			socialIdentity = socialIdentityService.create(auditor);
+			result = createEditModelAndView(socialIdentity);
+		}else if(ua.getAuthorities().contains(admin)){
+			Administrator adminis= adminService.findByUserAccountId(LoginService.getPrincipal().getId());
+			socialIdentity = socialIdentityService.create(adminis);
+			result = createEditModelAndView(socialIdentity);
 		}
 		result = createEditModelAndView(socialIdentity);
 		return result;
 	}
-
 	
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	
+	
+	/*@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		SocialIdentity socialIdentity;
+
+		Tenant tenant= tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
+		
+		socialIdentity = socialIdentityService.create(tenant);
+		result = createEditModelAndView(socialIdentity);
+
+		return result;
+	}
+	*/
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(SocialIdentity socialIdentity, BindingResult binding) {
 		ModelAndView result;
-		
-		
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(socialIdentity);
-			result.addObject("errors", binding.getAllErrors());
-		} else {
+		try{
+			socialIdentity = socialIdentityService.reconstruct(socialIdentity, binding);
 			try {
-				socialIdentity = socialIdentityService.reconstruct(socialIdentity, binding);
 				socialIdentityService.save(socialIdentity);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");
 				result.addObject("errors", binding.getAllErrors());
 			}
+		}catch(Throwable oppss){
+			result = createEditModelAndView(socialIdentity);
+			result.addObject("errors", binding.getAllErrors());
 		}
 
 		return result;
 	}
+
 	
 	
 	protected ModelAndView createEditModelAndView(SocialIdentity socialIdentity) {

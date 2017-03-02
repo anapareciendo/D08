@@ -21,7 +21,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<form:form action="socialIdentity/create.do" modelAttribute="socialIdentity">
+<form:form action="socialIdentity/edit.do" modelAttribute="socialIdentity">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
