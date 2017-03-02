@@ -725,4 +725,33 @@
 		<property name="urlSocial" value="http://facebook.com" />
 		<property name="actor" ref="lessor1" />			
 	</bean>
+	
+	<!-- Comment -->
+	
+	<bean id="comment1" class="domain.Comment">
+		<property name="title" value="Recordatorio" />	
+		<property name="moment" value="2016/10/28 11:25" />
+		<property name="text" value="Actualizar la foto de mi perfil" />
+		<property name="star" value="3" />
+		<property name="sender" ref="lessor1" />
+		<property name="commentable" ref="lessor1" />
+	</bean>
+	
+	<bean id="comment2" class="domain.Comment">
+		<property name="title" value="¡Hola!" />	
+		<property name="moment" value="2017/02/28 17:45" />
+		<property name="text" value="Tu perfil contiene información util." />
+		<property name="star" value="5" />
+		<property name="sender" ref="lessor2" />
+		<property name="commentable" ref="tenant2" />
+	</bean>
+	
+	<bean id="comment3" class="domain.Comment">
+		<property name="title" value="Negociación" />	
+		<property name="moment" value="2017/03/01 08:00" />
+		<property name="text" value="Tu perfil me parece interesante, negociemos." />
+		<property name="star" value="4" />
+		<property name="sender" ref="lessor2" />
+		<property name="commentable" ref="tenant1" />
+	</bean>
 </beans>
