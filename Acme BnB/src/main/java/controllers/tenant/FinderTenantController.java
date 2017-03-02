@@ -53,13 +53,9 @@ public class FinderTenantController extends AbstractController {
 	@RequestMapping(value = "/find", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Finder finder, BindingResult binding) {
 		ModelAndView result;
-		finder = finderService.reconstruct(finder, binding);
 		
-		if (binding.hasErrors()) {
-			result = new ModelAndView("finder/finder");
-			result.addObject("finder", finder);
-			result.addObject("errors", binding.getAllErrors());
-		} else {
+		try{
+			finder = finderService.reconstruct(finder, binding);
 			try {
 				Finder ff=finderService.save(finder);				
 				Collection<Property> search = finderService.searchFincer(ff.getAddress(), ff.getMinPrice(), ff.getMaxPrice(), ff.getDestinationCity(), ff.getKeyword());
@@ -71,8 +67,12 @@ public class FinderTenantController extends AbstractController {
 				result.addObject("finder", finder);
 				result.addObject("message", "finder.commit.error");
 			}
+		}catch(Throwable oopss){
+			result = new ModelAndView("finder/finder");
+			result.addObject("finder", finder);
+			result.addObject("errors", binding.getAllErrors());
 		}
-
+		
 		return result;
 	}
 

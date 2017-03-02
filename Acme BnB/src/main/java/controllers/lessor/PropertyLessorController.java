@@ -73,19 +73,17 @@ public class PropertyLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result;
-		System.out.println("Errores"+binding.hasErrors());
-		
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(property);
-			result.addObject("errors", binding.getAllErrors());
-		} else {
+		try{
+			property = propertyService.reconstruct(property, binding);
 			try {
-				property = propertyService.reconstruct(property, binding);
 				propertyService.save(property);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(property, "property.commit.error");
+				result = createEditModelAndView(property);
+				result.addObject("errors", binding.getAllErrors());
 			}
+		}catch(Throwable oppss){
+			result = createEditModelAndView(property, "property.commit.error");
 		}
 
 		return result;

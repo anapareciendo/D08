@@ -118,17 +118,14 @@ public class PropertyService {
 		Property res;
 		
 		if(property.getId()==0){
-			Lessor lessor= lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
-			res = this.create(lessor);
+			res = this.create(lessorService.findByUserAccountId(LoginService.getPrincipal().getId()));
 		}else{
 			res = propertyRepository.findOne(property.getId());
-			res.setName(property.getName());
-			res.setRatePerDay(property.getRatePerDay());
-			res.setDescription(property.getDescription());
-			res.setAddress(property.getAddress());
-			validator.validate(res, binding);
 		}
-
+		res.setName(property.getName());
+		res.setRatePerDay(property.getRatePerDay());
+		res.setDescription(property.getDescription());
+		res.setAddress(property.getAddress());
 		validator.validate(res, binding);
 		return res;
 	}
