@@ -48,6 +48,9 @@
 		<bean class="converters.ValueToStringConverter" />
 		<bean class="converters.StringToValueConverter" />
 		
+		<bean class="converters.CommentableToStringConverter" />
+		<bean class="converters.StringToCommentableConverter" />
+		
 	</util:list>
 	
 </beans>
