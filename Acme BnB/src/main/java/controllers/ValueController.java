@@ -83,14 +83,9 @@ public class ValueController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Value value, BindingResult binding, @RequestParam int propertyId) {
 		ModelAndView result;
-		if (binding.hasErrors()) {
-			
-			result = createEditModelAndView(value);
-			result.addObject("errors", binding.getAllErrors());
-			
-		} else {
-			try {
-				value = valueService.reconstruct(value, binding, propertyId);
+		try {
+			value = valueService.reconstruct(value, binding, propertyId);
+			try{	
 				valueService.save(value);
 				result = new ModelAndView("redirect:list.do?propertyId="+propertyId);
 				 
@@ -98,7 +93,11 @@ public class ValueController extends AbstractController {
 				result = createEditModelAndView(value,"value.commit.error");
 				
 			}
+		}catch(Throwable oppss){
+			result = createEditModelAndView(value);
+//			result.addObject("errors", binding.getAllErrors());
 		}
+		
 
 		return result;
 	}

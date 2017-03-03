@@ -98,11 +98,10 @@ public class ValueService {
 			res = this.create(property, value.getAttribute());
 		}else{
 			res = valueRepository.findOne(value.getId());
-			res.setName(value.getName());
-			res.setAttribute(value.getAttribute());
 			
 		}
-		
+		res.setName(value.getName());
+		res.setAttribute(value.getAttribute());
 		validator.validate(res, binding);
 		return res;
 	}
