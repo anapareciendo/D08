@@ -75,6 +75,8 @@
 		
 		<security:intercept-url pattern="/request/lessor/accept.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/request/lessor/denied.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/request/lessor/toDeny.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/request/lessor/toAccept.do" access="hasRole('LESSOR')" />
 		
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		

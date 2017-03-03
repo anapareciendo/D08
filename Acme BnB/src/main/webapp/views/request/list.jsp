@@ -32,5 +32,22 @@
   <spring:message code="request.status" var="statusHeader"/>
   <display:column property="status" title="${statusHeader}" sortable="true" />
   
+  <security:authorize access="hasRole('LESSOR')">
+  		<display:column>
+  			<jstl:if test="${accept == true}">
+	  			<a href="request/lessor/toAccept.do?requestId=${req.id}">
+	  				<spring:message code="request.lessor.accept" var="changeHeader" />
+	  				<jstl:out value="${changeHeader}" />
+	  			</a>
+	  		</jstl:if>
+	  		<jstl:if test="${accept == false}">
+	  			<a href="request/lessor/toDeny.do?requestId=${req.id}">
+	  				<spring:message code="request.lessor.deny" var="changeHeader" />
+	  				<jstl:out value="${changeHeader}" />
+	  			</a>
+	  		</jstl:if>
+  		</display:column>
+  </security:authorize>
+  
   	
 </display:table>

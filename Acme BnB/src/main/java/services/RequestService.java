@@ -13,6 +13,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Property;
 import domain.Request;
+import domain.Status;
 import domain.Tenant;
 
 @Service
@@ -37,6 +38,7 @@ public class RequestService {
 		res = new Request();
 		res.setTenant(tenant);
 		res.setProperty(property);
+		res.setStatus(Status.PENDING);
 
 		return res;
 	}
@@ -80,12 +82,20 @@ public class RequestService {
 		return requestRepository.findMyRequest(ua.getId());
 	}
 	
-	public Collection<Request> findMyRequestProperties(){
+	public Collection<Request> findMyRequestAcceptProperties(){
 		Authority b = new Authority();
 		b.setAuthority(Authority.LESSOR);
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a lessor for this action");
-		return requestRepository.findMyRequestProperties(ua.getId());
+		return requestRepository.findMyRequestAcceptProperties(ua.getId());
+	}
+	
+	public Collection<Request> findMyRequestDeniedProperties(){
+		Authority b = new Authority();
+		b.setAuthority(Authority.LESSOR);
+		UserAccount ua=LoginService.getPrincipal();
+		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a lessor for this action");
+		return requestRepository.findMyRequestDeniedProperties(ua.getId());
 	}
 	
 	
