@@ -85,7 +85,7 @@ public class RequestService {
 		b.setAuthority(Authority.LESSOR);
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a lessor for this action");
-		return requestRepository.findMyRequest(ua.getId());
+		return requestRepository.findMyRequestProperties(ua.getId());
 	}
 	
 	

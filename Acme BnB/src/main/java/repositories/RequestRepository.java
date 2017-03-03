@@ -15,6 +15,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select r from Request r where r.tenant.userAccount.id = ?1")
 	Collection<Request> findMyRequest(int id);
 	
-	@Query("select p.requests from Property p where p.lessor.id=?1")
-	Collection<Request> findMyRequestProperties(int idLessor);
+	@Query("select r from Request r where r.property.lessor.userAccount.id=?1")
+	Collection<Request> findMyRequestProperties(int id);
+	
 }
