@@ -20,6 +20,9 @@
 
 <display:table name="req" id="req"  requestURI="${requestURI }" pagesize="5" class="displaytag">
   
+  <spring:message code="property.name" var="name"/>
+  <display:column property="property.name" title="${name}" sortable="false" />
+  
   <spring:message code="request.checkIn" var="inHeader"/>
   <display:column property="checkIn" title="${inHeader}" sortable="false" />
   
