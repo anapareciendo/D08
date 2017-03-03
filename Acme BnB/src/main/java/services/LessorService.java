@@ -101,6 +101,11 @@ public class LessorService {
 		return lessorRepository.findByUserAccountId(id);
 	}
 	
+	public Collection<Lessor> findMyLessors(int id){
+		Assert.notNull(id);
+		return lessorRepository.findMyLessors(id);
+	}
+	
 	public Lessor reconstruct(ActorForm actor, BindingResult binding){
 		Lessor result;
 		List<String> cond = Arrays.asList(actor.getConditions());

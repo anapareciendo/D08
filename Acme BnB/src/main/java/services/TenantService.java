@@ -102,6 +102,12 @@ public class TenantService {
 		return tenantRepository.findByUserAccountId(id);
 	}
 
+	public Collection<Tenant> findMyTenants(int id){
+		Assert.notNull(id);
+		return tenantRepository.findMyTenants(id);
+	}
+
+	
 	public Tenant reconstruct(ActorForm actor, BindingResult binding) {
 		Tenant result;
 		List<String> cond = Arrays.asList(actor.getConditions());

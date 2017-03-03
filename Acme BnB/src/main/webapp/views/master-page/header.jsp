@@ -126,6 +126,7 @@
 						<li class="arrow"></li>
 					
 							<li><a href="comment/list.do"><spring:message code="master.page.comment.list" /></a></li>					
+							<li><a href="comment/create.do"><spring:message code="master.page.comment.create" /></a></li>
 					
 					</ul>
 				</li>
