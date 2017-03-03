@@ -1,7 +1,9 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AttributeService;
+import services.PropertyService;
 import services.ValueService;
 import domain.Attribute;
+import domain.Property;
 import domain.Value;
 
 @Controller
@@ -25,8 +29,8 @@ public class ValueController extends AbstractController {
 	@Autowired
 	private ValueService valueService;
 	
-//	@Autowired
-//	private PropertyService propertyService;
+	@Autowired
+	private PropertyService propertyService;
 	@Autowired
 	private AttributeService attributeService;
 
@@ -60,45 +64,78 @@ public class ValueController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int propertyId) {
+		ModelAndView result;
+		List<Attribute> attributes = new ArrayList<Attribute>();
+		attributes.addAll(attributeService.findAll());
+		Property property = propertyService.findOne(propertyId);
+		
+		Value value = valueService.create(property, attributes.get(0));
+		
+		result = new ModelAndView("value/edit");
+		result.addObject("value", value);
+		result.addObject("attributes",attributes);
+
+		return result;
+	}
+	
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Value value, BindingResult binding) {
 		ModelAndView result;
 		
-//		try {
-			Value res = valueService.reconstruct(value, binding);
-			if(!binding.hasErrors()){
-				try{	
-					valueService.save(res);
-					result = new ModelAndView("redirect:list.do?propertyId="+value.getProperty().getId());
+		Value res = valueService.reconstruct(value, binding);
+		if(!binding.hasErrors()){
+			try{	
+				valueService.save(res);
+				result = new ModelAndView("redirect:list.do?propertyId="+value.getProperty().getId());
 					 
-				} catch (Throwable oops) {
+			} catch (Throwable oops) {
 					
-					Collection<Attribute> attributes = attributeService.findAll();
-					result = new ModelAndView("value/edit");
-					result.addObject("value", value);
-					result.addObject("attributes",attributes);
-					result.addObject("message", "value.commit.error");
-					
-				}
-			}else{
 				Collection<Attribute> attributes = attributeService.findAll();
 				result = new ModelAndView("value/edit");
 				result.addObject("value", value);
 				result.addObject("attributes",attributes);
-				result.addObject("errors", binding.getAllErrors());
-			}
-			
-//		}catch(Throwable oppss){
-//			Collection<Attribute> attributes = attributeService.findAll();
-//			result = new ModelAndView("value/edit");
-//			result.addObject("value", value);
-//			result.addObject("attributes",attributes);
+				result.addObject("message", "value.commit.error");
+					
+				}
+		}else{
+			Collection<Attribute> attributes = attributeService.findAll();
+			result = new ModelAndView("value/edit");
+			result.addObject("value", value);
+			result.addObject("attributes",attributes);
 //			result.addObject("errors", binding.getAllErrors());
-//		}
-		
+		}
+			
 		return result;
 	}
 	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(Value value, BindingResult binding) {
+		ModelAndView result;
+		
+		if(!binding.hasErrors()){
+			try {
+				int propertyId = value.getProperty().getId();
+				valueService.delete(value);
+				result = new ModelAndView("redirect:list.do?propertyId="+propertyId);
+			} catch (Throwable oops) {
+			
+				Collection<Attribute> attributes = attributeService.findAll();
+				result = new ModelAndView("value/edit");
+				result.addObject("value", value);
+				result.addObject("attributes",attributes);
+				result.addObject("message", "value.commit.error");
+			}
+		}else{
+			Collection<Attribute> attributes = attributeService.findAll();
+			result = new ModelAndView("value/edit");
+			result.addObject("value", value);
+			result.addObject("attributes",attributes);
+		}
 
+		return result;
+	}
+	
 }
