@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AdministratorRepository;
 import security.Authority;
@@ -25,6 +27,10 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository administratorRepository;
 
+	//Validator
+	@Autowired
+	private Validator validator;
+
 
 	//Supporting services
 
@@ -34,12 +40,12 @@ public class AdministratorService {
 	}
 
 	//Simple CRUD methods
-	public Administrator create() {
+	public Administrator create(UserAccount ua) {
 		Administrator res;
 		res = new Administrator();
 		res.setPostComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
-
+		res.setUserAccount(ua);
 		return res;
 	}
 
@@ -179,6 +185,22 @@ public class AdministratorService {
 		return administratorRepository.totalAmountMoney();
 	}
 	
+	public Administrator reconstruct(Administrator admin, BindingResult binding) {
+		Administrator res;
+		
+		if(admin.getId()==0){
+			res = this.create(LoginService.getPrincipal());
+		}else{
+			res = administratorRepository.findOne(admin.getId());
+		}
+		res.setName(admin.getName());
+		res.setSurname(admin.getSurname());
+		res.setEmail(admin.getEmail());
+		res.setPhone(admin.getPhone());
+		res.setPicture(admin.getPicture());
+		validator.validate(res, binding);
+		return res;
+	}
 	
 	
 }
