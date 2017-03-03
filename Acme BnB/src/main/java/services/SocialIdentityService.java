@@ -73,25 +73,6 @@ public class SocialIdentityService {
 		return res;
 	}
 	
-
-	//Utilites methods
-	//EL MAS MEJOR
-/*	public SocialIdentity reconstruct(SocialIdentity socialIdentity, BindingResult binding) {
-		SocialIdentity res;
-		
-		if(socialIdentity.getId()==0){
-			
-			Tenant tenant= tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
-			res = this.create(tenant);
-		}else{
-			res = socialRepository.findOne(socialIdentity.getId());
-		}
-		res.setNick(socialIdentity.getNick());
-		res.setNameSocial(socialIdentity.getNameSocial());
-		res.setUrlSocial(socialIdentity.getUrlSocial());
-		validator.validate(res, binding);
-		return res;
-	}*/
 	
 	public SocialIdentity reconstruct(SocialIdentity socialIdentity, BindingResult binding) {
 		SocialIdentity res = new SocialIdentity();
@@ -144,6 +125,19 @@ public class SocialIdentityService {
 		a.setAuthority(Authority.TRIAL);
 		Assert.isTrue(!ua.getAuthorities().contains(a), "You must to be authenticate to find your folders.");
 		return socialRepository.findMySocialIdentities(ua.getId());
+	}
+	
+	public void delete(SocialIdentity socialIdentity) {
+		
+		Authority b = new Authority();
+		b.setAuthority(Authority.ADMIN);
+		
+		UserAccount ua=LoginService.getPrincipal();
+		Assert.isTrue(socialIdentity.getActor().getUserAccount().equals(ua) || ua.getAuthorities().contains(b), "Your note the owner or this social identity");
+		Assert.notNull(socialIdentity, "The social identity to delete cannot be null.");
+		assert socialIdentity.getId() != 0;
+		Assert.isTrue(socialRepository.exists(socialIdentity.getId()));
+		socialRepository.delete(socialIdentity);
 	}
 }
 

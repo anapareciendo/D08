@@ -23,6 +23,7 @@ import domain.Auditor;
 import domain.Lessor;
 import domain.SocialIdentity;
 import domain.Tenant;
+import domain.Value;
 
 @Controller
 @RequestMapping("/socialIdentity")
@@ -105,21 +106,6 @@ public class SocialIdentityController extends AbstractController{
 	}
 	
 	
-	
-	/*@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		SocialIdentity socialIdentity;
-
-		Tenant tenant= tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
-		
-		socialIdentity = socialIdentityService.create(tenant);
-		result = createEditModelAndView(socialIdentity);
-
-		return result;
-	}
-	*/
-	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(SocialIdentity socialIdentity, BindingResult binding) {
 		ModelAndView result;
@@ -140,7 +126,22 @@ public class SocialIdentityController extends AbstractController{
 		return result;
 	}
 
-	
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int socialIdentityId) {
+		ModelAndView result;
+		
+		SocialIdentity socialIdentity= socialIdentityService.findOne(socialIdentityId);
+		
+		try {
+			socialIdentityService.delete(socialIdentity);
+			result = new ModelAndView("redirect:list.do");	
+		} catch (Throwable oops) {
+			result = createEditModelAndView(socialIdentity, "value.commit.error");
+		}
+
+		return result;
+	}
 	
 	protected ModelAndView createEditModelAndView(SocialIdentity socialIdentity) {
 		ModelAndView result;
