@@ -72,7 +72,9 @@
 		<security:intercept-url pattern="/socialIdentity/delete.do" access="isAuthenticated()" />
 		
 		<security:intercept-url pattern="/comment/list.do" access="hasRole('LESSOR') or hasRole('TENANT')" />
-		<security:intercept-url pattern="/request/lessor/list.do" access="hasRole('LESSOR')" />
+		
+		<security:intercept-url pattern="/request/lessor/accept.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/request/lessor/denied.do" access="hasRole('LESSOR')" />
 		
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		
