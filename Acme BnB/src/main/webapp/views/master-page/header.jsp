@@ -29,6 +29,7 @@
 					<li><a href="dashboard/admin/display.do"><spring:message code="master.page.administrator.dashboard" /></a></li>					
 					<li><a href="attribute/admin/list.do"><spring:message code="master.page.administrator.attribute.name" /></a></li>									
 					<li><a href="attribute/admin/create.do"><spring:message code="master.page.administrator.attribute.create" /></a></li>
+					<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.data" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
