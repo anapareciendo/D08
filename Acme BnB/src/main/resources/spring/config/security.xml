@@ -82,6 +82,8 @@
 		
 		<security:intercept-url pattern="/auditor/edit.do" access="hasRole('AUDITOR')" />
 		
+		<security:intercept-url pattern="/tenant/edit.do" access="hasRole('TENANT')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

@@ -53,6 +53,15 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('TENANT')">
+			<li><a class="fNiv"><spring:message	code="master.page.tenant" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="tenant/edit.do"><spring:message code="master.page.tenant.edit" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
 		<security:authorize access="hasRole('AUDITOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.auditor" /></a>
 				<ul>
