@@ -80,6 +80,7 @@
 		
 		<security:intercept-url pattern="/request/tenant/list.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/request/tenant/new.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/request/tenant/make.do" access="hasRole('TENANT')" />
 		
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		

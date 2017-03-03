@@ -5,18 +5,16 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.PropertyService;
 import services.RequestService;
-import services.TenantService;
 import controllers.AbstractController;
 import domain.Request;
-import domain.Tenant;
+import forms.RequestForm;
 
 @Controller
 @RequestMapping("/request/tenant")
@@ -24,11 +22,6 @@ public class RequestTenantController extends AbstractController {
 
 	@Autowired
 	private RequestService	requestService;
-	@Autowired
-	private TenantService tenantService;
-	@Autowired
-	private PropertyService propertyService;
-
 
 	public RequestTenantController() {
 		super();
@@ -49,11 +42,35 @@ public class RequestTenantController extends AbstractController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int propertyId) {
 		ModelAndView result;
-		Tenant tenant=tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
-			Request request = requestService.create(tenant, propertyService.findOne(propertyId));
+		RequestForm request = new RequestForm();
+		request.setPropertyId(propertyId);
 			
+		result = new ModelAndView("request/create");
+		result.addObject("req", request);
+		return result;
+	}
+	
+	@RequestMapping(value = "/make", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(RequestForm request, BindingResult binding) {
+		ModelAndView result;
+		
+		try{
+			Request req = requestService.reconstruct(request, binding);
+			try {
+				requestService.save(req);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				
+				result = new ModelAndView("request/create");
+				result.addObject("req", request);
+				result.addObject("errors", binding.getAllErrors());
+			}
+		}catch(Throwable oopss){
 			result = new ModelAndView("request/create");
 			result.addObject("req", request);
+			result.addObject("message", "finder.commit.error");
+		}
+		
 		return result;
 	}
 	

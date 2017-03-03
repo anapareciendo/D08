@@ -1,11 +1,15 @@
 package services;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
 import security.Authority;
@@ -15,6 +19,7 @@ import domain.Property;
 import domain.Request;
 import domain.Status;
 import domain.Tenant;
+import forms.RequestForm;
 
 @Service
 @Transactional
@@ -25,6 +30,13 @@ public class RequestService {
 	private RequestRepository requestRepository;
 	
 	//Supporting services
+	@Autowired
+	private TenantService tenantService;
+	@Autowired
+	private PropertyService propertyService;
+	
+	@Autowired
+	private Validator validator;
 	
 	//Constructors
 	public RequestService() {
@@ -97,6 +109,21 @@ public class RequestService {
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a lessor for this action");
 		return requestRepository.findMyRequestDeniedProperties(ua.getId());
+	}
+
+	public Request reconstruct(RequestForm request, BindingResult binding) {
+		Request res;
+		List<String> smoker = Arrays.asList(request.getSmoker());
+		res=this.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()), propertyService.findOne(request.getPropertyId()));
+		res.setCheckIn(request.getCheckIn());
+		res.setCheckOut(request.getCheckOut());
+		if(smoker.contains("smoker")){
+			res.setSmoke(true);
+		}else{
+			res.setSmoke(false);
+		}
+		validator.validate(res, binding);
+		return res;
 	}
 	
 	

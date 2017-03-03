@@ -10,11 +10,11 @@
 
 <form:form action="request/tenant/make.do" modelAttribute="req">
 
-	<form:hidden path="id" />
+	<form:hidden path="propertyId" />
 	
 	<acme:textbox code="request.checkIn" path="checkIn"/>
 	<acme:textbox code="request.checkOut" path="checkOut"/>
-	<acme:textbox code="request.smoke" path="smoke"/>
+	<acme:checkbox code="request.smoke" value="smoker" path="smoker"/>
 	
 	<input type="submit" name="save" value="<spring:message code="property.save" />" />
 	<input type="button" name="cancel" value="<spring:message code="property.cancel" />" onclick="window.location='welcome/index.do'" /> <br />
