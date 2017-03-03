@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AuditorService;
 import services.LessorService;
 import services.TenantService;
+import domain.Auditor;
 import domain.Lessor;
 import domain.Tenant;
 import forms.ActorForm;
@@ -32,6 +34,8 @@ public class SigninController extends AbstractController {
 	private LessorService lessorService;
 	@Autowired
 	private TenantService tenantService;
+	@Autowired
+	private AuditorService auditorService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -123,6 +127,39 @@ public class SigninController extends AbstractController {
 				result = new ModelAndView("security/signin");
 				result.addObject("authority", "tenant2");
 				result.addObject("tenant2", actor);
+				result.addObject("message", "security.signin.failed");
+			}
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.POST, params = "audit2")
+	public ModelAndView auditor(ActorForm actor, BindingResult binding) {
+		ModelAndView result;
+		Auditor auditor;
+		auditor = auditorService.reconstructForm(actor, binding);
+
+		if (binding.hasErrors() || auditor.getName().equals("Pass") || auditor.getName().equals("Cond")) {
+			result = new ModelAndView("security/signin");
+			result.addObject("lessor2", actor);
+			result.addObject("authority", "lessor2");
+			if(auditor.getName().equals("Pass")){
+				result.addObject("message", "security.password.failed");
+			}else if(auditor.getName().equals("Cond")){
+				result.addObject("message", "security.condition.failed");
+			}
+			else{
+				result.addObject("errors", binding.getAllErrors());
+			}
+		} else {
+			try{
+				auditorService.save(auditor);
+				result = new ModelAndView("redirect:login.do");
+			}catch (Throwable oops) {
+				result = new ModelAndView("security/signin");
+				result.addObject("authority", "lessor2");
+				result.addObject("lessor2", actor);
 				result.addObject("message", "security.signin.failed");
 			}
 		}

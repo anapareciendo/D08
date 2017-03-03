@@ -24,8 +24,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
+					<li><a href="security/admin/audit.do"><spring:message code="master.page.administrator.audit" /></a></li>
 					<li><a href="dashboard/admin/display.do"><spring:message code="master.page.administrator.dashboard" /></a></li>					
 					<li><a href="attribute/admin/list.do"><spring:message code="master.page.administrator.attribute.name" /></a></li>									
 					<li><a href="attribute/admin/create.do"><spring:message code="master.page.administrator.attribute.create" /></a></li>
