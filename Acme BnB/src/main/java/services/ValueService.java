@@ -26,8 +26,6 @@ public class ValueService {
 	private ValueRepository valueRepository;
 	
 	//Supporting services
-	@Autowired
-	private PropertyService propertyService;
 
 	
 	@Autowired
@@ -90,18 +88,18 @@ public class ValueService {
 		return valueRepository.findValues(propertyId);
 	}
 	
-	public Value reconstruct(Value value, BindingResult binding, int propertyId) {
+	public Value reconstruct(Value value, BindingResult binding) {
 		Value res;
 		
 		if(value.getId()==0){
-			Property property = propertyService.findOne(propertyId);
-			res = this.create(property, value.getAttribute());
+			res = this.create(value.getProperty(), value.getAttribute());
 		}else{
-			res = valueRepository.findOne(value.getId());
-			
+			Value aux = valueRepository.findOne(value.getId());
+			valueRepository.delete(aux);
+			res= this.create(aux.getProperty(), value.getAttribute());
 		}
 		res.setName(value.getName());
-		res.setAttribute(value.getAttribute());
+		
 		validator.validate(res, binding);
 		return res;
 	}

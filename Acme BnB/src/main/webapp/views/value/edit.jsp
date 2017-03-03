@@ -8,10 +8,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="value/edit.do?propertyId=${value.property.id}" modelAttribute="value">
+<form:form action="value/edit.do" modelAttribute="value">
 
 	<form:hidden path="id" />
-	<form:hidden path="version" />
+	<form:hidden path="property" />
 
 	<acme:textbox code="value.name" path="name"/>
 	
