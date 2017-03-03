@@ -135,5 +135,22 @@ public class TenantService {
 		}
 		return result;
 	}
+	
+	public Tenant reconstruct(Tenant tenant, BindingResult binding) {
+		Tenant res;
+		
+		if(tenant.getId()==0){
+			res = this.create(LoginService.getPrincipal());
+		}else{
+			res = tenantRepository.findOne(tenant.getId());
+		}
+		res.setName(tenant.getName());
+		res.setSurname(tenant.getSurname());
+		res.setEmail(tenant.getEmail());
+		res.setPhone(tenant.getPhone());
+		res.setPicture(tenant.getPicture());
+		validator.validate(res, binding);
+		return res;
+	}
 
 }
