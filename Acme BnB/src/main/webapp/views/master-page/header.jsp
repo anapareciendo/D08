@@ -116,6 +116,7 @@
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
 						<li><a href="finder/tenant/finder.do"><spring:message code="master.page.property.finder" /></a></li>					
+						<li><a href="request/tenant/list.do"><spring:message code="master.page.tenant.request.list" /></a></li>
 					</security:authorize>
 				</ul>
 			</li>

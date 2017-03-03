@@ -39,6 +39,7 @@ public class RequestService {
 		res.setTenant(tenant);
 		res.setProperty(property);
 		res.setStatus(Status.PENDING);
+		res.setCreditCard(tenant.getCreditCard());
 
 		return res;
 	}

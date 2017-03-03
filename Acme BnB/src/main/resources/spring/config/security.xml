@@ -78,6 +78,9 @@
 		<security:intercept-url pattern="/request/lessor/toDeny.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/request/lessor/toAccept.do" access="hasRole('LESSOR')" />
 		
+		<security:intercept-url pattern="/request/tenant/list.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/request/tenant/new.do" access="hasRole('TENANT')" />
+		
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		
 		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMIN')" />

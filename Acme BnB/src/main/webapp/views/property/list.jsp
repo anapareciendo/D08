@@ -48,6 +48,14 @@
   		</display:column>
 	
 	</security:authorize>
+	<security:authorize access="hasRole('TENANT')">
+		<display:column>
+	  		<a href="request/tenant/new.do?propertyId=${property.id}">
+	  			<spring:message code="master.page.tenant.request.new" var="requestHeader" />
+	  			<jstl:out value="${requestHeader}" />
+	  		</a>
+  		</display:column>
+	</security:authorize>
  
   <jstl:if test="${owner == true}">
   		<display:column>
