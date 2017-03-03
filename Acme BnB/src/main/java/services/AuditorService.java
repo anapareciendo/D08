@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AuditorRepository;
 import security.Authority;
@@ -24,6 +26,10 @@ public class AuditorService {
 	//Managed repository
 	@Autowired
 	private AuditorRepository auditorRepository;
+	
+	//Validator
+		@Autowired
+		private Validator validator;
 
 
 	//Supporting services
@@ -34,13 +40,13 @@ public class AuditorService {
 	}
 
 	//Simple CRUD methods
-	public Auditor create() {
+	public Auditor create(UserAccount ua) {
 		Auditor res;
 		res = new Auditor();
 		res.setPostComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 		res.setComments(new ArrayList<Comment>());
-		
+		res.setUserAccount(ua);
 		return res;
 	}
 
@@ -81,6 +87,24 @@ public class AuditorService {
 	public Auditor findByUserAccountId(int id){
 		Assert.notNull(id);
 		return auditorRepository.findByUserAccountId(id);
+	}
+	
+	public Auditor reconstruct(Auditor auditor, BindingResult binding) {
+		Auditor res;
+		
+		if(auditor.getId()==0){
+			res = this.create(LoginService.getPrincipal());
+		}else{
+			res = auditorRepository.findOne(auditor.getId());
+		}
+		res.setName(auditor.getName());
+		res.setSurname(auditor.getSurname());
+		res.setEmail(auditor.getEmail());
+		res.setPhone(auditor.getPhone());
+		res.setPicture(auditor.getPicture());
+		res.setCompany(auditor.getCompany());
+		validator.validate(res, binding);
+		return res;
 	}
 
 }
