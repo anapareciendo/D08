@@ -23,7 +23,6 @@ import domain.Auditor;
 import domain.Lessor;
 import domain.SocialIdentity;
 import domain.Tenant;
-import domain.Value;
 
 @Controller
 @RequestMapping("/socialIdentity")

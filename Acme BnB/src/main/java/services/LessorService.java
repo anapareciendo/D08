@@ -134,5 +134,23 @@ public class LessorService {
 		}
 		return result;
 	}
+	
+	public Lessor reconstruct2(Lessor lessor, BindingResult binding) {
+		Lessor res;
+		
+		if(lessor.getId()==0){
+			res = this.create(LoginService.getPrincipal());
+		}else{
+			res = lessorRepository.findOne(lessor.getId());
+		}
+		res.setName(lessor.getName());
+		res.setSurname(lessor.getSurname());
+		res.setEmail(lessor.getEmail());
+		res.setPhone(lessor.getPhone());
+		res.setPicture(lessor.getPicture());
+		validator.validate(res, binding);
+		return res;
+	}
+	
 
 }

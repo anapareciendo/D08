@@ -11,10 +11,11 @@
 <form:form action="value/edit.do?propertyId=${value.property.id}" modelAttribute="value">
 
 	<form:hidden path="id" />
+	<form:hidden path="version" />
 
 	<acme:textbox code="value.name" path="name"/>
 	
-	<acme:select items="${attributes }" itemLabel="name" code="value.attribute" path="attribute"/>
+	<acme:select items="${attributes}" itemLabel="name" code="value.attribute" path="attribute"/>
 
 	
 	<input type="submit" name="save" value="<spring:message code="value.save" />" />

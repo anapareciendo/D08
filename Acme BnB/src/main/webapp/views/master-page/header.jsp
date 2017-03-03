@@ -43,6 +43,15 @@
 			</li>
 		</security:authorize>
 		
+			<security:authorize access="hasRole('LESSOR')">
+			<li><a class="fNiv"><spring:message	code="master.page.lessor" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="lessor/edit.do"><spring:message code="master.page.lessor.edit" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
 		
 		
 		<security:authorize access="isAnonymous()">
