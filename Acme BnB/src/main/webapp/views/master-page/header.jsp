@@ -57,6 +57,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="tenant/edit.do"><spring:message code="master.page.tenant.edit" /></a></li>
+					<li><a href="creditCard/edit.do"><spring:message code="master.page.tenant.creditCard" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

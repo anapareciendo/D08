@@ -153,4 +153,21 @@ public class TenantService {
 		return res;
 	}
 
+	public Tenant reconstruct2(Tenant tenant, BindingResult binding) {
+		Tenant res;
+		
+		if(tenant.getId()==0){
+			res = this.create(LoginService.getPrincipal());
+		}else{
+			res = tenantRepository.findOne(tenant.getId());
+		}
+		res.getCreditCard().setBrand(tenant.getCreditCard().getBrand());
+		res.getCreditCard().setCvv(tenant.getCreditCard().getCvv());
+		res.getCreditCard().setExpirationMonth(tenant.getCreditCard().getExpirationMonth());
+		res.getCreditCard().setExpirationYear(tenant.getCreditCard().getExpirationYear());
+		res.getCreditCard().setHolder(tenant.getCreditCard().getHolder());
+		res.getCreditCard().setNumber(tenant.getCreditCard().getNumber());
+		validator.validate(res, binding);
+		return res;
+	}
 }
