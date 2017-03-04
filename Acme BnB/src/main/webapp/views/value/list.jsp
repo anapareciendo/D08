@@ -16,6 +16,9 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+
+<jstl:if test="${vacio != true}">
+
 <display:table name="value" id="value"
   requestURI="${requestURI }" pagesize="5"
   class="displaytag">
@@ -41,6 +44,13 @@
   </display:column> --%>
 
 </display:table>
+
+</jstl:if>
+<jstl:if test="${vacio == true}">
+	<spring:message code="value.empty" var="emptyHeader" />
+	<jstl:out value="${emptyHeader}" />
+</jstl:if>
+
 <div>
 	<a href="value/create.do?propertyId=${value.property.id }"> <spring:message code="value.create" /></a>
 </div>	

@@ -46,8 +46,11 @@ public class ValueController extends AbstractController {
 		value = valueService.findValues(propertyId);
 		result = new ModelAndView("value/list");
 		result.addObject("requestURI", "value/list.do");
-		result.addObject("value", value);
-
+		if(value.isEmpty()){
+			result.addObject("vacio", true);
+		}else{
+			result.addObject("value", value);
+		}
 		return result;
 	}
 	
@@ -115,7 +118,6 @@ public class ValueController extends AbstractController {
 	public ModelAndView delete(Value value, BindingResult binding) {
 		ModelAndView result;
 		
-		if(!binding.hasErrors()){
 			try {
 				int propertyId = value.getProperty().getId();
 				valueService.delete(value);
@@ -128,12 +130,6 @@ public class ValueController extends AbstractController {
 				result.addObject("attributes",attributes);
 				result.addObject("message", "value.commit.error");
 			}
-		}else{
-			Collection<Attribute> attributes = attributeService.findAll();
-			result = new ModelAndView("value/edit");
-			result.addObject("value", value);
-			result.addObject("attributes",attributes);
-		}
 
 		return result;
 	}
