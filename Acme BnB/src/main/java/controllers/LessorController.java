@@ -64,11 +64,11 @@ public class LessorController {
 				result.addObject("message", "lessor.commit.ok");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(lessor, "lessor.commit.error");
-				result.addObject("errors", binding.getAllErrors());
+				//result.addObject("errors", binding.getAllErrors());
 			}
 		}catch(Throwable oppss){
 			result = createEditModelAndView(lessor);
-			result.addObject("errors", binding.getAllErrors());
+			//result.addObject("errors", binding.getAllErrors());
 		}
 
 		return result;

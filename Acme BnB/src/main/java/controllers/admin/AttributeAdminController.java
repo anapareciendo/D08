@@ -94,7 +94,7 @@ public class AttributeAdminController extends AbstractController {
 			result = createEditModelAndView(attribute);
 			result = new ModelAndView("attribute/edit");
 			result.addObject("attribute",attribute);
-			result.addObject("errors", binding.getAllErrors());
+			//result.addObject("errors", binding.getAllErrors());
 		} else {
 			try {
 				attributeService.save(attribute);				

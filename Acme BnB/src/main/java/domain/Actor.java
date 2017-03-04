@@ -14,6 +14,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
 
@@ -61,7 +62,9 @@ public abstract class Actor extends Commentable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+	
+	@URL
+	@NotBlank
 	public String getPicture() {
 		return picture;
 	}

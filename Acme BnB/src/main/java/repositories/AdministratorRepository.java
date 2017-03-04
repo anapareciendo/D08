@@ -1,11 +1,14 @@
 
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
+import domain.Property;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
@@ -49,6 +52,28 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Tenant tennatMoreDenied();
 	@Query("select r.tenant from Request r where r.status = domain.Status.PENDING")
 	Tenant tennatMorePending(); */
+	
+	//Level B
+	
+	//The minimum, the average, and the maximum number of audits that the properties have got
+	@Query("select min(a.audits.size) from Auditor a")
+	Double minAuditsHaveProperty();
+	@Query("select max(a.audits.size) from Auditor a")
+	Double maxAuditsHaveProperty();
+	@Query("select avg(a.audits.size) from Auditor a")
+	Double avgAuditsHaveProperty();
+	
+	//A listing in which the attributes are sorted in descending order regarding the number of times they have been used to describe a property
+	
+	//A listing with his or her properties sorted according to the number of audits that they have got
+	@Query("select p from Property p order by p.audits.size DESC")
+	Collection<Property> propertiesAccordingAudits();
+	
+	//A listing with his or her properties sorted according to the number of requests that they have got
+	@Query("select p from Property p order by p.requests.size DESC")
+	Collection<Property> propertiesAccordingRequest();
+	
+	//A listing with his or her properties sorted according to the number of approved requests that they have got.
 	
 	
 	//Level A

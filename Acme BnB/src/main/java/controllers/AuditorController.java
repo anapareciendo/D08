@@ -61,7 +61,7 @@ public class AuditorController extends AbstractController {
 			}
 		}catch(Throwable oppss){
 			result = createEditModelAndView(auditor);
-			result.addObject("errors", binding.getAllErrors());
+			//result.addObject("errors", binding.getAllErrors());
 		}
 
 		return result;

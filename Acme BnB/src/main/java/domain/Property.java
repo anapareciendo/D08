@@ -51,7 +51,7 @@ public class Property extends DomainEntity {
 		this.totalRate = totalRate;
 	}
 
-	@NotNull
+	@NotBlank
 	public String getAddress() {
 		return address;
 	}
@@ -60,7 +60,7 @@ public class Property extends DomainEntity {
 		this.address = address;
 	}
 
-	@NotNull
+	@NotBlank
 	public String getDescription() {
 		return description;
 	}

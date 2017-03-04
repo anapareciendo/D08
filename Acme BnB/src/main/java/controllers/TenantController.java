@@ -61,7 +61,7 @@ public class TenantController extends AbstractController {
 			}
 		}catch(Throwable oppss){
 			result = createEditModelAndView(tenant);
-			result.addObject("errors", binding.getAllErrors());
+			//result.addObject("errors", binding.getAllErrors());
 		}
 
 		return result;
