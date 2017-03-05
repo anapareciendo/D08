@@ -39,7 +39,9 @@ public class FinderTenantController extends AbstractController {
 	public ModelAndView signinUser(){
 		ModelAndView result;
 		Finder finder= tenantService.findByUserAccountId(LoginService.getPrincipal().getId()).getFinder();
-		if(!finderService.isActive()){
+		if(finder==null){
+			finder = finderService.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()));
+		}else if(!finderService.isActive()){
 			finderService.delete(finder);
 			finder = finderService.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()));
 		}
