@@ -89,6 +89,22 @@ public class PropertyLessorController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(Property property, BindingResult binding) {
+		ModelAndView result;
+		
+			try {
+				propertyService.delete(property);
+				result = new ModelAndView("redirect:list.do");
+				
+			} catch (Throwable oops) {
+				result = createEditModelAndView(property, "property.commit.error");
+				
+			}
+
+		return result;
+	}
+	
 	protected ModelAndView createEditModelAndView(Property property) {
 		ModelAndView result;
 

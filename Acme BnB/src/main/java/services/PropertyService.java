@@ -76,8 +76,8 @@ public class PropertyService {
 		
 		Authority b = new Authority();
 		b.setAuthority(Authority.ADMIN);
-
 		UserAccount ua=LoginService.getPrincipal();
+		
 		Assert.isTrue(property.getLessor().getUserAccount().equals(ua) || ua.getAuthorities().contains(b), "You are not the owner of the property");
 		Assert.isTrue(property.getValues().isEmpty(), "The property cannot be delete with attributes");
 		Assert.isTrue(property.getAudits().isEmpty(), "The property cannot be delete with audits");
