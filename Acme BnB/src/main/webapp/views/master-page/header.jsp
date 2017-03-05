@@ -44,27 +44,6 @@
 			</li>
 		</security:authorize>
 		
-			<security:authorize access="hasRole('LESSOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.lessor" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="lessor/edit.do"><spring:message code="master.page.lessor.edit" /></a></li>
-					<li><a href="lessor/displayPersonal.do"><spring:message code="master.page.lessor.profile" /></a></li>
-				</ul>
-			</li>
-		</security:authorize>
-		
-		<security:authorize access="hasRole('TENANT')">
-			<li><a class="fNiv"><spring:message	code="master.page.tenant" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="tenant/edit.do"><spring:message code="master.page.tenant.edit" /></a></li>
-					<li><a href="creditCard/edit.do"><spring:message code="master.page.tenant.creditCard" /></a></li>
-					<li><a href="tenant/display.do"><spring:message code="master.page.tenant.profile" /></a></li>
-				</ul>
-			</li>
-		</security:authorize>
-		
 		<security:authorize access="hasRole('AUDITOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.auditor" /></a>
 				<ul>
@@ -102,7 +81,14 @@
 					<li class="arrow"></li>
 					<security:authorize access="hasRole('LESSOR') or hasRole('TENANT')">
 						<li><a href="actor/display.do"><spring:message code="master.page.actor.display" /></a></li>
-					</security:authorize>		
+					</security:authorize>
+					<security:authorize access="hasRole('LESSOR')">
+						<li><a href="lessor/edit.do"><spring:message code="master.page.lessor.edit" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('TENANT')">
+						<li><a href="tenant/edit.do"><spring:message code="master.page.tenant.edit" /></a></li>
+						<li><a href="creditCard/edit.do"><spring:message code="master.page.tenant.creditCard" /></a></li>
+					</security:authorize>			
 					<li><a href="socialIdentity/list.do"><spring:message code="master.page.socialIdentity.list" /> </a></li>
 					<li><a href="socialIdentity/create.do"><spring:message code="master.page.socialIdentity.create" /> </a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
