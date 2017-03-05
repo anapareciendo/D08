@@ -14,6 +14,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Audit;
 import domain.Auditor;
+import domain.Property;
 
 @Service
 @Transactional
@@ -32,11 +33,13 @@ public class AuditService {
 	}
 
 	//Simple CRUD methods
-	public Audit create(Auditor auditor) {
+	public Audit create(Auditor auditor, Property property) {
 		Assert.notNull(auditor);
 		Audit res;
 		res = new Audit();
 		res.setAuditor(auditor);
+		res.setProperty(property);
+		res.setDraft(true);
 		//Creo que hay que cambiarlo en el domain
 	//	res.setProperty(new ArrayList<Property>());
 	
@@ -57,10 +60,38 @@ public class AuditService {
 		Assert.notNull(audit, "The audit to save cannot be null.");
 		Audit res = auditRepository.save(audit);
 		res.getAuditor().getAudits().add(res);
+		res.getProperty().getAudits().add(res);
 		return res;
 	}
 	
-	public Collection<Audit> findMyAudits(){
+	
+	//-----Other Methods
+//	public Collection<Audit> findMyAudits(){
+//		Authority t = new Authority();
+//		t.setAuthority(Authority.TENANT);
+//		Authority l = new Authority();
+//		l.setAuthority(Authority.LESSOR);
+//		Authority a = new Authority();
+//		a.setAuthority(Authority.AUDITOR);
+//		Authority admin = new Authority();
+//		admin.setAuthority(Authority.ADMIN);
+//		UserAccount ua=LoginService.getPrincipal();
+//		Assert.isTrue(ua.getAuthorities().contains(t) || 
+//				ua.getAuthorities().contains(l) ||
+//				ua.getAuthorities().contains(a) || 
+//				ua.getAuthorities().contains(admin) , "You must to be authenticte for this action");
+//		return auditRepository.findMyAudits(ua.getId());
+//	}
+	
+	public Collection<Audit> findMyDraftAudits(int auditorId){
+		Authority a = new Authority();
+		a.setAuthority(Authority.AUDITOR);
+		UserAccount ua=LoginService.getPrincipal();
+		Assert.isTrue(ua.getAuthorities().contains(a),"You must to be an Auditor for this action");
+		return auditRepository.findMyDraftAudits(ua.getId());
+	}
+	
+	public Collection<Audit> findAllNoDraft(int propertyId){
 		Authority t = new Authority();
 		t.setAuthority(Authority.TENANT);
 		Authority l = new Authority();
@@ -74,7 +105,8 @@ public class AuditService {
 				ua.getAuthorities().contains(l) ||
 				ua.getAuthorities().contains(a) || 
 				ua.getAuthorities().contains(admin) , "You must to be authenticte for this action");
-		return auditRepository.findMyAudits(ua.getId());
+		return auditRepository.findAllNoDraft(propertyId);
 	}
+		
 
 }

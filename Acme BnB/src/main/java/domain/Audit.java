@@ -24,7 +24,15 @@ public class Audit extends DomainEntity{
 	private Date moment;
 	private String text;
 	private Collection<String> attachments;
+	private boolean draft;
 	
+	public boolean isDraft() {
+		return draft;
+	}
+	public void setDraft(boolean draft) {
+		this.draft = draft;
+	}
+
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyy HH:mm")

@@ -659,6 +659,7 @@
 	<bean id="audit1" class="domain.Audit">
 		<property name="moment" value="2016/12/31" />
 		<property name="text" value="Text 1" />
+		<property name="draft" value="true" />
 		<property name="attachments">
 			<list></list>
 		</property>	
@@ -669,6 +670,7 @@
 	<bean id="audit2" class="domain.Audit">
 		<property name="moment" value="2016/03/01" />
 		<property name="text" value="Text 2" />
+		<property name="draft" value="false" />
 		<property name="attachments">
 			<list></list>
 		</property>	
@@ -679,6 +681,7 @@
 	<bean id="audit3" class="domain.Audit">
 		<property name="moment" value="2016/03/01" />
 		<property name="text" value="Text 3" />
+		<property name="draft" value="true" />
 		<property name="attachments">
 			<list></list>
 		</property>	
