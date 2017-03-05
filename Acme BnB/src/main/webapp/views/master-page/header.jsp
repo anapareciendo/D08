@@ -34,16 +34,6 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
-		</security:authorize>
-		
 		<security:authorize access="hasRole('AUDITOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.auditor" /></a>
 				<ul>
@@ -111,15 +101,22 @@
 				</ul>
 			</li>
 			<security:authorize access="hasRole('LESSOR') or hasRole('TENANT')">
-				<li><a class="fNiv"><spring:message code="master.page.comment" /></a>
-					<ul>
-						<li class="arrow"></li>
-					
-							<li><a href="comment/list.do"><spring:message code="master.page.comment.list" /></a></li>					
-							<li><a href="comment/create.do"><spring:message code="master.page.comment.create" /></a></li>
-					
-					</ul>
-				</li>
+			<li><a class="fNiv"><spring:message code="master.page.comment" /></a>
+				<ul>
+					<li class="arrow"></li>
+						<li><a href="comment/list.do"><spring:message code="master.page.comment.list" /></a></li>					
+						<li><a href="comment/create.do"><spring:message code="master.page.comment.create" /></a></li>
+				</ul>
+			</li>
+			</security:authorize>
+			<security:authorize access="hasRole('AUDITOR')">
+			<li><a class="fNiv"><spring:message code="master.page.audit" /></a>
+				<ul>
+					<li class="arrow"></li>
+						<li><a href="audit/auditor/list.do"><spring:message code="master.page.audit.list" /></a></li>					
+						<li><a href="audit/auditor/create.do"><spring:message code="master.page.audit.create" /></a></li>
+				</ul>
+			</li>
 			</security:authorize>
 		</security:authorize>
 	</ul>

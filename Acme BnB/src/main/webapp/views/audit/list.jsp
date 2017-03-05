@@ -32,6 +32,14 @@
 	<spring:message code="audit.attachments" var="attachmentsHeader" />
 	<display:column property="attachments" title="${attachmentsHeader}" sortable="true" />
 	
+	<jstl:if test="${owner == true}">
+		<display:column>
+		<a href="audit/auditor/send.do?auditId=${audit.id}">
+	  		<spring:message code="audit.send" var="sendHeader" />
+	  		<jstl:out value="${sendHeader}" />
+	  	</a>
+	  	</display:column>
+	</jstl:if>
 	
 </display:table>
 

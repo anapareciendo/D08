@@ -17,5 +17,8 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 	
 	@Query("select p from Property p order by p.requests.size desc")
 	Collection<Property> findAllSortedRequest();
+	
+	@Query("select distinct p from Property p join p.audits a where a.auditor.userAccount.id=?1")
+	Collection<Property> findNotAuditProperty(int auditorId);
 
 }

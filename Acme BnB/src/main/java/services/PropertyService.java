@@ -116,5 +116,13 @@ public class PropertyService {
 		return propertyRepository.findAllSortedRequest();
 	}
 	
+	public Collection<Property> findNotAuditProperty(){
+		Authority b = new Authority();
+		b.setAuthority(Authority.AUDITOR);
+		UserAccount ua=LoginService.getPrincipal();
+		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a auditor for this action");
+		return propertyRepository.findNotAuditProperty(ua.getId());
+	}
+	
 }
 

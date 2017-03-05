@@ -20,5 +20,9 @@
 		<put-attribute name="title" value="Listado de auditorías" />
 		<put-attribute name="body" value="/views/audit/list.jsp" />
 	</definition>
+	<definition name="audit/create" extends="master.page">	
+		<put-attribute name="title" value="Crear nueva Auditoria" />
+		<put-attribute name="body" value="/views/audit/create.jsp" />
+	</definition>
 	
 </tiles-definitions>

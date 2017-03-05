@@ -13,7 +13,6 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,7 +25,7 @@ public class Audit extends DomainEntity{
 	private Collection<String> attachments;
 	private boolean draft;
 	
-	public boolean isDraft() {
+	public boolean getDraft() {
 		return draft;
 	}
 	public void setDraft(boolean draft) {
@@ -44,7 +43,7 @@ public class Audit extends DomainEntity{
 		this.moment = moment;
 	}
 	
-	@NotBlank
+	@NotNull
 	public String getText() {
 		return text;
 	}
