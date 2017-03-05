@@ -14,5 +14,8 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 	
 	@Query("select p from Property p where p.lessor.userAccount.id = ?1")
 	Collection<Property> findMyProperties(int id);
+	
+	@Query("select p from Property p order by p.requests.size desc")
+	Collection<Property> findAllSortedRequest();
 
 }

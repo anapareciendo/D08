@@ -37,5 +37,18 @@ public class PropertyController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/sorted", method = RequestMethod.GET)
+	public ModelAndView sorted() {
+		ModelAndView result;
+		Collection<Property> property;
+
+		property = propertyService.findAllSortedRequest();
+		result = new ModelAndView("property/list");
+		result.addObject("requestURI", "property/list.do");
+		result.addObject("property", property);
+
+		return result;
+	}
+	
 
 }

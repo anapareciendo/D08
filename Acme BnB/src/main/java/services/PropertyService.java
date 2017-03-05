@@ -112,5 +112,9 @@ public class PropertyService {
 		return res;
 	}
 	
+	public Collection<Property> findAllSortedRequest(){
+		return propertyRepository.findAllSortedRequest();
+	}
+	
 }
 

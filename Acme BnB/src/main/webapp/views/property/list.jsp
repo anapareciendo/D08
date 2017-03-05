@@ -32,9 +32,6 @@
   <spring:message code="property.description" var="descriptionHeader"/>
   <display:column property="description" title="${descriptionHeader}" sortable="false" />
   
-  <spring:message code="property.description" var="descriptionHeader"/>
-  <display:column property="requests.size" title="${descriptionHeader}" sortable="true" />
-  
   <display:column>
 	  <a href="lessor/display.do?lessorId=${property.lessor.id}">
 	  	<spring:message code="property.lessor" var="lessorHeader" />
@@ -76,6 +73,13 @@
   	</jstl:if>
   	
 </display:table>
+
+<jstl:if test="${owner != true}">
+  	<div>
+		<a href="property/sorted.do"> <spring:message code="property.list.sorted" /></a>
+	</div>	
+</jstl:if>
+
 <jstl:if test="${owner == true}">
   	<div>
 		<a href="property/lessor/create.do"> <spring:message code="property.create" /></a>
