@@ -58,6 +58,8 @@ public class RequestTenantController extends AbstractController {
 			Request req = requestService.reconstruct(request, binding);
 			if(req.getId()==-1){
 				result = new ModelAndView("request/create");
+				request.setCheckIn(null);
+				request.setCheckOut(null);
 				result.addObject("req", request);
 				result.addObject("message", "finder.error.date");
 			}else{
