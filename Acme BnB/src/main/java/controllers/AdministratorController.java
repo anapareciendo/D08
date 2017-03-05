@@ -33,6 +33,24 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 		
+	
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		ModelAndView result;
+		Administrator administrator= adminService.findByUserAccountId(LoginService.getPrincipal().getId());
+		try{
+		administrator = adminService.findOne(administrator.getId());
+		result = new ModelAndView("administrator/display");
+		result.addObject("administrator", administrator);
+		}catch(Throwable oops){
+			
+			result= new ModelAndView("hacker/hackers");
+
+		}
+		return result;
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 			ModelAndView result;

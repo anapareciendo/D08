@@ -33,6 +33,23 @@ public class TenantController extends AbstractController {
 		super();
 	}
 		
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		ModelAndView result;
+		Tenant tenant= tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
+		try{
+		tenant = tenantService.findOne(tenant.getId());
+		result = new ModelAndView("tenant/display");
+		result.addObject("tenant", tenant);
+		}catch(Throwable oops){
+			
+			result= new ModelAndView("hacker/hackers");
+
+		}
+		return result;
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 			ModelAndView result;

@@ -37,4 +37,9 @@
 		<put-attribute name="body" value="/views/administrator/edit.jsp" />
 	</definition>
 	
+	<definition name="administrator/display" extends="master.page">	
+		<put-attribute name="title" value="Datos personale" />
+		<put-attribute name="body" value="/views/administrator/display.jsp" />
+	</definition>
+	
 </tiles-definitions>

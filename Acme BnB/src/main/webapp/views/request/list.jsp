@@ -32,6 +32,9 @@
   <spring:message code="request.smoke" var="smokeHeader"/>
   <display:column property="smoke" title="${smokeHeader}" sortable="false" />
   
+  <spring:message code="request.creditCard" var="creditCardHeader"/>
+  <display:column property="creditCard.number" title="${creditCardHeader}" sortable="false" />
+  
   <spring:message code="request.status" var="statusHeader"/>
   <display:column property="status" title="${statusHeader}" sortable="true" />
   

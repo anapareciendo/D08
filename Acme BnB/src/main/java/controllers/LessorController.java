@@ -37,6 +37,22 @@ public class LessorController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/displayPersonal", method = RequestMethod.GET)
+	public ModelAndView displayPersonal() {
+		ModelAndView result;
+		Lessor lessor= lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+		try{
+		lessor = lessorService.findOne(lessor.getId());
+		result = new ModelAndView("lessor/display");
+		result.addObject("lessor", lessor);
+		}catch(Throwable oops){
+			
+			result= new ModelAndView("hacker/hackers");
+
+		}
+		return result;
+	}
+	
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

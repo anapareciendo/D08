@@ -80,4 +80,18 @@ public class RequestLessorController extends AbstractController {
 	}
 	
 
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Request> request= requestService.findMyRequestLessor();
+
+		result = new ModelAndView("request/list");
+		result.addObject("requestURI", "request/list.do");
+		result.addObject("req", request);
+
+		return result;
+	}
+	
+	
+
 }

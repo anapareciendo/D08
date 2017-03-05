@@ -15,6 +15,10 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select r from Request r where r.tenant.userAccount.id = ?1")
 	Collection<Request> findMyRequest(int id);
 	
+	@Query("select p.requests from Property p where p.lessor.userAccount.id= ?1")
+	Collection<Request> findMyRequestLessor(int id);
+	
+	
 	@Query("select r from Request r where r.property.lessor.userAccount.id=?1 and (r.status=domain.Status.DENIED or r.status=domain.Status.PENDING)")
 	Collection<Request> findMyRequestDeniedProperties(int id);
 	

@@ -29,6 +29,7 @@
 					<li><a href="attribute/admin/list.do"><spring:message code="master.page.administrator.attribute.name" /></a></li>									
 					<li><a href="attribute/admin/create.do"><spring:message code="master.page.administrator.attribute.create" /></a></li>
 					<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.data" /></a></li>
+					<li><a href="administrator/display.do"><spring:message code="master.page.administrator.profile" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -48,6 +49,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="lessor/edit.do"><spring:message code="master.page.lessor.edit" /></a></li>
+					<li><a href="lessor/displayPersonal.do"><spring:message code="master.page.lessor.profile" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -58,6 +60,7 @@
 					<li class="arrow"></li>
 					<li><a href="tenant/edit.do"><spring:message code="master.page.tenant.edit" /></a></li>
 					<li><a href="creditCard/edit.do"><spring:message code="master.page.tenant.creditCard" /></a></li>
+					<li><a href="tenant/display.do"><spring:message code="master.page.tenant.profile" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -112,7 +115,8 @@
 					<security:authorize access="hasRole('LESSOR')">
 						<li><a href="property/lessor/list.do"><spring:message code="master.page.lessor.list" /></a></li>
 						<li><a href="request/lessor/accept.do"><spring:message code="master.page.lessor.request.accept" /></a></li>
-						<li><a href="request/lessor/denied.do"><spring:message code="master.page.lessor.request.denied" /></a></li>					
+						<li><a href="request/lessor/denied.do"><spring:message code="master.page.lessor.request.denied" /></a></li>	
+						<li><a href="request/lessor/list.do"><spring:message code="master.page.lessor.request.list" /></a></li>				
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
 						<li><a href="finder/tenant/finder.do"><spring:message code="master.page.property.finder" /></a></li>					

@@ -96,24 +96,6 @@ public class PropertyService {
 		return propertyRepository.findMyProperties(ua.getId());
 	}
 
-/*	public Property reconstruct(Property property, BindingResult binding) {
-		Property res;
-		if(property.getId()==0){
-			validator.validate(property, binding);
-			//Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
-			//res=this.create(lessor);
-		}else{
-			res=propertyRepository.findOne(property.getId());
-			property.setName(res.getName());
-			property.setDescription(res.getDescription());
-			property.setRatePerDay(res.getRatePerDay());
-			property.setAddress(res.getAddress());
-		}
-		validator.validate(property, binding);
-		return property;
-	}
-	*/
-	
 	public Property reconstruct(Property property, BindingResult binding) {
 		Property res;
 		

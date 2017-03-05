@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AuditRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import domain.Audit;
 import domain.Auditor;
 
@@ -55,6 +58,23 @@ public class AuditService {
 		Audit res = auditRepository.save(audit);
 		res.getAuditor().getAudits().add(res);
 		return res;
+	}
+	
+	public Collection<Audit> findMyAudits(){
+		Authority t = new Authority();
+		t.setAuthority(Authority.TENANT);
+		Authority l = new Authority();
+		l.setAuthority(Authority.LESSOR);
+		Authority a = new Authority();
+		a.setAuthority(Authority.AUDITOR);
+		Authority admin = new Authority();
+		admin.setAuthority(Authority.ADMIN);
+		UserAccount ua=LoginService.getPrincipal();
+		Assert.isTrue(ua.getAuthorities().contains(t) || 
+				ua.getAuthorities().contains(l) ||
+				ua.getAuthorities().contains(a) || 
+				ua.getAuthorities().contains(admin) , "You must to be authenticte for this action");
+		return auditRepository.findMyAudits(ua.getId());
 	}
 
 }
