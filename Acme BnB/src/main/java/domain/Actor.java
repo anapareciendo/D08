@@ -55,7 +55,7 @@ public abstract class Actor extends Commentable {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "([+][0-9]{3})?[ ]*([(][0-9]{3}[)])?[ ]*([0-9a-zA-Z][ -]*){4,}")
+	@Pattern(regexp = "([+][0-9]{3})[ ]*([(][0-9]{3}[)])?[ ]*([0-9a-zA-Z][ -]*){4,}")
 	public String getPhone() {
 		return phone;
 	}

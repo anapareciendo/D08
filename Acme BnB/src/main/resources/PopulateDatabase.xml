@@ -206,7 +206,7 @@
 		<property name="name" value="Jefe" />
 		<property name="surname" value="Maximo" />
 		<property name="email" value="jefemaximo@gmail.com" />
-		<property name="phone" value="(051)122332687" />
+		<property name="phone" value="+034 (051)122332687" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount1" />	
 		<property name="socialIdentities">
@@ -224,7 +224,7 @@
 		<property name="name" value="Cayetana" />
 		<property name="surname" value="Galeano" />
 		<property name="email" value="cate@gmail.com" />
-		<property name="phone" value="(051)122332687" />
+		<property name="phone" value="+034(051)122332687" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount2" />	
 		<property name="socialIdentities">
@@ -242,7 +242,7 @@
 		<property name="name" value="Juan" />
 		<property name="surname" value="Rosal" />
 		<property name="email" value="roma@gmail.com" />
-		<property name="phone" value="(051)122332687" />
+		<property name="phone" value="+034(051)122332687" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount3" />	
 		<property name="socialIdentities">
@@ -348,7 +348,7 @@
 		<property name="name" value="Jose" />
 		<property name="surname" value="Pallero" />
 		<property name="email" value="josepall@gmail.com" />
-		<property name="phone" value="122335987" />
+		<property name="phone" value="+352122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount7" />	
 		<property name="properties">
@@ -370,7 +370,7 @@
 		<property name="name" value="Rodrigo" />
 		<property name="surname" value="Pallero" />
 		<property name="email" value="rodripall@gmail.com" />
-		<property name="phone" value="122335987" />
+		<property name="phone" value="+021122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount8" />	
 		<property name="properties">
@@ -391,7 +391,7 @@
 		<property name="name" value="Pepito" />
 		<property name="surname" value="Perez" />
 		<property name="email" value="rodripall@gmail.com" />
-		<property name="phone" value="122335987" />
+		<property name="phone" value="+034122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount9" />	
 		<property name="properties">
@@ -412,7 +412,7 @@
 		<property name="name" value="Jose" />
 		<property name="surname" value="Rodriguez" />
 		<property name="email" value="jorodri@gmail.com" />
-		<property name="phone" value="(051)122332687" />
+		<property name="phone" value="+034(051)122332687" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount10" />	
 		<property name="socialIdentities">
@@ -434,7 +434,7 @@
 		<property name="name" value="Rosa" />
 		<property name="surname" value="Castellano" />
 		<property name="email" value="rocame@gmail.com" />
-		<property name="phone" value="(051)122332687" />
+		<property name="phone" value="+034(051)122332687" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount11" />	
 		<property name="socialIdentities">
@@ -456,7 +456,7 @@
 		<property name="name" value="Luis" />
 		<property name="surname" value="Gamero" />
 		<property name="email" value="lugari@gmail.com" />
-		<property name="phone" value="(051)122332687" />
+		<property name="phone" value="+034(051)122332687" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="userAccount" ref="userAccount12" />	
 		<property name="socialIdentities">
