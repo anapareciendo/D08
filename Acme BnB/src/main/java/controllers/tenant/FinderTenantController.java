@@ -64,6 +64,7 @@ public class FinderTenantController extends AbstractController {
 				result = new ModelAndView("property/list");
 				result.addObject("requestURI", "property/list.do");
 				result.addObject("property", search);
+				result.addObject("find", true);
 			} catch (Throwable oops) {
 				result = new ModelAndView("finder/finder");
 				result.addObject("finder", finder);

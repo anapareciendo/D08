@@ -74,7 +74,7 @@
   	
 </display:table>
 
-<jstl:if test="${owner != true}">
+<jstl:if test="${owner != true && find!=true}">
   	<div>
 		<a href="property/sorted.do"> <spring:message code="property.list.sorted" /></a>
 	</div>	
