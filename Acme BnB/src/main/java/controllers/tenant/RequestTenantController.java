@@ -56,14 +56,20 @@ public class RequestTenantController extends AbstractController {
 		
 		try{
 			Request req = requestService.reconstruct(request, binding);
-			try {
-				requestService.save(req);
-				result = new ModelAndView("redirect:list.do");
-			} catch (Throwable oops) {
-				
+			if(req.getId()==-1){
 				result = new ModelAndView("request/create");
 				result.addObject("req", request);
-				result.addObject("errors", binding.getAllErrors());
+				result.addObject("message", "finder.error.date");
+			}else{
+				try {
+					requestService.save(req);
+					result = new ModelAndView("redirect:list.do");
+				} catch (Throwable oops) {
+					
+					result = new ModelAndView("request/create");
+					result.addObject("req", request);
+					result.addObject("errors", binding.getAllErrors());
+				}
 			}
 		}catch(Throwable oopss){
 			result = new ModelAndView("request/create");

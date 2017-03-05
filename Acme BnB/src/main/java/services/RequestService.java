@@ -67,7 +67,9 @@ public class RequestService {
 	}
 	
 	public Request save(Request request) {
+		long day = 86400000;
 		Assert.notNull(request, "The request to save cannot be null.");
+		Assert.isTrue(request.getCheckOut().getTime()-request.getCheckIn().getTime()>=day,"The check out must be at leas on day after the check in");
 		Request res = requestRepository.save(request);
 		res.getTenant().getRequests().add(res);
 		res.getProperty().getRequests().add(res);
@@ -121,16 +123,22 @@ public class RequestService {
 
 	public Request reconstruct(RequestForm request, BindingResult binding) {
 		Request res;
-		List<String> smoker = Arrays.asList(request.getSmoker());
-		res=this.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()), propertyService.findOne(request.getPropertyId()));
-		res.setCheckIn(request.getCheckIn());
-		res.setCheckOut(request.getCheckOut());
-		if(smoker.contains("smoker")){
-			res.setSmoke(true);
+		long day = 86400000;
+		if(request.getCheckOut().getTime()-request.getCheckIn().getTime()<day){
+			res = new Request();
+			res.setId(-1);
 		}else{
-			res.setSmoke(false);
+			List<String> smoker = Arrays.asList(request.getSmoker());
+			res=this.create(tenantService.findByUserAccountId(LoginService.getPrincipal().getId()), propertyService.findOne(request.getPropertyId()));
+			res.setCheckIn(request.getCheckIn());
+			res.setCheckOut(request.getCheckOut());
+			if(smoker.contains("smoker")){
+				res.setSmoke(true);
+			}else{
+				res.setSmoke(false);
+			}
+			validator.validate(res, binding);
 		}
-		validator.validate(res, binding);
 		return res;
 	}
 	
