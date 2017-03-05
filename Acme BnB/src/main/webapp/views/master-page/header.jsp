@@ -100,9 +100,9 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
+					<security:authorize access="hasRole('LESSOR') or hasRole('TENANT')">
+						<li><a href="actor/display.do"><spring:message code="master.page.actor.display" /></a></li>
+					</security:authorize>		
 					<li><a href="socialIdentity/list.do"><spring:message code="master.page.socialIdentity.list" /> </a></li>
 					<li><a href="socialIdentity/create.do"><spring:message code="master.page.socialIdentity.create" /> </a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>

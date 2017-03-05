@@ -80,10 +80,24 @@ public class CommentService {
 	//Utilites methods
 	public Collection<Comment> findMyComments(){
 		Authority b = new Authority();
+		Authority c = new Authority();
 		b.setAuthority(Authority.LESSOR);
+		c.setAuthority(Authority.TENANT);
 		UserAccount ua=LoginService.getPrincipal();
-		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be a lessor for this action");
+		Assert.isTrue(ua.getAuthorities().contains(b) || ua.getAuthorities().contains(c) , "You must to be a lessor or a tenant for this action");
+		
 		return commentRepository.findMyComments(ua.getId());
+	}
+	
+	public Collection<Comment> findProfileComments(int actorId){
+		Authority b = new Authority();
+		Authority c = new Authority();
+		b.setAuthority(Authority.LESSOR);
+		c.setAuthority(Authority.TENANT);
+		UserAccount ua=LoginService.getPrincipal();
+		Assert.isTrue(ua.getAuthorities().contains(b) || ua.getAuthorities().contains(c) , "You must to be a lessor or a tenant for this action");
+		
+		return commentRepository.findProfileComments(actorId);
 	}
 
 }

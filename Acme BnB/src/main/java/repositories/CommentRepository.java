@@ -14,4 +14,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
 	@Query("select c from Comment c where c.sender.userAccount.id = ?1")
 	Collection<Comment> findMyComments(int id);
+	
+	@Query("select c from Comment c where c.commentable.id = ?1")
+	Collection<Comment> findProfileComments(int actorId);
 }
