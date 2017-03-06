@@ -1,6 +1,5 @@
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,6 @@ public class FeeService {
 		Fee res;
 		res = new Fee();
 		res.setCost(1.0);
-		res.setMoment(Calendar.getInstance().getTime());
-		
 		return res;
 	}
 	
