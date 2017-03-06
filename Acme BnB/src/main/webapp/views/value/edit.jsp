@@ -8,6 +8,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jstl:if test="${vacio != true}">
+
 <form:form action="value/edit.do" modelAttribute="value">
 
 	<form:hidden path="id" />
@@ -24,8 +26,11 @@
 			onclick="return confirm('<spring:message code="value.confirm.delete" />')" />&nbsp;
 	<input type="button" name="cancel" value="<spring:message code="value.cancel" />" onclick="window.location='welcome/index.do'" /> <br />
 	
-	<%-- <div>
-		<jstl:out value="${errors}"/>
-	</div> --%>
-	
 </form:form>
+
+</jstl:if>
+
+<jstl:if test="${vacio == true}">
+	<spring:message code="value.attribute.empty" var="emptyHeader" />
+	<jstl:out value="${emptyHeader}" />
+</jstl:if>

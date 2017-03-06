@@ -475,6 +475,24 @@
 	</bean> 
 	
 	<!-- Property -->
+	<bean id="property3" class="domain.Property">
+		<property name="name" value="Campo Silvestre" />
+		<property name="ratePerDay" value="130.25" />
+		<property name="totalRate" value="3.0" />
+		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
+		<property name="address" value="Sevilla" />
+		<property name="lessor" ref="lessor2" />
+		<property name="values">
+			<list></list>
+		</property>
+		<property name="requests">
+			<list></list>
+		</property> 
+		<property name="audits">
+			<list></list>
+		</property>	
+	</bean>
+	
 	
 	<bean id="property1" class="domain.Property">
 		<property name="name" value="Villa Ángel 2.0" />
@@ -511,25 +529,6 @@
 			<list></list>
 		</property>	
 	</bean>
-	
-	<bean id="property3" class="domain.Property">
-		<property name="name" value="Campo Silvestre" />
-		<property name="ratePerDay" value="130.25" />
-		<property name="totalRate" value="3.0" />
-		<property name="description" value="Tiene las tres b: buena, bonita y barata" />
-		<property name="address" value="Sevilla" />
-		<property name="lessor" ref="lessor2" />
-		<property name="values">
-			<list></list>
-		</property>
-		<property name="requests">
-			<list></list>
-		</property> 
-		<property name="audits">
-			<list></list>
-		</property>	
-	</bean>
-	
 	
 	<!-- Attribute -->
  	

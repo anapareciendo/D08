@@ -46,6 +46,7 @@ public class ValueController extends AbstractController {
 		value = valueService.findValues(propertyId);
 		result = new ModelAndView("value/list");
 		result.addObject("requestURI", "value/list.do");
+		result.addObject("propertyId", new Integer(propertyId));
 		if(value.isEmpty()){
 			result.addObject("vacio", true);
 		}else{
@@ -72,14 +73,17 @@ public class ValueController extends AbstractController {
 		ModelAndView result;
 		List<Attribute> attributes = new ArrayList<Attribute>();
 		attributes.addAll(attributeService.findAll());
-		Property property = propertyService.findOne(propertyId);
-		
-		Value value = valueService.create(property, attributes.get(0));
 		
 		result = new ModelAndView("value/edit");
-		result.addObject("value", value);
-		result.addObject("attributes",attributes);
-
+		
+		if(attributes.isEmpty()){
+			result.addObject("vacio", true);
+		}else{
+			Property property = propertyService.findOne(propertyId);
+			Value value = valueService.create(property, attributes.get(0));
+			result.addObject("value", value);
+			result.addObject("attributes",attributes);
+		}
 		return result;
 	}
 	

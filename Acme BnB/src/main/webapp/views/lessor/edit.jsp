@@ -24,7 +24,6 @@
 <form:form action="lessor/edit.do" modelAttribute="lessor">
 	
 	<form:hidden path="id" />
-	<form:hidden path="version" />
 	
 	<acme:textbox code="lessor.name" path="name"/>
 	<acme:textbox code="lessor.surname" path="surname"/>

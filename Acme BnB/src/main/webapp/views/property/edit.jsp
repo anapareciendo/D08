@@ -20,9 +20,13 @@
 	<acme:textbox code="property.address" path="address"/>
 	
 	<input type="submit" name="save" value="<spring:message code="property.save" />" />
+	
+	 <jstl:if test="${edit == true}">
 	<input type="submit" name="delete"
 			value="<spring:message code="property.delete" />"
 			onclick="return confirm('<spring:message code="property.confirm.delete" />')" />&nbsp;
+	</jstl:if>
+	
 	<input type="button" name="cancel" value="<spring:message code="property.cancel" />" onclick="window.location='welcome/index.do'" /> <br />
 	
 	<div>

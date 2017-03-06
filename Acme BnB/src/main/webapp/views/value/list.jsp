@@ -52,5 +52,5 @@
 </jstl:if>
 
 <div>
-	<a href="value/create.do?propertyId=${value.property.id }"> <spring:message code="value.create" /></a>
+	<a href="value/create.do?propertyId=${propertyId}"> <spring:message code="value.create" /></a>
 </div>	

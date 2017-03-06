@@ -66,6 +66,7 @@ public class PropertyLessorController extends AbstractController {
 		Property property = propertyService.findOne(propertyId);
 				
 		result = createEditModelAndView(property);
+		result.addObject("edit", true);
 
 		return result;
 	}
@@ -92,7 +93,7 @@ public class PropertyLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(Property property, BindingResult binding) {
 		ModelAndView result;
-		
+		property = propertyService.reconstruct(property, binding);
 			try {
 				propertyService.delete(property);
 				result = new ModelAndView("redirect:list.do");
