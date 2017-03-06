@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
+import services.FeeService;
 import services.LessorService;
 import services.RequestService;
 import controllers.AbstractController;
@@ -29,6 +30,8 @@ public class RequestLessorController extends AbstractController {
 	private RequestService	requestService;
 	@Autowired
 	private LessorService lessorService;
+	@Autowired
+	private FeeService feeService;
 
 
 	public RequestLessorController() {
@@ -106,6 +109,10 @@ public class RequestLessorController extends AbstractController {
 		}
 		
 		requestService.save(request);
+		
+		Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+		lessor.setAmount(lessor.getAmount()+feeService.getFee().getCost());
+		lessorService.save(lessor);
 		
 		requests=requestService.findMyRequestDeniedProperties();
 		result.addObject("req", requests);

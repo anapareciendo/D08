@@ -72,5 +72,8 @@ public class FeeService {
 	
 	
 	//Utilites methods
+	public Fee getFee(){
+		return feeRepository.getFee();
+	}
 }
 
