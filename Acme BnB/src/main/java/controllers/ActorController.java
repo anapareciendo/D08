@@ -24,6 +24,7 @@ import services.LessorService;
 import services.TenantService;
 import domain.Actor;
 import domain.Comment;
+import domain.SocialIdentity;
 
 @Controller
 @RequestMapping("/actor")
@@ -46,21 +47,21 @@ public class ActorController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		ModelAndView result;
-		//Collection <SocialIdentity> social;
+		Collection <SocialIdentity> social;
 		int uaId=LoginService.getPrincipal().getId();
 		Actor actor = lessorService.findByUserAccountId(uaId);
-		//social= actor.getSocialIdentities();
+		
 		if(actor == null){
 			actor = tenantService.findByUserAccountId(uaId);
-			//social= actor.getSocialIdentities();
+			
 		}
-		
+		social= actor.getSocialIdentities();
 		Collection<Comment> comment;
 
 		comment = commentService.findProfileComments(actor.getId());
 		result = new ModelAndView("actor/display");
 		result.addObject("actor", actor);
-		//result.addObject("social", social);
+		result.addObject("social", social);
 		result.addObject("comment", comment);
 		
 		return result;
