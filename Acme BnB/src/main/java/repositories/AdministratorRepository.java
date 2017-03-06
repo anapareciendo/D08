@@ -47,6 +47,10 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select a from Attribute a order by a.values.size DESC")
 	Collection<Attribute> attributesDescTimesUsed();
 	
+	//A listing with his or her properties sorted according to the number of audits that they have got
+	@Query("select p from Property p order by p.audits.size DESC")
+	Collection<Property> propertiesOrderByAudits();
+	
 	//@Query("select avg(p.states.size) from Property p join p.states s where s.status!=domain.Status.PENDING group  by p.lessor")
 	//select count(s) from State s where s.status=domain.Status.ACCEPTED group by s.property.lessor;
 	

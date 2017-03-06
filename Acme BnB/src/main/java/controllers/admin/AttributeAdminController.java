@@ -33,8 +33,6 @@ public class AttributeAdminController extends AbstractController {
 	@Autowired
 	private AttributeService attributeService;
 
-
-	
 	
 	public AttributeAdminController() {
 		super();

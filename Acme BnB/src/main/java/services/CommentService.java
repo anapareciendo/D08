@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CommentRepository;
 import security.Authority;
@@ -25,7 +27,14 @@ public class CommentService {
 	private CommentRepository commentRepository;
 	
 	//Supporting services
+	@Autowired
+	private LessorService lessorService;
 	
+	@Autowired
+	private TenantService tenantService;
+	
+	@Autowired
+	private Validator validator;
 	
 	//Constructors
 	public CommentService() {
@@ -98,6 +107,25 @@ public class CommentService {
 		Assert.isTrue(ua.getAuthorities().contains(b) || ua.getAuthorities().contains(c) , "You must to be a lessor or a tenant for this action");
 		
 		return commentRepository.findProfileComments(actorId);
+	}
+
+	public Comment reconstruct(Comment comment, BindingResult binding) {
+		Comment res;
+		int uaId=LoginService.getPrincipal().getId();
+		Actor actor = lessorService.findByUserAccountId(uaId);
+		if(actor == null){
+			actor = tenantService.findByUserAccountId(uaId);
+		}
+		
+		res = this.create(actor, comment.getCommentable());
+		
+		res.setTitle(comment.getTitle());
+		res.setText(comment.getText());
+		res.setStar(comment.getStar());
+		
+		validator.validate(res, binding);
+		
+		return res;
 	}
 
 }

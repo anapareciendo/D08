@@ -12,8 +12,6 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="moment" />
-	<form:hidden path="sender" />
 
 	<acme:textbox code="comment.title" path="title"/>
 	<acme:textbox code="comment.text" path="text"/>

@@ -95,16 +95,22 @@ public class CommentController extends AbstractController {
 			commentables.add(actor);
 			commentables.addAll(tenantService.findMyTenants(actor.getId()));
 		}
-		
-		try {
-			commentService.save(comment);
-			result = new ModelAndView("redirect:list.do");
+		try{
+			comment =	commentService.reconstruct(comment, binding);
+			try {
+				commentService.save(comment);
+				result = new ModelAndView("redirect:list.do");
 				
-		} catch (Throwable oops) {
+			} catch (Throwable oops) {
+				result = new ModelAndView("comment/create");
+				result.addObject("comment", comment);
+				result.addObject("commentables", commentables);
+				result.addObject("message", "comment.commit.error");
+			}
+		}catch(Throwable oops){
 			result = new ModelAndView("comment/create");
 			result.addObject("comment", comment);
 			result.addObject("commentables", commentables);
-			result.addObject("message", "comment.commit.error");
 		}
 		
 		return result;
