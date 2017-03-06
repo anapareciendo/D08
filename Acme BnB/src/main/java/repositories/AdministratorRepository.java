@@ -8,13 +8,40 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
+import domain.Lessor;
 import domain.Property;
+import domain.Tenant;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
 
 	@Query("select a from Administrator a where a.userAccount.id = ?1")
 	Administrator findByUserAccountId(int id);
+	
+	//The lessors who have aprroved more requests (Level C)
+	@Query("select distinct(p.lessor) from Property p join p.requests r where p.requests.size = (select max(p.requests.size) from Property p join p.requests r where r.status = 2) AND r.status = 2")
+	Collection <Lessor> lessorMaxRequestsAccepted();
+	
+	//The lessors who have denied more requests (Level C)
+	@Query("select distinct(p.lessor) from Property p join p.requests r where p.requests.size = (select max(p.requests.size) from Property p join p.requests r where r.status = 3) AND r.status = 3")
+	Collection <Lessor> lessorMaxRequestsDenied();
+	
+	//The lessors who have more pending requests (Level C)
+	@Query("select distinct(p.lessor) from Property p join p.requests r where p.requests.size = (select max(p.requests.size) from Property p join p.requests r where r.status = 1) AND r.status = 1")
+	Collection <Lessor> lessorMaxRequestsPending();
+	
+	//The tenants who have got more requests approved (Level C)
+	@Query("select distinct(t) from Tenant t join t.requests r where t.requests.size = (select max(t.requests.size) from Tenant t join t.requests r where r.status = 2) AND r.status = 2")
+	Collection<Tenant> tenantMaxRequestsAccepted();
+	
+	//The tenants who have got more requests denied (Level C)
+	@Query("select distinct(t) from Tenant t join t.requests r where t.requests.size = (select max(t.requests.size) from Tenant t join t.requests r where r.status = 3) AND r.status = 3")
+	Collection<Tenant> tenantMaxRequestsDenied();
+	
+	//The tenants who have more pending requests (Level C)
+	@Query("select distinct(t) from Tenant t join t.requests r where t.requests.size = (select max(t.requests.size) from Tenant t join t.requests r where r.status = 1) AND r.status = 1")
+	Collection<Tenant> tenantMaxRequestsPending();
+	
 	
 	//@Query("select avg(p.states.size) from Property p join p.states s where s.status!=domain.Status.PENDING group  by p.lessor")
 	//select count(s) from State s where s.status=domain.Status.ACCEPTED group by s.property.lessor;
