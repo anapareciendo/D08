@@ -47,7 +47,7 @@ public class Request extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getCheckIn() {
 		return checkIn;
 	}
@@ -58,7 +58,7 @@ public class Request extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getCheckOut() {
 		return checkOut;
 	}

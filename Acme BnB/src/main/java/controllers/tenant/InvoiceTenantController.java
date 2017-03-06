@@ -1,6 +1,7 @@
 
 package controllers.tenant;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,15 +36,25 @@ public class InvoiceTenantController extends AbstractController {
 		ModelAndView result;
 		Collection<Request> requests= requestService.findMyRequest();
 		result = new ModelAndView("request/list");
-		result.addObject("requestURI", "request/list.do");
+		result.addObject("requestURI", "request/tenant/list.do");
 		result.addObject("req", requests);
 		
 		Request request = requestService.findOne(requestId);
+		
+		int years=(request.getCreditCard().getExpirationYear()+2000)-1970;
+		int month=request.getCreditCard().getExpirationMonth();
+		long exp = years*31540000000l+month*2628000000l;
+		long finale = exp-Calendar.getInstance().getTime().getTime();
+		
 		if(request.getInvoice()==null){
 			if(request.getStatus().equals(Status.ACCEPTED)){
 				Invoice invoice = invoiceService.create(request);
-				invoiceService.save(invoice);
-				result.addObject("message", "request.invoice.commit.success");
+				if(finale>0){
+					invoiceService.save(invoice);
+					result.addObject("message", "request.invoice.commit.success");
+				}else{
+					result.addObject("message","request.error.credit");
+				}
 			}else{
 				result.addObject("message", "request.invoice.error.status");
 			}

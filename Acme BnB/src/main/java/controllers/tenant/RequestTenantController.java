@@ -33,7 +33,7 @@ public class RequestTenantController extends AbstractController {
 		Collection<Request> request= requestService.findMyRequest();
 
 		result = new ModelAndView("request/list");
-		result.addObject("requestURI", "request/list.do");
+		result.addObject("requestURI", "request/tenant/list.do");
 		result.addObject("req", request);
 
 		return result;
@@ -67,14 +67,17 @@ public class RequestTenantController extends AbstractController {
 					requestService.save(req);
 					result = new ModelAndView("redirect:list.do");
 				} catch (Throwable oops) {
-					
 					result = new ModelAndView("request/create");
+					request.setCheckIn(null);
+					request.setCheckOut(null);
 					result.addObject("req", request);
 					result.addObject("errors", binding.getAllErrors());
 				}
 			}
 		}catch(Throwable oopss){
 			result = new ModelAndView("request/create");
+			request.setCheckIn(null);
+			request.setCheckOut(null);
 			result.addObject("req", request);
 			result.addObject("message", "finder.commit.error");
 		}
