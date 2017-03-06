@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
+import domain.Attribute;
 import domain.Lessor;
 import domain.Property;
 import domain.Tenant;
@@ -42,6 +43,9 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select distinct(t) from Tenant t join t.requests r where t.requests.size = (select max(t.requests.size) from Tenant t join t.requests r where r.status = 1) AND r.status = 1")
 	Collection<Tenant> tenantMaxRequestsPending();
 	
+	//Attributes sorted in descending order regarding the number of times they have been used to describe a property
+	@Query("select a from Attribute a order by a.values.size DESC")
+	Collection<Attribute> attributesDescTimesUsed();
 	
 	//@Query("select avg(p.states.size) from Property p join p.states s where s.status!=domain.Status.PENDING group  by p.lessor")
 	//select count(s) from State s where s.status=domain.Status.ACCEPTED group by s.property.lessor;
