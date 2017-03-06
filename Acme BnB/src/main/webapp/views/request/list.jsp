@@ -55,5 +55,14 @@
   		</display:column>
   </security:authorize>
   
+  <security:authorize access="hasRole('TENANT')">
+  		<display:column>
+	  		<a href="invoice/tenant/invoice.do?requestId=${req.id}">
+	  			<spring:message code="request.invoice.invoice" var="invoiceHeader" />
+	  			<jstl:out value="${invoiceHeader}" />
+	  		</a>
+  		</display:column>
+  </security:authorize>
+  
   	
 </display:table>

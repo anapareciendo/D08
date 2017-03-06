@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +22,7 @@ public class Invoice extends DomainEntity {
 
 	//-------------------------------Attributes------------------
 	private Date	moment;
-	private Integer	vatNumber;
+	private String	vatNumber;
 	private String	detail;
 	private Double	totalAmount;
 	private CreditCard	creditCard;
@@ -46,15 +47,14 @@ public class Invoice extends DomainEntity {
 		this.moment = moment;
 	}
 
-	@NotNull
-	public Integer getVatNumber() {
+	@NotBlank
+	@Pattern(regexp = "ES[A-Z]{1}[0-9]{8}[A-Z]{1}")
+	public String getVatNumber() {
 		return vatNumber;
 	}
-
-	public void setVatNumber(Integer vatNumber) {
+	public void setVatNumber(String vatNumber) {
 		this.vatNumber = vatNumber;
 	}
-
 	@NotBlank
 	public String getDetail() {
 		return detail;

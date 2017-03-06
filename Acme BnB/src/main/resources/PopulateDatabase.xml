@@ -693,7 +693,7 @@
 		
 	<bean id="invoice1" class="domain.Invoice">
 		<property name="moment" value="2016/03/01" />
-		<property name="vatNumber" value="123456" />
+		<property name="vatNumber" value="ESA12345678C" />
 		<property name="detail" value="Invoice number 1" />
 		<property name="totalAmount" value="123.2" />
 		<property name="creditCard" ref="creditCard3" />
@@ -702,7 +702,7 @@
 	
 	<bean id="invoice2" class="domain.Invoice">
 		<property name="moment" value="2016/05/02" />
-		<property name="vatNumber" value="123456" />
+		<property name="vatNumber" value="ESA12345678C" />
 		<property name="detail" value="Invoice number 2" />
 		<property name="totalAmount" value="123.2" />
 		<property name="creditCard" ref="creditCard3" />
