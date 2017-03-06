@@ -24,6 +24,7 @@ import services.LessorService;
 import services.TenantService;
 import domain.Actor;
 import domain.Comment;
+import domain.Lessor;
 import domain.SocialIdentity;
 
 @Controller
@@ -48,18 +49,22 @@ public class ActorController extends AbstractController {
 	public ModelAndView display() {
 		ModelAndView result;
 		Collection <SocialIdentity> social;
+		
+		result = new ModelAndView("actor/display");
+		
 		int uaId=LoginService.getPrincipal().getId();
-		Actor actor = lessorService.findByUserAccountId(uaId);
+		Actor actor = tenantService.findByUserAccountId(uaId);
 		
 		if(actor == null){
-			actor = tenantService.findByUserAccountId(uaId);
-			
+			Lessor lessor = lessorService.findByUserAccountId(uaId); 
+			actor = lessor;
+			result.addObject("amount", lessor.getAmount());
 		}
 		social= actor.getSocialIdentities();
 		Collection<Comment> comment;
 
 		comment = commentService.findProfileComments(actor.getId());
-		result = new ModelAndView("actor/display");
+		
 		result.addObject("actor", actor);
 		result.addObject("social", social);
 		result.addObject("comment", comment);

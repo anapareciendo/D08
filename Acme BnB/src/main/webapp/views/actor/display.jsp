@@ -37,6 +37,12 @@
 		</p>
 	</div>
 	
+	<security:authorize access="hasRole('LESSOR')">
+		<p>
+			<strong><spring:message code="actor.lessor.amount"/></strong>: <jstl:out value="${amount}" /> Euros<br>
+		</p>
+	</security:authorize>
+	
 	<div>
 	
 		<h3>
