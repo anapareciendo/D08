@@ -22,11 +22,11 @@
 
 	<div>
 		<p>
-			<spring:message code="admin.name"/>: <jstl:out value="${administrator.name}"/><br>
-			<spring:message code="admin.surname"/>: <jstl:out value="${administrator.surname}" /><br>
-			<spring:message code="admin.email"/>: <jstl:out value="${administrator.email}" /><br>
-			<spring:message code="admin.phone"/>: <jstl:out value="${administrator.phone}" /><br>
-			<spring:message code="admin.picture"/>: <jstl:out value="${administrator.picture}" /><br>	
+			<spring:message code="auditor.name"/>: <jstl:out value="${auditor.name}"/><br>
+			<spring:message code="auditor.surname"/>: <jstl:out value="${auditor.surname}" /><br>
+			<spring:message code="auditor.email"/>: <jstl:out value="${auditor.email}" /><br>
+			<spring:message code="auditor.phone"/>: <jstl:out value="${auditor.phone}" /><br>
+			<spring:message code="auditor.picture"/>: <jstl:out value="${auditor.picture}" /><br>	
 		</p>
 	</div>
 

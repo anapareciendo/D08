@@ -39,6 +39,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="auditor/edit.do"><spring:message code="master.page.auditor.edit" /></a></li>
+					<li><a href="auditor/display.do"><spring:message code="master.page.auditor.display" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

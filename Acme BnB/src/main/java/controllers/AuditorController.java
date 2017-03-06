@@ -33,6 +33,22 @@ public class AuditorController extends AbstractController {
 		super();
 	}
 		
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		ModelAndView result;
+		Auditor auditor= auditorService.findByUserAccountId(LoginService.getPrincipal().getId());
+		try{
+		auditor = auditorService.findOne(auditor.getId());
+		result = new ModelAndView("auditor/display");
+		result.addObject("auditor", auditor);
+		}catch(Throwable oops){
+			
+			result= new ModelAndView("hacker/hackers");
+
+		}
+		return result;
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 			ModelAndView result;

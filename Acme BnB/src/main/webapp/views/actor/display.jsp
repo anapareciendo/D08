@@ -64,4 +64,25 @@
 	
 	</div>
 	
+		<div>
+	
+		<h3>
+			<spring:message code="actores.social.title.tabla"  />
+		</h3>
+	<display:table name="social" id="social" requestURI="${requestURI}" class="displaytag">	
+
+	<spring:message code="social.nick" var="nickHeader" />
+	<display:column property="social.nick" title="${nickHeader}" sortable="true"/>
+	
+	<spring:message code="social.nameSocial" var="nameSocialHeader" />
+	<display:column property="social.nameSocial" title="${nameSocialHeader}" sortable="true"/>
+	
+	<spring:message code="social.urlSocial" var="urlSocialHeader" />
+	<display:column property="social.urlSocial" title="${urlSocialHeader}" sortable="true"/>
+
+	
+	</display:table>
+	
+	</div>
+	
 	

@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.LessorService;
 import domain.Lessor;
+import domain.SocialIdentity;
 
 @Controller
 @RequestMapping("/lessor")
@@ -25,10 +28,13 @@ public class LessorController {
 	public ModelAndView display(@RequestParam int lessorId) {
 		ModelAndView result;
 		Lessor lessor;
+		Collection<SocialIdentity> social;
 		try{
 		lessor = lessorService.findOne(lessorId);
+		social= lessor.getSocialIdentities();
 		result = new ModelAndView("lessor/display");
 		result.addObject("lessor", lessor);
+		result.addObject("social", social);
 		}catch(Throwable oops){
 			
 			result= new ModelAndView("hacker/hackers");
