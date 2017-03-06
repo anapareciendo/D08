@@ -1,4 +1,4 @@
-package controllers.tenant;
+package controllers.lessor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
-import services.TenantService;
+import services.LessorService;
 import controllers.AbstractController;
-import domain.Tenant;
+import domain.Lessor;
 
 @Controller
-@RequestMapping("/creditCard")
-public class CreditCardController extends AbstractController{
+@RequestMapping("/creditCard/lessor")
+public class CreditCardControllerLessor extends AbstractController{
 	
 	@Autowired
-	private TenantService tenantService;
+	private LessorService lessorService;
 
 
 
@@ -26,48 +26,48 @@ public class CreditCardController extends AbstractController{
 	public ModelAndView creditCard() {
 		ModelAndView result;
 
-		Tenant tenant= tenantService.findByUserAccountId(LoginService.getPrincipal().getId());
+		Lessor lessor= lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
 	
-		result = new ModelAndView("creditCard/edit");
-		result.addObject("tenant", tenant);
+		result = new ModelAndView("creditCard/editL");
+		result.addObject("lessor", lessor);
 
 		return result;
 	}
-
+	
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(Tenant tenant, BindingResult binding) {
+	public ModelAndView save(Lessor lessor, BindingResult binding) {
 		ModelAndView result;
 		try{
-			tenant = tenantService.reconstruct2(tenant, binding);
+			lessor = lessorService.reconstruct3(lessor, binding);
 			try {
-				tenantService.save(tenant);				
+				lessorService.save(lessor);				
 				result = new ModelAndView("welcome/index");
 				result.addObject("message", "lessor.commit.ok");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(tenant, "tenant.commit.error");
+				result = createEditModelAndView(lessor, "lessor.commit.error");
 			}
 		}catch(Throwable oppss){
-			result = createEditModelAndView(tenant);
+			result = createEditModelAndView(lessor);
 		}
 //			result.addObject("errors", binding.getAllErrors());
 		return result;
 		}
 		
 		
-	protected ModelAndView createEditModelAndView(Tenant tenant) {
+	protected ModelAndView createEditModelAndView(Lessor lessor) {
 		ModelAndView result;
 
-		result = createEditModelAndView(tenant, null);
+		result = createEditModelAndView(lessor, null);
 		
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Tenant tenant, String message) {
+	protected ModelAndView createEditModelAndView(Lessor lessor, String message) {
 		ModelAndView result;
 		
-		result = new ModelAndView("creditCard/edit");
-		result.addObject("tenant", tenant);
+		result = new ModelAndView("creditCard/editL");
+		result.addObject("lessor", lessor);
 		result.addObject("message", message);
 
 		return result;

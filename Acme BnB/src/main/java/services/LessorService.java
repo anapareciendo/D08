@@ -158,4 +158,22 @@ public class LessorService {
 	}
 	
 
+
+	public Lessor reconstruct3(Lessor lessor, BindingResult binding) {
+		Lessor res;
+		
+		if(lessor.getId()==0){
+			res = this.create(LoginService.getPrincipal());
+		}else{
+			res = lessorRepository.findOne(lessor.getId());
+		}
+		res.getCreditCard().setBrand(lessor.getCreditCard().getBrand());
+		res.getCreditCard().setCvv(lessor.getCreditCard().getCvv());
+		res.getCreditCard().setExpirationMonth(lessor.getCreditCard().getExpirationMonth());
+		res.getCreditCard().setExpirationYear(lessor.getCreditCard().getExpirationYear());
+		res.getCreditCard().setHolder(lessor.getCreditCard().getHolder());
+		res.getCreditCard().setNumber(lessor.getCreditCard().getNumber());
+		validator.validate(res, binding);
+		return res;
+	}
 }

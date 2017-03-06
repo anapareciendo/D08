@@ -74,6 +74,7 @@
 					</security:authorize>
 					<security:authorize access="hasRole('LESSOR')">
 						<li><a href="lessor/edit.do"><spring:message code="master.page.lessor.edit" /></a></li>
+						<li><a href="creditCard/lessor/edit.do"><spring:message code="master.page.lessor.creditCard" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
 						<li><a href="tenant/edit.do"><spring:message code="master.page.tenant.edit" /></a></li>
