@@ -76,11 +76,18 @@ public class SigninController extends AbstractController {
 		Lessor lessor;
 		lessor = lessorService.reconstruct(actor, binding);
 
-		if (binding.hasErrors() || lessor.getName().equals("Pass") || lessor.getName().equals("Cond")) {
+		int years=(actor.getCreditCard().getExpirationYear()+2000)-1970;
+		int month=actor.getCreditCard().getExpirationMonth();
+		long exp = years*31540000000l+month*2628000000l;
+		long finale = exp-Calendar.getInstance().getTime().getTime();
+		
+		if (binding.hasErrors() || lessor.getName().equals("Pass") || lessor.getName().equals("Cond") || finale<0) {
 			result = new ModelAndView("security/signin");
-			result.addObject("lessor2", actor);
 			result.addObject("authority", "lessor2");
-			if(lessor.getName().equals("Pass")){
+			result.addObject("lessor2", actor);
+			if(finale<0){
+				result.addObject("message", "security.credit.failed");
+			}else if(lessor.getName().equals("Pass")){
 				result.addObject("message", "security.password.failed");
 			}else if(lessor.getName().equals("Cond")){
 				result.addObject("message", "security.condition.failed");

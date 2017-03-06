@@ -1,8 +1,10 @@
 
 package controllers.lessor;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import services.LessorService;
 import services.RequestService;
 import controllers.AbstractController;
+import domain.Lessor;
 import domain.Request;
 import domain.Status;
 
@@ -22,6 +27,8 @@ public class RequestLessorController extends AbstractController {
 
 	@Autowired
 	private RequestService	requestService;
+	@Autowired
+	private LessorService lessorService;
 
 
 	public RequestLessorController() {
@@ -31,12 +38,32 @@ public class RequestLessorController extends AbstractController {
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
 	public ModelAndView accept() {
 		ModelAndView result;
-		Collection<Request> requests;
-		requests=requestService.findMyRequestDeniedProperties();
-		result = new ModelAndView("request/list");
-		result.addObject("requestURI", "request/list.do");
-		result.addObject("req", requests);
-		result.addObject("accept", true);
+		Lessor lessor = lessorService.findByUserAccountId(LoginService.getPrincipal().getId());
+		
+		int years=(lessor.getCreditCard().getExpirationYear()+2000)-1970;
+		int month=lessor.getCreditCard().getExpirationMonth();
+		long exp = years*31540000000l+month*2628000000l;
+		long finale = exp-Calendar.getInstance().getTime().getTime();
+		
+		if(finale>0){
+			Collection<Request> requests;
+			requests=requestService.findMyRequestDeniedProperties();
+			result = new ModelAndView("request/list");
+			result.addObject("requestURI", "request/list.do");
+			result.addObject("req", requests);
+			result.addObject("accept", true);
+		}else{
+			SimpleDateFormat formatter;
+			String moment;
+			
+			formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			moment = formatter.format(new Date());
+					
+			result = new ModelAndView("welcome/index");
+			result.addObject("name", lessor.getName());
+			result.addObject("moment", moment);
+			result.addObject("message", "request.lessor.no.card");
+		}
 
 		return result;
 	}
@@ -59,10 +86,9 @@ public class RequestLessorController extends AbstractController {
 		ModelAndView result;
 		
 		Collection<Request> requests;
-		requests=requestService.findMyRequestDeniedProperties();
+		
 		result = new ModelAndView("request/list");
 		result.addObject("requestURI", "request/list.do");
-		result.addObject("req", requests);
 		result.addObject("accept", true);
 		
 		Request request = requestService.findOne(requestId);
@@ -81,6 +107,8 @@ public class RequestLessorController extends AbstractController {
 		
 		requestService.save(request);
 		
+		requests=requestService.findMyRequestDeniedProperties();
+		result.addObject("req", requests);
 		
 		
 		return result;

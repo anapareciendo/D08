@@ -350,6 +350,7 @@
 		<property name="email" value="josepall@gmail.com" />
 		<property name="phone" value="+352122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="creditCard" ref="creditCard1" />
 		<property name="userAccount" ref="userAccount7" />	
 		<property name="properties">
 			<list></list>
@@ -372,6 +373,7 @@
 		<property name="email" value="rodripall@gmail.com" />
 		<property name="phone" value="+021122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="creditCard" ref="creditCard2" />
 		<property name="userAccount" ref="userAccount8" />	
 		<property name="properties">
 			<list></list>
@@ -393,6 +395,7 @@
 		<property name="email" value="rodripall@gmail.com" />
 		<property name="phone" value="+034122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="creditCard" ref="creditCard3" />
 		<property name="userAccount" ref="userAccount9" />	
 		<property name="properties">
 			<list></list>

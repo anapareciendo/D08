@@ -13,7 +13,17 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Lessor extends Actor {
-
+	
+	private CreditCard creditCard;
+	
+	@Valid
+	@NotNull
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
 	//---------------------------Relationships--------------------------
 	private Collection<Property> properties;
 
