@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
+import domain.Audit;
 import domain.Auditor;
 import domain.Comment;
 import domain.SocialIdentity;
@@ -53,6 +54,7 @@ public class AuditorService {
 		res.setPostComments(new ArrayList<Comment>());
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 		res.setComments(new ArrayList<Comment>());
+		res.setAudits(new ArrayList<Audit>());
 		res.setUserAccount(ua);
 		return res;
 	}
@@ -81,11 +83,12 @@ public class AuditorService {
 		a.setAuthority(Authority.ADMIN);
 		Assert.isTrue(ua.getAuthorities().contains(a), "You must to be a admin to delete an actor.");
 
-		Assert.notNull(auditor, "The adminstrator to delete cannot be null.");
+		Assert.notNull(auditor, "The auditor to delete cannot be null.");
 		Assert.isTrue(auditorRepository.exists(auditor.getId()));
 
-		Assert.isNull(auditor.getPostComments().isEmpty(), "The administrator cannot be delete with post comments");
-		Assert.isTrue(auditor.getSocialIdentities().isEmpty(), "The administrator cannot be delete with social identities");
+		Assert.isNull(auditor.getPostComments().isEmpty(), "The auditor cannot be delete with post comments");
+		Assert.isTrue(auditor.getSocialIdentities().isEmpty(), "The auditor cannot be delete with social identities");
+		Assert.isTrue(auditor.getAudits().isEmpty(), "The auditor cannot be delete with audits");
 
 		auditorRepository.delete(auditor);
 	}
@@ -137,6 +140,7 @@ public class AuditorService {
 			result.setEmail(actor.getEmail());
 			result.setPhone(actor.getPhone());
 			result.setPicture(actor.getPicture());
+			result.setCompany(actor.getCompany());
 			validator.validate(result, binding);
 		}else{
 			result=new Auditor();

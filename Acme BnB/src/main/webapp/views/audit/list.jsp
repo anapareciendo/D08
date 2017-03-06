@@ -34,7 +34,8 @@
 	
 	<jstl:if test="${owner == true}">
 		<display:column>
-		<a href="audit/auditor/send.do?auditId=${audit.id}">
+		<a href="audit/auditor/send.do?auditId=${audit.id}" 
+			onclick="return confirm('<spring:message code="audit.confirm.send" />')" >
 	  		<spring:message code="audit.send" var="sendHeader" />
 	  		<jstl:out value="${sendHeader}" />
 	  	</a>

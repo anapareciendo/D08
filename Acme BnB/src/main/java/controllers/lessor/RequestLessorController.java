@@ -1,6 +1,7 @@
 
 package controllers.lessor;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,11 +58,30 @@ public class RequestLessorController extends AbstractController {
 	public ModelAndView toAccept(@RequestParam int requestId){
 		ModelAndView result;
 		
+		Collection<Request> requests;
+		requests=requestService.findMyRequestDeniedProperties();
+		result = new ModelAndView("request/list");
+		result.addObject("requestURI", "request/list.do");
+		result.addObject("req", requests);
+		result.addObject("accept", true);
+		
 		Request request = requestService.findOne(requestId);
-		request.setStatus(Status.ACCEPTED);
+		
+		int years=(request.getCreditCard().getExpirationYear()+2000)-1970;
+		int month=request.getCreditCard().getExpirationMonth();
+		long exp = years*31540000000l+month*2628000000l;
+		long finale = exp-Calendar.getInstance().getTime().getTime();
+		
+		if(finale>0){
+			request.setStatus(Status.ACCEPTED);
+		}else{
+			request.setStatus(Status.DENIED);
+			result.addObject("message", "request.error.credit");
+		}
+		
 		requestService.save(request);
 		
-		result = new ModelAndView("redirect:accept.do");
+		
 		
 		return result;
 	}

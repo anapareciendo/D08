@@ -37,8 +37,8 @@ public class SigninAdminController extends AbstractController {
 		ActorForm actor = new ActorForm();
 		
 		result = new ModelAndView("security/signin");
-		result.addObject("authority", "audit2");
-		result.addObject("audit2", actor);
+		result.addObject("authority", "auditor2");
+		result.addObject("auditor2", actor);
 		
 		return result;
 	}

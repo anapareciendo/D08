@@ -31,6 +31,10 @@
 		<acme:textbox code="security.creditCard.cvv" path="creditCard.cvv"/>
 	</jstl:if>
 	
+	<jstl:if test="${authority == 'auditor2'}">
+		<acme:textbox code="security.auditor.company" path="company"/>
+	</jstl:if>
+	
 	<br/>
 	<acme:checkbox code="security.condition" value="acepto" path="conditions"/>
 	

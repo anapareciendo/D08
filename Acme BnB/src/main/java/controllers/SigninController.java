@@ -143,7 +143,7 @@ public class SigninController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/signin", method = RequestMethod.POST, params = "audit2")
+	@RequestMapping(value = "/signin", method = RequestMethod.POST, params = "auditor2")
 	public ModelAndView auditor(ActorForm actor, BindingResult binding) {
 		ModelAndView result;
 		Auditor auditor;
@@ -151,8 +151,8 @@ public class SigninController extends AbstractController {
 
 		if (binding.hasErrors() || auditor.getName().equals("Pass") || auditor.getName().equals("Cond")) {
 			result = new ModelAndView("security/signin");
-			result.addObject("lessor2", actor);
-			result.addObject("authority", "lessor2");
+			result.addObject("auditor2", actor);
+			result.addObject("authority", "auditor2");
 			if(auditor.getName().equals("Pass")){
 				result.addObject("message", "security.password.failed");
 			}else if(auditor.getName().equals("Cond")){
@@ -164,11 +164,16 @@ public class SigninController extends AbstractController {
 		} else {
 			try{
 				auditorService.save(auditor);
-				result = new ModelAndView("redirect:login.do");
+				ActorForm newActor = new ActorForm();
+				
+				result = new ModelAndView("security/signin");
+				result.addObject("authority", "auditor2");
+				result.addObject("auditor2", newActor);
+				result.addObject("message", "security.signin.audit.success");
 			}catch (Throwable oops) {
 				result = new ModelAndView("security/signin");
-				result.addObject("authority", "lessor2");
-				result.addObject("lessor2", actor);
+				result.addObject("authority", "auditor2");
+				result.addObject("auditor2", actor);
 				result.addObject("message", "security.signin.failed");
 			}
 		}

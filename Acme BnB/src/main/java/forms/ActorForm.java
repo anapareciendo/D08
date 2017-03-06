@@ -22,6 +22,8 @@ public class ActorForm {
 	
 	private CreditCard creditCard;
 
+	private String company;
+	
 	public ActorForm() {
 		super();
 	}
@@ -84,6 +86,12 @@ public class ActorForm {
 	}
 	public void setCreditCard(CreditCard creditCard) {
 		this.creditCard = creditCard;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
 	}
 	
 	
