@@ -26,7 +26,10 @@
 			<spring:message code="admin.surname"/>: <jstl:out value="${administrator.surname}" /><br>
 			<spring:message code="admin.email"/>: <jstl:out value="${administrator.email}" /><br>
 			<spring:message code="admin.phone"/>: <jstl:out value="${administrator.phone}" /><br>
-			<spring:message code="admin.picture"/>: <jstl:out value="${administrator.picture}" /><br>	
+			<spring:message code="admin.picture"/>: 
+			<jstl:if test="${administrator.picture != null}">
+				<img src="${administrator.picture}" alt="">
+			</jstl:if>	
 		</p>
 	</div>
 

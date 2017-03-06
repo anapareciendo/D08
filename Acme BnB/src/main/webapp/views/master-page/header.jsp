@@ -19,31 +19,7 @@
 
 <div>
 	<ul id="jMenu">
-		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="security/admin/audit.do"><spring:message code="master.page.administrator.audit" /></a></li>
-					<li><a href="dashboard/admin/display.do"><spring:message code="master.page.administrator.dashboard" /></a></li>					
-					<li><a href="attribute/admin/list.do"><spring:message code="master.page.administrator.attribute.name" /></a></li>									
-					<li><a href="attribute/admin/create.do"><spring:message code="master.page.administrator.attribute.create" /></a></li>
-					<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.data" /></a></li>
-					<li><a href="administrator/display.do"><spring:message code="master.page.administrator.profile" /></a></li>
-				</ul>
-			</li>
-		</security:authorize>
-		
-		<security:authorize access="hasRole('AUDITOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.auditor" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="auditor/edit.do"><spring:message code="master.page.auditor.edit" /></a></li>
-					<li><a href="auditor/display.do"><spring:message code="master.page.auditor.display" /></a></li>
-				</ul>
-			</li>
-		</security:authorize>
-		
+		<!-- Do not forget the "fNiv" class for the first level links !! -->		
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
@@ -70,13 +46,29 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li><a href="administrator/display.do"><spring:message code="master.page.administrator.profile" /></a></li>
+						<li><a href="security/admin/audit.do"><spring:message code="master.page.administrator.audit" /></a></li>
+						<li><a href="dashboard/admin/display.do"><spring:message code="master.page.administrator.dashboard" /></a></li>					
+						<li><a href="attribute/admin/list.do"><spring:message code="master.page.administrator.attribute.name" /></a></li>									
+						<li><a href="attribute/admin/create.do"><spring:message code="master.page.administrator.attribute.create" /></a></li>
+						<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.data" /></a></li>
+					</security:authorize>
+	
+					<security:authorize access="hasRole('AUDITOR')">
+					<li><a href="auditor/display.do"><spring:message code="master.page.auditor.display" /></a></li>
+						<li><a href="auditor/edit.do"><spring:message code="master.page.auditor.edit" /></a></li>
+					</security:authorize>
+					
 					<security:authorize access="hasRole('LESSOR') or hasRole('TENANT')">
 						<li><a href="actor/display.do"><spring:message code="master.page.actor.display" /></a></li>
 					</security:authorize>
+					
 					<security:authorize access="hasRole('LESSOR')">
 						<li><a href="lessor/edit.do"><spring:message code="master.page.lessor.edit" /></a></li>
 						<li><a href="creditCard/lessor/edit.do"><spring:message code="master.page.lessor.creditCard" /></a></li>
 					</security:authorize>
+					
 					<security:authorize access="hasRole('TENANT')">
 						<li><a href="tenant/edit.do"><spring:message code="master.page.tenant.edit" /></a></li>
 						<li><a href="creditCard/edit.do"><spring:message code="master.page.tenant.creditCard" /></a></li>
