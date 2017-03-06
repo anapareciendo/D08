@@ -25,10 +25,6 @@ public class DashboardAdminController extends AbstractController {
 
 	@Autowired
 	private AdministratorService adminService;
-
-
-
-	
 	
 	public DashboardAdminController() {
 		super();
