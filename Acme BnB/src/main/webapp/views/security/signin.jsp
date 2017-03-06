@@ -22,6 +22,16 @@
 	<acme:textbox code="security.picture" path="picture"/>
 	
 	<br/>
+	<jstl:if test="${authority == 'tenant2'}">
+		<acme:textbox code="security.creditCard.holder" path="creditCard.holder"/>
+		<acme:textbox code="security.creditCard.brand" path="creditCard.brand"/>
+		<acme:textbox code="security.creditCard.number" path="creditCard.number"/>
+		<acme:textbox code="security.creditCard.expirationMonth" path="creditCard.expirationMonth"/>
+		<acme:textbox code="security.creditCard.expirationYear" path="creditCard.expirationYear"/>
+		<acme:textbox code="security.creditCard.cvv" path="creditCard.cvv"/>
+	</jstl:if>
+	
+	<br/>
 	<acme:checkbox code="security.condition" value="acepto" path="conditions"/>
 	
 	<br/><br/>

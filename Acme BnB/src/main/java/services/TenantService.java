@@ -131,6 +131,7 @@ public class TenantService {
 			result.setEmail(actor.getEmail());
 			result.setPhone(actor.getPhone());
 			result.setPicture(actor.getPicture());
+			result.setCreditCard(actor.getCreditCard());
 			validator.validate(result, binding);
 		}else{
 			result=new Tenant();

@@ -3,6 +3,8 @@ package forms;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 
+import domain.CreditCard;
+
 @Access(AccessType.PROPERTY)
 public class ActorForm {
 
@@ -17,6 +19,8 @@ public class ActorForm {
 	private String picture;
 	
 	private String[] conditions={};
+	
+	private CreditCard creditCard;
 
 	public ActorForm() {
 		super();
@@ -74,6 +78,12 @@ public class ActorForm {
 	}
 	public void setConditions(String[] conditions) {
 		this.conditions = conditions;
+	}
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 	
 	
