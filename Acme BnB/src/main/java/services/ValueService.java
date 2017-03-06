@@ -62,6 +62,7 @@ public class ValueService {
 		Assert.notNull(value, "The value to save cannot be null.");
 		Value res = valueRepository.save(value);
 		res.getProperty().getValues().add(res);
+		res.getAttribute().getValues().add(res);
 		return res;
 	}
 	

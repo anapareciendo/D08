@@ -90,19 +90,19 @@ public class AttributeAdminController extends AbstractController {
 	public ModelAndView save(@Valid Attribute attribute, BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(attribute);
-			result = new ModelAndView("attribute/edit");
-			result.addObject("attribute",attribute);
-			//result.addObject("errors", binding.getAllErrors());
-		} else {
+		try {
+			attribute = attributeService.reconstruct(attribute, binding);
 			try {
 				attributeService.save(attribute);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(attribute, "attribute.commit.error");				
 			}
-		}
+		}catch(Throwable oops){
+			result = createEditModelAndView(attribute);
+			result = new ModelAndView("attribute/edit");
+			result.addObject("attribute",attribute);
+		}	
 
 		return result;
 	}

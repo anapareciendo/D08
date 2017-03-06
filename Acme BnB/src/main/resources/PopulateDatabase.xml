@@ -536,21 +536,36 @@
 	<!-- Attribute -->
  	
 	<bean id="attribute1" class="domain.Attribute">
-		<property name="name" value="Country" />		
+		<property name="name" value="Country" />
+		<property name="values">
+			<list></list>
+		</property>			
 	</bean> 
 	
 	<bean id="attribute2" class="domain.Attribute">
-		<property name="name" value="Province" />		
+		<property name="name" value="Province" />
+		<property name="values">
+			<list></list>
+		</property>			
 	</bean> 
 		<bean id="attribute3" class="domain.Attribute">
-		<property name="name" value="State" />		
+		<property name="name" value="State" />
+		<property name="values">
+			<list></list>
+		</property>		
 	</bean> 
 	
 		<bean id="attribute4" class="domain.Attribute">
-		<property name="name" value="City" />		
+		<property name="name" value="City" />
+		<property name="values">
+			<list></list>
+		</property>			
 	</bean> 
 		<bean id="attribute5" class="domain.Attribute">
 		<property name="name" value="Capacity" />
+		<property name="values">
+			<list></list>
+		</property>	
 		
 	</bean> 
 	<!-- Value -->
@@ -694,7 +709,7 @@
 	<!-- Invoice -->
 		
 	<bean id="invoice1" class="domain.Invoice">
-		<property name="moment" value="2016/03/01" />
+		<property name="moment" value="2016/03/01 14:20" />
 		<property name="vatNumber" value="ESA12345678C" />
 		<property name="detail" value="Invoice number 1" />
 		<property name="totalAmount" value="123.2" />
@@ -703,7 +718,7 @@
 	</bean>
 	
 	<bean id="invoice2" class="domain.Invoice">
-		<property name="moment" value="2016/05/02" />
+		<property name="moment" value="2016/05/02 12:10" />
 		<property name="vatNumber" value="ESA12345678C" />
 		<property name="detail" value="Invoice number 2" />
 		<property name="totalAmount" value="123.2" />
