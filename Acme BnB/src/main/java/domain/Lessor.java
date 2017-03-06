@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -15,6 +16,15 @@ import javax.validation.constraints.NotNull;
 public class Lessor extends Actor {
 	
 	private CreditCard creditCard;
+	private double amount;
+	
+	@Min(0)
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 	
 	@Valid
 	@NotNull

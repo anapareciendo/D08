@@ -55,6 +55,7 @@ public class LessorService {
 		res.setSocialIdentities(new ArrayList<SocialIdentity>());
 		res.setProperties(new ArrayList<Property>());
 		res.setComments(new ArrayList<Comment>());
+		res.setAmount(0.0);
 		res.setUserAccount(ua);
 		
 		return res;

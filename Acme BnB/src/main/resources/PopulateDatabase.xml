@@ -351,6 +351,7 @@
 		<property name="phone" value="+352122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="creditCard" ref="creditCard1" />
+		<property name="amount" value="0.0" />
 		<property name="userAccount" ref="userAccount7" />	
 		<property name="properties">
 			<list></list>
@@ -374,6 +375,7 @@
 		<property name="phone" value="+021122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="creditCard" ref="creditCard2" />
+		<property name="amount" value="1.0" />
 		<property name="userAccount" ref="userAccount8" />	
 		<property name="properties">
 			<list></list>
@@ -396,6 +398,7 @@
 		<property name="phone" value="+034122335987" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
 		<property name="creditCard" ref="creditCard3" />
+		<property name="amount" value="0.0" />
 		<property name="userAccount" ref="userAccount9" />	
 		<property name="properties">
 			<list></list>
@@ -604,7 +607,7 @@
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
 		<property name="creditCard" ref="creditCard1" />
-		<property name="status" value="ACCEPTED" />	
+		<property name="status" value="PENDING" />	
 		<property name="tenant" ref="tenant2" />
 		<property name="property" ref="property2" />
 		
@@ -614,7 +617,7 @@
 		<property name="checkIn" value="2016/12/31" />
 		<property name="checkOut" value="2017/01/02" />
 		<property name="smoke" value="TRUE" />
-		<property name="status" value="ACCEPTED" />	
+		<property name="status" value="PENDING" />	
 		<property name="creditCard" ref="creditCard2" />
 		<property name="tenant" ref="tenant1" />
 		<property name="property" ref="property3" />
@@ -625,7 +628,7 @@
 		<property name="checkIn" value="2016/03/28" />
 		<property name="checkOut" value="2017/07/03" />
 		<property name="smoke" value="TRUE" />
-		<property name="status" value="ACCEPTED" />	
+		<property name="status" value="DENIED" />	
 		<property name="creditCard" ref="creditCard1" />
 		<property name="tenant" ref="tenant1" />
 		<property name="property" ref="property3" />
@@ -635,7 +638,7 @@
 		<property name="checkIn" value="2016/07/22" />
 		<property name="checkOut" value="2017/07/25" />
 		<property name="smoke" value="TRUE" />
-		<property name="status" value="ACCEPTED" />	
+		<property name="status" value="DENIED" />	
 		<property name="creditCard" ref="creditCard1" />
 		<property name="tenant" ref="tenant1" />
 		<property name="property" ref="property3" />
@@ -660,6 +663,7 @@
 		<property name="tenant" ref="tenant3" />
 		<property name="property" ref="property2" />
 	</bean>
+	
 	<!-- Finder -->
 	<bean id="finder1" class="domain.Finder">
 		<property name="destinationCity" value="Madrid" />
