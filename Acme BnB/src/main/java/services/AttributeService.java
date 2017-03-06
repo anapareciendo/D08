@@ -1,17 +1,21 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AttributeRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Attribute;
+import domain.Value;
 
 @Service
 @Transactional
@@ -22,6 +26,8 @@ public class AttributeService {
 	private AttributeRepository attributeRepository;
 	
 	//Supporting services
+	@Autowired
+	private Validator validator;
 	
 	//Constructors
 	public AttributeService() {
@@ -32,7 +38,7 @@ public class AttributeService {
 	public Attribute create() {
 		Attribute res;
 		res = new Attribute();
-
+		res.setValues(new ArrayList<Value>());
 		return res;
 	}
 	
@@ -61,10 +67,24 @@ public class AttributeService {
 
 		UserAccount ua=LoginService.getPrincipal();
 		Assert.isTrue(ua.getAuthorities().contains(b), "You must to be an admin for this action");
-		
+		Assert.isTrue(attribute.getValues().isEmpty(), "The attribute cannot be delete with values");
 	
 		
 		attributeRepository.delete(attribute);
+	}
+
+	public Attribute reconstruct(Attribute attribute, BindingResult binding) {
+		Attribute res;
+		
+		if(attribute.getId()==0){
+			res = this.create();
+		}else{
+			res = attributeRepository.findOne(attribute.getId());
+		}
+		res.setName(attribute.getName());
+		validator.validate(res, binding);
+		
+		return res;
 	}
 	
 	
