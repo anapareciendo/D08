@@ -62,6 +62,8 @@ public class DashboardAdminController extends AbstractController {
 		Double minInvoicesPerTenant = adminService.minInvoicesPerTenant();
 		Double avgInvoicesPerTenant  = adminService.avgInvoicesPerTenant();
 		
+		Double ratioLessors = adminService.ratioLessors();
+		
 		
 		//Carmen
 		Double requestAcceptedByLessor= adminService.requestAcceptedByLessor();
@@ -133,6 +135,7 @@ public class DashboardAdminController extends AbstractController {
 		result.addObject("totalAmountMoney", totalAmountMoney);
 		
 		result.addObject("versusRequestsPropertyAudit", versusRequestsPropertyAudit);
+		result.addObject("ratioLessors", ratioLessors);
 		
 		return result;
 	}

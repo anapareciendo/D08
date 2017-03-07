@@ -160,5 +160,10 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select avg(r.property.requests.size) from Request r where r.property.audits.size=0")
 	Double avgRequestsPropertyNoAudits();
 	
+	@Query("select count(*)*1.0 from Lessor l join l.properties p join p.requests r where r.status = 1")
+	Double totalLessorAccepted();
+	
+	@Query("select count(*)*1.0 from Lessor l")
+	Double totalLessors();
 	
 }

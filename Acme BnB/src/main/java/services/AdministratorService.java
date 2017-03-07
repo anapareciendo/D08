@@ -279,6 +279,14 @@ public class AdministratorService {
 		return administratorRepository.avgRequestsPropertyAudits();
 	}
 	
+	public Double ratioLessors(){
+		this.isAdministrator();
+		Double res;
+		res = administratorRepository.totalLessorAccepted() / administratorRepository.totalLessors();
+		return res;
+	}
+	
+	
 	
 	public Administrator reconstruct(Administrator admin, BindingResult binding) {
 		Administrator res;

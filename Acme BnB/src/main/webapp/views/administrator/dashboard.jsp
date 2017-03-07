@@ -97,6 +97,8 @@
 			<spring:message code="dashboard.totalAmountMoney"/>: <jstl:out value="${totalAmountMoney}"/><br>
 			
 			<spring:message code="dashboard.versusRequestsPropertyAudit"/>: <jstl:out value="${versusRequestsPropertyAudit}"/><br>
+			
+			<spring:message code="dashboard.ratioLessors"/>: <jstl:out value="${ratioLessors}"/><br>
 		
 			</p>
 	</div>
