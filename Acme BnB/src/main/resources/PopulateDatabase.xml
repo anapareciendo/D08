@@ -259,7 +259,7 @@
 	<!-- Tenant -->
  	<bean id="tenant1" class="domain.Tenant">
 		<property name="name" value="Manuel" />
-		<property name="surname" value="Pallero" />
+		<property name="surname" value="Ramos" />
 		<property name="email" value="manpall@gmail.com" />
 		<property name="phone" value="+034 122335298" />
 		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
