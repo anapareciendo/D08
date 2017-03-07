@@ -40,6 +40,11 @@ public class DashboardAdminController extends AbstractController {
  	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		ModelAndView result;
+		//Josema
+		Double avgRequestsPropertyAudits = adminService.avgRequestsPropertyAudits();
+		Double avgRequestsPropertyNoAudits = adminService.avgRequestsPropertyNoAudits();
+		Double versusRequestsPropertyAudit = avgRequestsPropertyAudits/avgRequestsPropertyNoAudits;
+		
 
 		//Ana
 		Collection<Lessor> lessorMaxRequestsDenied = adminService.lessorMaxRequestsDenied();
@@ -126,6 +131,8 @@ public class DashboardAdminController extends AbstractController {
 		result.addObject("avgInvoicePerTenant", avgInvoicePerActor); */
 		
 		result.addObject("totalAmountMoney", totalAmountMoney);
+		
+		result.addObject("versusRequestsPropertyAudit", versusRequestsPropertyAudit);
 		
 		return result;
 	}

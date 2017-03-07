@@ -270,6 +270,16 @@ public class AdministratorService {
 		return administratorRepository.totalAmountMoney();
 	}
 	
+	public Double avgRequestsPropertyNoAudits(){
+		this.isAdministrator();
+		return administratorRepository.avgRequestsPropertyNoAudits();
+	}
+	public Double avgRequestsPropertyAudits(){
+		this.isAdministrator();
+		return administratorRepository.avgRequestsPropertyAudits();
+	}
+	
+	
 	public Administrator reconstruct(Administrator admin, BindingResult binding) {
 		Administrator res;
 		

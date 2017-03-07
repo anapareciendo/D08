@@ -155,6 +155,10 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	//Hay que unir estas dos querys pero no se si con un dividir
 	//select avg(p) from Property p where p.audits.size>0;
 	//select avg(p) from Property p where p.audits.size=0;
+	@Query("select avg(r.property.requests.size) from Request r where r.property.audits.size>0")
+	Double avgRequestsPropertyAudits();
+	@Query("select avg(r.property.requests.size) from Request r where r.property.audits.size=0")
+	Double avgRequestsPropertyNoAudits();
 	
 	
 }
