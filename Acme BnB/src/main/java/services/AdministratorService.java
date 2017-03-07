@@ -161,14 +161,22 @@ public class AdministratorService {
 	
 	public Double maxInvoicesPerTenant(){
 		this.isAdministrator();
+		Double res = 0.0;
 		Collection<Double> numInvoices = administratorRepository.numInvoicesPerTenant();
-		return Collections.max(numInvoices);
+		if(!numInvoices.isEmpty()){
+			res= Collections.max(numInvoices);
+		}
+		return res;
 	}
 	
 	public Double minInvoicesPerTenant(){
 		this.isAdministrator();
+		Double res = 0.0;
 		Collection<Double> numInvoices = administratorRepository.numInvoicesPerTenant();
-		return Collections.min(numInvoices);
+		if(!numInvoices.isEmpty()){
+			res=Collections.min(numInvoices);
+		}
+		return res;
 	}
 	
 	public Double avgInvoicesPerTenant(){
@@ -176,10 +184,13 @@ public class AdministratorService {
 		Double totalInvoices = administratorRepository.totalInvoices();
 		Collection<Double> numInvoices = administratorRepository.numInvoicesPerTenant();
 		Double suma = 0.0;
-		for(Double i : numInvoices)
+		for(Double i : numInvoices){
 			suma = suma + i;
-		
-		return (suma/totalInvoices);
+		}
+		if(totalInvoices!=0.0){
+			suma/=totalInvoices;
+		}
+		return suma;
 	}
 	
 	//Carmen
