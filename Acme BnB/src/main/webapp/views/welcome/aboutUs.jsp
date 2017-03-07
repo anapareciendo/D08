@@ -21,10 +21,10 @@
 <h2> Sobre nosotros </h2>
 <p>Fundado en febrero de 2017, Acme-BnB es un
 mercado comunitario basado en la confianza en el que la gente publica, descubre y
-reserva alojamientos únicos en todo el mundo. <p>
+reserva alojamientos unicos en todo el mundo. <p>
 
 <p>Acme-BnB ofrece a sus usuarios experiencias 
-únicas para todos los bolsillos, proporcionándoles una
+unicas para todos los bolsillos, proporcionandoles una
 forma sencilla de ganar dinero alquilando su espacio. Permite mostrar su vivienda 
 a una gran comunidad que no deja de crecer.<p>
 

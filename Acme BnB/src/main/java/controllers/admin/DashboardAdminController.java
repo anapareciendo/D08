@@ -40,10 +40,15 @@ public class DashboardAdminController extends AbstractController {
  	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		ModelAndView result;
+		
 		//Josema
 		Double avgRequestsPropertyAudits = adminService.avgRequestsPropertyAudits();
 		Double avgRequestsPropertyNoAudits = adminService.avgRequestsPropertyNoAudits();
-		Double versusRequestsPropertyAudit = avgRequestsPropertyAudits/avgRequestsPropertyNoAudits;
+		Double versusRequestsPropertyAudit=0.0;
+		if(avgRequestsPropertyNoAudits!=null){
+			versusRequestsPropertyAudit = avgRequestsPropertyAudits/avgRequestsPropertyNoAudits;
+		}
+		
 		
 
 		//Ana
