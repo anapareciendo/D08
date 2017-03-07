@@ -11,6 +11,14 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <jsp:useBean id="date" class="java.util.Date" />
 
@@ -18,8 +26,8 @@
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme BnB Co., Inc.</b>
 
-<div class="popup" onclick="myFunction()">Click me!
-  <span class="popuptext" id="myPopup">We use language cookies. This cookie is set whenever you use the language bar to change the
+<div class="popup" onclick="myFunction()"> <spring:message code="cookies"/> 
+  <span class="popuptext" id="myPopup"> <spring:message code="cookies_text"/>   We use language cookies. This cookie is set whenever you use the language bar to change the
 language in which your system must show its messages. 
 If you continue browsing, we assume that you accept these conditions</span>
 </div>
