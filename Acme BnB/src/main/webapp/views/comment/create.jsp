@@ -16,7 +16,7 @@
 	<acme:textbox code="comment.title" path="title"/>
 	<acme:textbox code="comment.text" path="text"/>
 	<acme:textbox code="comment.star" path="star"/>
-	<acme:select items="${commentables}" itemLabel="userAccount.username" code="comment.commentable" path="commentable"/>
+	<acme:select items="${commentable}" itemLabel="userAccount.username" code="comment.commentable" path="commentable"/>
 	
 	<input type="submit" name="save" value="<spring:message code="comment.save" />" />
 	<input type="button" name="cancel" value="<spring:message code="comment.cancel" />" onclick="window.location='welcome/index.do'" /> <br />

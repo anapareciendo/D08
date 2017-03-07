@@ -56,17 +56,17 @@ public class CommentController extends AbstractController {
 		ModelAndView result;
 		
 		int uaId=LoginService.getPrincipal().getId();
-		Collection<Actor> commentables = new ArrayList<Actor>();
+		Collection<Actor> commentable = new ArrayList<Actor>();
 		Actor actor = lessorService.findByUserAccountId(uaId);
 		
 		if(actor == null){
 			actor = tenantService.findByUserAccountId(uaId);
-			commentables.add(actor);
-			commentables.addAll(lessorService.findMyLessors(actor.getId()));
+			commentable.add(actor);
+			commentable.addAll(lessorService.findMyLessors(actor.getId()));
 			
 		}else{
-			commentables.add(actor);
-			commentables.addAll(tenantService.findMyTenants(actor.getId()));
+			commentable.add(actor);
+			commentable.addAll(tenantService.findMyTenants(actor.getId()));
 		}
 		
 		
@@ -74,7 +74,7 @@ public class CommentController extends AbstractController {
 		
 		result = new ModelAndView("comment/create");
 		result.addObject("comment",comment);
-		result.addObject("commentables", commentables);
+		result.addObject("commentable", commentable);
 
 		return result;
 	}
@@ -83,17 +83,17 @@ public class CommentController extends AbstractController {
 	public ModelAndView create(@Valid Comment comment, BindingResult binding) {
 		ModelAndView result;
 		int uaId=LoginService.getPrincipal().getId();
-		Collection<Actor> commentables = new ArrayList<Actor>();
+		Collection<Actor> commentable = new ArrayList<Actor>();
 		Actor actor = lessorService.findByUserAccountId(uaId);
 		
 		if(actor == null){
 			actor = tenantService.findByUserAccountId(uaId);
-			commentables.add(actor);
-			commentables.addAll(lessorService.findMyLessors(actor.getId()));
+			commentable.add(actor);
+			commentable.addAll(lessorService.findMyLessors(actor.getId()));
 			
 		}else{
-			commentables.add(actor);
-			commentables.addAll(tenantService.findMyTenants(actor.getId()));
+			commentable.add(actor);
+			commentable.addAll(tenantService.findMyTenants(actor.getId()));
 		}
 		try{
 			comment = commentService.reconstruct(comment, binding);
@@ -104,13 +104,13 @@ public class CommentController extends AbstractController {
 			} catch (Throwable oops) {
 				result = new ModelAndView("comment/create");
 				result.addObject("comment", comment);
-				result.addObject("commentables", commentables);
+				result.addObject("commentable", commentable);
 				result.addObject("message", "comment.commit.error");
 			}
 		}catch(Throwable oops){
 			result = new ModelAndView("comment/create");
 			result.addObject("comment", comment);
-			result.addObject("commentables", commentables);
+			result.addObject("commentable", commentable);
 		}
 		
 		return result;
