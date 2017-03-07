@@ -36,6 +36,7 @@
 					<li><a href="property/list.do"><spring:message code="master.page.property.list" /></a>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="aboutUs/acme.do"><spring:message code="master.page.about" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -113,8 +114,10 @@
 				</ul>
 			</li>
 			</security:authorize>
+			<li><a class="fNiv" href="aboutUs/acme.do"><spring:message code="master.page.about" /></a></li>
 		</security:authorize>
 	</ul>
+	
 </div>
 
 <div>
