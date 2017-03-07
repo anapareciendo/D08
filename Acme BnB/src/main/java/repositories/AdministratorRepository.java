@@ -166,4 +166,11 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select count(*)*1.0 from Lessor l")
 	Double totalLessors();
 	
+	@Query("select count(*)*1.0 from Tenant t join t.requests r where r.status = 1")
+	Double totalTenantAccepted();
+	
+	@Query("select count(*)*1.0 from Tenant t")
+	Double totalTenants();
+	
+	
 }

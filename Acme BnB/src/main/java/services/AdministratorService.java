@@ -1,6 +1,7 @@
 
 package services;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -279,13 +280,21 @@ public class AdministratorService {
 		return administratorRepository.avgRequestsPropertyAudits();
 	}
 	
-	public Double ratioLessors(){
+	public String ratioLessors(){
 		this.isAdministrator();
 		Double res;
 		res = administratorRepository.totalLessorAccepted() / administratorRepository.totalLessors();
-		return res;
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(res);
 	}
 	
+	public String ratioTenants(){
+		this.isAdministrator();
+		Double res;
+		res = administratorRepository.totalTenantAccepted() / administratorRepository.totalTenants();
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(res);
+	}
 	
 	
 	public Administrator reconstruct(Administrator admin, BindingResult binding) {

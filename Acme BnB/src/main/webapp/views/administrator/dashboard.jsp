@@ -99,6 +99,7 @@
 			<spring:message code="dashboard.versusRequestsPropertyAudit"/>: <jstl:out value="${versusRequestsPropertyAudit}"/><br>
 			
 			<spring:message code="dashboard.ratioLessors"/>: <jstl:out value="${ratioLessors}"/><br>
+			<spring:message code="dashboard.ratioTenants"/>: <jstl:out value="${ratioTenants}"/><br>
 		
 			</p>
 	</div>
