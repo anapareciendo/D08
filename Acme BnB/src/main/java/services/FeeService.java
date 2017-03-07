@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.FeeRepository;
 import security.Authority;
@@ -22,6 +24,9 @@ public class FeeService {
 	private FeeRepository feeRepository;
 	
 	//Supporting services
+	
+	@Autowired
+	private Validator validator;
 	
 	//Constructors
 	public FeeService() {
@@ -74,6 +79,14 @@ public class FeeService {
 	//Utilites methods
 	public Fee getFee(){
 		return feeRepository.getFee();
+	}
+
+	public Fee reconstruc(Fee fee, BindingResult binding) {
+		Fee res = feeRepository.findOne(fee.getId());
+		res.setCost(fee.getCost());
+		validator.validate(res, binding);
+		
+		return res;
 	}
 }
 

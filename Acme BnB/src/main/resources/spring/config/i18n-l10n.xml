@@ -40,6 +40,7 @@
 		<value>/views/tenant/messages</value>
 		<value>/views/creditCard/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/fee/messages</value>
 	</util:list>
 
 </beans>

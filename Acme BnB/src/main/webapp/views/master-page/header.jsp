@@ -47,6 +47,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<security:authorize access="hasRole('ADMIN')">
+						<li><a href="fee/admin/edit.do"><spring:message code="master.page.admin.fee" /></a></li>
 						<li><a href="administrator/display.do"><spring:message code="master.page.administrator.profile" /></a></li>
 						<li><a href="security/admin/audit.do"><spring:message code="master.page.administrator.audit" /></a></li>
 						<li><a href="dashboard/admin/display.do"><spring:message code="master.page.administrator.dashboard" /></a></li>					

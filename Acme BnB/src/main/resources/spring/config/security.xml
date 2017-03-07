@@ -105,6 +105,9 @@
 		<security:intercept-url pattern="/audit/auditor/send.do" access="hasRole('AUDITOR')" />
 		<security:intercept-url pattern="/audit/auditor/save.do" access="hasRole('AUDITOR')" />
 		
+		<security:intercept-url pattern="/fee/admin/edit.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/fee/admin/save.do" access="hasRole('ADMIN')" />
+		
 		<security:intercept-url pattern="/actor/display.do" access="hasRole('LESSOR') or hasRole('TENANT')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
