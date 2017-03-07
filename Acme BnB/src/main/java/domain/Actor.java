@@ -14,6 +14,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
@@ -31,6 +32,7 @@ public abstract class Actor extends Commentable {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -39,6 +41,7 @@ public abstract class Actor extends Commentable {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getSurname() {
 		return surname;
 	}
@@ -48,6 +51,7 @@ public abstract class Actor extends Commentable {
 
 	@NotBlank
 	@Email
+	@SafeHtml
 	public String getEmail() {
 		return email;
 	}
@@ -56,6 +60,7 @@ public abstract class Actor extends Commentable {
 	}
 
 	@Pattern(regexp = "([+][0-9]{3})[ ]*([(][0-9]{3}[)])?[ ]*([0-9a-zA-Z][ -]*){4,}")
+	@SafeHtml
 	public String getPhone() {
 		return phone;
 	}
@@ -65,6 +70,7 @@ public abstract class Actor extends Commentable {
 	
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getPicture() {
 		return picture;
 	}

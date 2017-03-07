@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -26,6 +27,7 @@ public class Property extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -52,6 +54,7 @@ public class Property extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getAddress() {
 		return address;
 	}
@@ -61,6 +64,7 @@ public class Property extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}

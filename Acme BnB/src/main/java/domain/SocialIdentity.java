@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -20,6 +21,7 @@ public class SocialIdentity extends DomainEntity{
 	private String urlSocial;
 	
 	@NotBlank
+	@SafeHtml
 	public String getNick() {
 		return nick;
 	}
@@ -28,6 +30,7 @@ public class SocialIdentity extends DomainEntity{
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getNameSocial() {
 		return nameSocial;
 	}
@@ -37,6 +40,7 @@ public class SocialIdentity extends DomainEntity{
 	
 	@NotBlank
 	@URL
+	@SafeHtml
 	public String getUrlSocial() {
 		return urlSocial;
 	}

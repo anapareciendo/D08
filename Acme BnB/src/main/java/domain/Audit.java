@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -44,6 +45,7 @@ public class Audit extends DomainEntity{
 	}
 	
 	@NotNull
+	@SafeHtml
 	public String getText() {
 		return text;
 	}

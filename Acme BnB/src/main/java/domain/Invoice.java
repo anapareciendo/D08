@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -49,6 +50,7 @@ public class Invoice extends DomainEntity {
 
 	@NotBlank
 	@Pattern(regexp = "ES[A-Z]{1}[0-9]{8}[A-Z]{1}")
+	@SafeHtml
 	public String getVatNumber() {
 		return vatNumber;
 	}
@@ -56,6 +58,7 @@ public class Invoice extends DomainEntity {
 		this.vatNumber = vatNumber;
 	}
 	@NotBlank
+	@SafeHtml
 	public String getDetail() {
 		return detail;
 	}

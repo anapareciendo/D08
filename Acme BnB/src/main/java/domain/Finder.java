@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -39,6 +40,7 @@ public class Finder extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDestinationCity() {
 		return destinationCity;
 	}
@@ -63,6 +65,7 @@ public class Finder extends DomainEntity {
 		this.maxPrice = maxPrice;
 	}
 
+	@SafeHtml
 	public String getKeyword() {
 		return keyword;
 	}
@@ -71,6 +74,7 @@ public class Finder extends DomainEntity {
 		this.keyword = keyword;
 	}
 
+	@SafeHtml
 	public String getAddress() {
 		return address;
 	}
@@ -79,6 +83,7 @@ public class Finder extends DomainEntity {
 		this.address = address;
 	}
 
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
