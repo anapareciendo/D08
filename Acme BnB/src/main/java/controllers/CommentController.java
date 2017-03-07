@@ -97,11 +97,11 @@ public class CommentController extends AbstractController {
 		}
 		try{
 			comment = commentService.reconstruct(comment, binding);
-			if(!binding.hasErrors()){
+			try{
 				commentService.save(comment);
 				result = new ModelAndView("redirect:list.do");
 				
-			}else{
+			}catch(Throwable opps){
 				result = new ModelAndView("comment/create");
 				result.addObject("comment", comment);
 				result.addObject("commentable", commentable);

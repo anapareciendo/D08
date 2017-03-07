@@ -67,6 +67,7 @@ public class CommentService {
 	
 	public Comment save(Comment comment) {
 		Assert.notNull(comment, "The comment to save cannot be null.");
+		Assert.isTrue(comment.getStar()>0&&comment.getStar()<=5,"The stars must be between 1 and 5");
 		Comment res = commentRepository.save(comment);
 		res.setMoment(Calendar.getInstance().getTime());
 		
@@ -122,7 +123,11 @@ public class CommentService {
 		
 		res.setTitle(comment.getTitle());
 		res.setText(comment.getText());
-		res.setStar(comment.getStar());
+//		if(comment.getStar()==0 || comment.getStar()<0 || comment.getStar()>5){
+//			res.setStar(1);
+//		}else{
+			res.setStar(comment.getStar());
+//		}
 		
 		validator.validate(res, binding);
 		
