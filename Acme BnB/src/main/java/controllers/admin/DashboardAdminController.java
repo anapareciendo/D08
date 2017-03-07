@@ -10,6 +10,8 @@
 
 package controllers.admin;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import controllers.AbstractController;
+import domain.Attribute;
+import domain.Lessor;
+import domain.Property;
+import domain.Tenant;
 
 @Controller
 @RequestMapping("/dashboard/admin")
@@ -35,7 +41,24 @@ public class DashboardAdminController extends AbstractController {
 	public ModelAndView display() {
 		ModelAndView result;
 
+		//Ana
+		Collection<Lessor> lessorMaxRequestsDenied = adminService.lessorMaxRequestsDenied();
+		Collection<Lessor> lessorMaxRequestsAccepted = adminService.lessorMaxRequestsAccepted();
+		Collection<Lessor> lessorMaxRequestsPending = adminService.lessorMaxRequestsPending();
+		Collection<Tenant> tenantMaxRequestsAccepted = adminService.tenantMaxRequestsAccepted();
+		Collection<Tenant> tenantMaxRequestsDenied = adminService.tenantMaxRequestsDenied();
+		Collection<Tenant> tenantMaxRequestsPending = adminService.tenantMaxRequestsPending();
+		Collection<Attribute> attributesDescTimesUsed = adminService.attributesDescTimesUsed();
+		Collection<Property> propertiesOrderByAudits = adminService.propertiesOrderByAudits(); 
+		Collection<Property> propertiesOrderByRequestsAccepted = adminService.propertiesOrderByRequestsAccepted();
+		Collection<Property> propertiesOrderByRequestsDenied = adminService.propertiesOrderByRequestsDenied();
+		Collection<Property> propertiesOrderByRequestsPending = adminService.propertiesOrderByRequestsPending();
+		Double maxInvoicesPerTenant = adminService.maxInvoicesPerTenant();
+		Double minInvoicesPerTenant = adminService.minInvoicesPerTenant();
+		Double avgInvoicesPerTenant  = adminService.avgInvoicesPerTenant();
 		
+		
+		//Carmen
 		Double requestAcceptedByLessor= adminService.requestAcceptedByLessor();
 		Double requestDeniedByLessor= adminService.requestDeniedByLessor();
 		
@@ -63,6 +86,22 @@ public class DashboardAdminController extends AbstractController {
 		Double totalAmountMoney = adminService.totalAmountMoney();
 	
 		result = new ModelAndView("administrator/dashboard");
+		
+		result.addObject("lessorMaxRequestsPending", lessorMaxRequestsPending);
+		result.addObject("lessorMaxRequestsAccepted",lessorMaxRequestsAccepted);
+		result.addObject("lessorMaxRequestsDenied",lessorMaxRequestsDenied);
+		result.addObject("tenantMaxRequestsAccepted",tenantMaxRequestsAccepted);
+		result.addObject("tenantMaxRequestsDenied",tenantMaxRequestsDenied);
+		result.addObject("tenantMaxRequestsPending",tenantMaxRequestsPending);
+		result.addObject("attributesDescTimesUsed", attributesDescTimesUsed);
+		result.addObject("propertiesOrderByAudits", propertiesOrderByAudits);
+		result.addObject("propertiesOrderByRequestsAccepted", propertiesOrderByRequestsAccepted);
+		result.addObject("propertiesOrderByRequestsDenied", propertiesOrderByRequestsDenied);
+		result.addObject("propertiesOrderByRequestsPending", propertiesOrderByRequestsPending);
+		result.addObject("maxInvoicesPerTenant", maxInvoicesPerTenant);
+		result.addObject("minInvoicesPerTenant", minInvoicesPerTenant);
+		result.addObject("avgInvoicesPerTenant", avgInvoicesPerTenant);
+		
 		result.addObject("requestAcceptedByLessor", requestAcceptedByLessor);
 		result.addObject("requestDeniedByLessor", requestDeniedByLessor);
 		

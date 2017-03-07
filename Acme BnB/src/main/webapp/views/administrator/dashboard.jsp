@@ -22,6 +22,55 @@
 
 	<div>
 		<p>
+			<spring:message code="dashboard.lessorMaxRequestsAccepted"/>:<br>
+			<jstl:forEach var="row" items="${lessorMaxRequestsAccepted}">
+			<jstl:out value="${row.name}"/>, <jstl:out value="${row.surname}"/><br>	
+			</jstl:forEach><br>
+			<spring:message code="dashboard.lessorMaxRequestsDenied"/>:<br>
+			<jstl:forEach var="row" items="${lessorMaxRequestsDenied}">
+			<jstl:out value="${row.name}"/>, <jstl:out value="${row.surname}"/><br>	
+			</jstl:forEach><br>
+			<spring:message code="dashboard.lessorMaxRequestsPending"/>:<br>
+			<jstl:forEach var="row" items="${lessorMaxRequestsPending}">
+			<jstl:out value="${row.name}"/>, <jstl:out value="${row.surname}"/><br>	
+			</jstl:forEach><br>
+			<spring:message code="dashboard.tenantMaxRequestsAccepted"/>:<br>
+			<jstl:forEach var="row" items="${tenantMaxRequestsAccepted}">
+			<jstl:out value="${row.name}"/>, <jstl:out value="${row.surname}"/><br>	
+			</jstl:forEach><br>
+			<spring:message code="dashboard.tenantMaxRequestsDenied"/>:<br>
+			<jstl:forEach var="row" items="${tenantMaxRequestsDenied}">
+			<jstl:out value="${row.name}"/>, <jstl:out value="${row.surname}"/><br>	
+			</jstl:forEach><br>
+			<spring:message code="dashboard.tenantMaxRequestsPending"/>:<br>
+			<jstl:forEach var="row" items="${tenantMaxRequestsPending}">
+			<jstl:out value="${row.name}"/>, <jstl:out value="${row.surname}"/><br>	
+			</jstl:forEach><br>
+			<spring:message code="dashboard.attributesDescTimesUsed"/>:<br>
+			<jstl:forEach var="row" items="${attributesDescTimesUsed}">
+			<jstl:out value="${row.name}"/><br>
+			</jstl:forEach><br>
+			<spring:message code="dashboard.propertiesOrderByAudits"/>:<br>
+			<jstl:forEach var="row" items="${propertiesOrderByAudits}">
+			<jstl:out value="${row.name}"/><br>
+			</jstl:forEach><br>
+			<spring:message code="dashboard.propertiesOrderByRequestsAccepted"/>:<br>
+			<jstl:forEach var="row" items="${propertiesOrderByRequestsAccepted}">
+			<jstl:out value="${row.name}"/><br>
+			</jstl:forEach><br>
+			<spring:message code="dashboard.propertiesOrderByRequestsDenied"/>:<br>
+			<jstl:forEach var="row" items="${propertiesOrderByRequestsDenied}">
+			<jstl:out value="${row.name}"/><br>
+			</jstl:forEach><br>
+			<spring:message code="dashboard.propertiesOrderByRequestsPending"/>:<br>
+			<jstl:forEach var="row" items="${propertiesOrderByRequestsPending}">
+			<jstl:out value="${row.name}"/><br>
+			</jstl:forEach><br>
+			
+			<spring:message code="dashboard.maxInvoicesPerTenant"/>: <jstl:out value="${maxInvoicesPerTenant}"/><br>
+			<spring:message code="dashboard.minInvoicesPerTenant"/>: <jstl:out value="${minInvoicesPerTenant}"/><br>
+			<spring:message code="dashboard.avgInvoicesPerTenant"/>: <jstl:out value="${avgInvoicesPerTenant}"/><br>
+			
 			<spring:message code="dashboard.requestAcceptedByLessor"/>: <jstl:out value="${requestAcceptedByLessor}"/><br>
 			<spring:message code="dashboard.requestDeniedByLessor"/>: <jstl:out value="${requestDeniedByLessor}"/><br>
 			

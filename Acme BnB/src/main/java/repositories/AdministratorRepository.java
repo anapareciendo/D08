@@ -43,25 +43,33 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select distinct(t) from Tenant t join t.requests r where t.requests.size = (select max(t.requests.size) from Tenant t join t.requests r where r.status = 0) AND r.status = 0")
 	Collection<Tenant> tenantMaxRequestsPending();
 	
-	//Attributes sorted in descending order regarding the number of times they have been used to describe a property
+	//Attributes sorted in descending order regarding the number of times they have been used to describe a property (Level B)
 	@Query("select a from Attribute a order by a.values.size DESC")
 	Collection<Attribute> attributesDescTimesUsed();
 	
-	//A listing with his or her properties sorted according to the number of audits that they have got
+	//A listing with his or her properties sorted according to the number of audits that they have got (Level B)
 	@Query("select p from Property p order by p.audits.size DESC")
 	Collection<Property> propertiesOrderByAudits();
 	
-	//A listing with his o her properties sorted according to the number of approved requests that they have got
+	//A listing with his o her properties sorted according to the number of approved requests that they have got (Level B)
 	@Query("select distinct(p) from Property p join p.requests r where r.status = 1 order by p.requests.size DESC")
 	Collection<Property> propertiesOrderByRequestsAccepted();
 	
-	//A listing with his o her properties sorted according to the number of denied requests that they have got
+	//A listing with his o her properties sorted according to the number of denied requests that they have got (Level B)
 	@Query("select distinct(p) from Property p join p.requests r where r.status = 2 order by p.requests.size DESC")
 	Collection<Property> propertiesOrderByRequestsDenied();
 	
-	//A listing with his o her properties sorted according to the number of pending requests that they have got
+	//A listing with his o her properties sorted according to the number of pending requests that they have got (Level B)
 	@Query("select distinct(p) from Property p join p.requests r where r.status = 0 order by p.requests.size DESC")
 	Collection<Property> propertiesOrderByRequestsPending();
+	
+	//The minimum, the avg and the maximum number of invoices issued to tenants
+	//La query a la que he llegado devuelve el numero de invoices por tenant
+	@Query("select count(i)*1.0 from Tenant t join t.requests r join r.invoice i group by t")
+	Collection<Double> numInvoicesPerTenant();
+	//Para avg necesito el total de invoices
+	@Query("select count(i)*1.0 from Invoice i")
+	Double totalInvoices();
 	
 	//@Query("select avg(p.states.size) from Property p join p.states s where s.status!=domain.Status.PENDING group  by p.lessor")
 	//select count(s) from State s where s.status=domain.Status.ACCEPTED group by s.property.lessor;

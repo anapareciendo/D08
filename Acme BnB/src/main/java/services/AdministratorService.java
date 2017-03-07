@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,12 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.Attribute;
 import domain.Comment;
+import domain.Lessor;
+import domain.Property;
 import domain.SocialIdentity;
+import domain.Tenant;
 
 @Service
 @Transactional
@@ -97,6 +102,86 @@ public class AdministratorService {
 		Assert.isTrue(ua.getAuthorities().contains(a), "You must to be a administrator for this action.");
 	}
 	
+	//Ana
+	public Collection <Lessor> lessorMaxRequestsAccepted(){
+		this.isAdministrator();
+		return administratorRepository.lessorMaxRequestsAccepted();
+	}
+	
+	public Collection <Lessor> lessorMaxRequestsDenied(){
+		this.isAdministrator();
+		return administratorRepository.lessorMaxRequestsDenied();
+	}
+	
+	public Collection <Lessor> lessorMaxRequestsPending(){
+		this.isAdministrator();
+		return administratorRepository.lessorMaxRequestsPending();
+	}
+	
+	public Collection<Tenant> tenantMaxRequestsAccepted(){
+		this.isAdministrator();
+		return administratorRepository.tenantMaxRequestsAccepted();
+	}
+	
+	public Collection<Tenant> tenantMaxRequestsDenied(){
+		this.isAdministrator();
+		return administratorRepository.tenantMaxRequestsDenied();
+	}
+	
+	public Collection<Tenant> tenantMaxRequestsPending(){
+		this.isAdministrator();
+		return administratorRepository.tenantMaxRequestsPending();
+	}
+	
+	public Collection<Attribute> attributesDescTimesUsed(){
+		this.isAdministrator();
+		return administratorRepository.attributesDescTimesUsed();
+	}
+	
+	public Collection<Property> propertiesOrderByAudits(){
+		this.isAdministrator();
+		return administratorRepository.propertiesOrderByAudits();
+	}
+	
+	public Collection<Property> propertiesOrderByRequestsAccepted(){
+		this.isAdministrator();
+		return administratorRepository.propertiesOrderByRequestsAccepted();
+	}
+	
+	public Collection<Property> propertiesOrderByRequestsDenied(){
+		this.isAdministrator();
+		return administratorRepository.propertiesOrderByRequestsDenied();
+	}
+	
+	public Collection<Property> propertiesOrderByRequestsPending(){
+		this.isAdministrator();
+		return administratorRepository.propertiesOrderByRequestsPending();
+	}
+	
+	public Double maxInvoicesPerTenant(){
+		this.isAdministrator();
+		Collection<Double> numInvoices = administratorRepository.numInvoicesPerTenant();
+		return Collections.max(numInvoices);
+	}
+	
+	public Double minInvoicesPerTenant(){
+		this.isAdministrator();
+		Collection<Double> numInvoices = administratorRepository.numInvoicesPerTenant();
+		return Collections.min(numInvoices);
+	}
+	
+	public Double avgInvoicesPerTenant(){
+		this.isAdministrator();
+		Double totalInvoices = administratorRepository.totalInvoices();
+		Collection<Double> numInvoices = administratorRepository.numInvoicesPerTenant();
+		Double suma = 0.0;
+		for(Double i : numInvoices)
+			suma = suma + i;
+		
+		return (suma/totalInvoices);
+	}
+	
+	//Carmen
 	public Double requestAcceptedByLessor(){
 		this.isAdministrator();
 		return administratorRepository.requestAcceptedByLessor();
