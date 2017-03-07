@@ -17,3 +17,17 @@
 <hr />
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme BnB Co., Inc.</b>
+
+<div class="popup" onclick="myFunction()">Click me!
+  <span class="popuptext" id="myPopup">We use language cookies. This cookie is set whenever you use the language bar to change the
+language in which your system must show its messages. 
+If you continue browsing, we assume that you accept these conditions</span>
+</div>
+
+<script>
+// When the user clicks on <div>, open the popup
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+</script> 
