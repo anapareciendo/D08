@@ -96,7 +96,7 @@ public class CommentController extends AbstractController {
 			commentables.addAll(tenantService.findMyTenants(actor.getId()));
 		}
 		try{
-			comment =	commentService.reconstruct(comment, binding);
+			comment = commentService.reconstruct(comment, binding);
 			try {
 				commentService.save(comment);
 				result = new ModelAndView("redirect:list.do");

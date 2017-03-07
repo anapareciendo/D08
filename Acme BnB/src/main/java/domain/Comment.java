@@ -57,7 +57,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@NotNull
-	@Range(min = 1, max = 5)
+	@Range(min = 0, max = 5)
 	public Integer getStar() {
 		return star;
 	}

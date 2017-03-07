@@ -50,6 +50,7 @@ public class CommentService {
 		res.setSender(sender);
 		res.setCommentable(commentable);
 		res.setMoment(Calendar.getInstance().getTime());
+		res.setStar(0);
 		
 		return res;
 	}

@@ -55,6 +55,14 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select distinct(p) from Property p join p.requests r where r.status = 1 order by p.requests.size DESC")
 	Collection<Property> propertiesOrderByRequestsAccepted();
 	
+	//A listing with his o her properties sorted according to the number of denied requests that they have got
+	@Query("select distinct(p) from Property p join p.requests r where r.status = 2 order by p.requests.size DESC")
+	Collection<Property> propertiesOrderByRequestsDenied();
+	
+	//A listing with his o her properties sorted according to the number of pending requests that they have got
+	@Query("select distinct(p) from Property p join p.requests r where r.status = 0 order by p.requests.size DESC")
+	Collection<Property> propertiesOrderByRequestsPending();
+	
 	//@Query("select avg(p.states.size) from Property p join p.states s where s.status!=domain.Status.PENDING group  by p.lessor")
 	//select count(s) from State s where s.status=domain.Status.ACCEPTED group by s.property.lessor;
 	
