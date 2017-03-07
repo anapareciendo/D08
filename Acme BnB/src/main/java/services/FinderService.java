@@ -33,6 +33,8 @@ public class FinderService {
 	//Supporting services
 	@Autowired
 	private TenantService tenantService;
+	@Autowired
+	private PropertyService propertyService;
 	
 	@Autowired
 	private Validator validator;
@@ -118,8 +120,11 @@ public class FinderService {
 		if(xp==null){
 			xp=Double.MAX_VALUE;
 		}
-		Set<Property> res=new HashSet<Property>(finderRepository.searchFinder(address, mp, xp));
-		res.addAll(finderRepository.searchFinder(city,keyword));
+
+		Set<Property> res=new HashSet<Property>(finderRepository.searchFinder(mp, xp));
+		Set<Property> aux=new HashSet<Property>(propertyService.findAll());
+		aux.removeAll(finderRepository.searchFinder(city,address,keyword));
+		res.removeAll(aux);
  		return res;
 	}
 
