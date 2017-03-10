@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Administrator -->
+	<bean id="admin1" class="domain.Administrator">
+		<property name="name" value="Jefe" />
+		<property name="surname" value="Maximo" />
+		<property name="email" value="jefemaximo@gmail.com" />
+		<property name="phone" value="+034 (051)122332687" />
+		<property name="picture" value="http://www.negativardevedores.com.br/img/dest2.png" />
+		<property name="userAccount" ref="userAccount1" />	
+		<property name="socialIdentities">
+			<list></list>
+		</property>
+		<property name="postComments">
+			<list></list>
+		</property>
+		<property name="comments">
+			<list></list>
+		</property>
+	</bean>
+	
+	<!-- Attribute -->
+	<bean id="attribute1" class="domain.Attribute">
+		<property name="name" value="Country" />
+		<property name="values">
+			<list></list>
+		</property>			
+	</bean> 
+	<bean id="attribute2" class="domain.Attribute">
+		<property name="name" value="Province" />
+		<property name="values">
+			<list></list>
+		</property>			
+	</bean> 
+		<bean id="attribute3" class="domain.Attribute">
+		<property name="name" value="State" />
+		<property name="values">
+			<list></list>
+		</property>		
+	</bean> 
+	<bean id="attribute4" class="domain.Attribute">
+		<property name="name" value="City" />
+		<property name="values">
+			<list></list>
+		</property>			
+	</bean> 
+	<bean id="attribute5" class="domain.Attribute">
+		<property name="name" value="Capacity" />
+		<property name="values">
+			<list></list>
+		</property>	
+		
+	</bean> 
+
+	<!-- Fee -->
+	<bean id="fee1" class="domain.Fee">
+		<property name="cost" value="1.0" />	
+	</bean>
+</beans>
